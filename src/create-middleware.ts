@@ -115,13 +115,13 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
           /**
            * Generate uniqueid, make sure it does not exist
            */
-          let currentRequestId = lGet<TRequestId>(action, metaRequestIdPath);
-          if (!currentRequestId || {}.hasOwnProperty.call(requestStore, currentRequestId)) {
+          let currentRequestID = lGet<TRequestId>(action, metaRequestIdPath);
+          if (!currentRequestID || {}.hasOwnProperty.call(requestStore, currentRequestID)) {
             do {
-              currentRequestId = generateId({ action });
-            } while ({}.hasOwnProperty.call(requestStore, currentRequestId));
+              currentRequestID = generateId({ action });
+            } while ({}.hasOwnProperty.call(requestStore, currentRequestID));
 
-            lSet<TRequestId>(action, metaRequestIdPath, currentRequestId);
+            lSet<TRequestId>(action, metaRequestIdPath, currentRequestID);
           }
 
           // User override of the timeout for each request
@@ -141,7 +141,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
             .timeout(timeoutRequest, 'timeout')
             .finally(() => {
               // Cleanup from requestStore
-              requestStore.delete(currentRequestId);
+              requestStore.delete(currentRequestID);
             });
 
           // typescript being an asshole so need to do tricks
@@ -151,7 +151,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
             [REQUEST_KEY_REJECTFN]: reject,
           };
           // Register promise to requestStore
-          requestStore.add(currentRequestId, tmpRequestStoreAddPayload as IRequestMap<any>);
+          requestStore.add(currentRequestID, tmpRequestStoreAddPayload as IRequestMap<any>);
           /**
            * dispatch _PENDING with meta
            */
@@ -184,8 +184,8 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
           /**
            * handle _FULFILLED
            */
-          const epicRequestId = lGet<TRequestId>(action, metaRequestIdPath);
-          if (epicRequestId) {
+          const requestID = lGet<TRequestId>(action, metaRequestIdPath);
+          if (requestID) {
             requestStore.resolve(lGet<TRequestId>(action, metaRequestIdPath), action.payload);
           } else {
             console.warn(`${action.type} - meta data not found, did you forget to send it?`);
@@ -194,9 +194,9 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
           /**
            * handle _REJECTED
            */
-          const epicRequestId = lGet<TRequestId>(action, metaRequestIdPath);
-          if (epicRequestId) {
-            requestStore.reject(epicRequestId, action.payload);
+          const requestID = lGet<TRequestId>(action, metaRequestIdPath);
+          if (requestID) {
+            requestStore.reject(requestID, action.payload);
           } else {
             console.warn(`${action.type} - meta data not found, did you forget to send it?`);
           }
@@ -204,9 +204,9 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
           /**
            * handle _ABORTED
            */
-          const epicRequestId = lGet<TRequestId>(action, metaRequestIdPath);
-          if (epicRequestId) {
-            requestStore.reject(epicRequestId, action.payload);
+          const requestID = lGet<TRequestId>(action, metaRequestIdPath);
+          if (requestID) {
+            requestStore.reject(requestID, action.payload);
           } else {
             console.warn(`${action.type} - meta data not found, did you forget to send it?`);
           }
