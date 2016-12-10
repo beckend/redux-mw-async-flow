@@ -1,3 +1,4 @@
+import 'tslib';
 export {
   createAsyncFlowMiddleware,
   defaultOpts
