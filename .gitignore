@@ -1,0 +1,11 @@
+.DS_Store
+.vscode
+build-es5
+build-es2015
+build-es2017
+coverage
+node_modules
+npm-debug.log
+src/**/*.js
+src/**/*.map
+tmp

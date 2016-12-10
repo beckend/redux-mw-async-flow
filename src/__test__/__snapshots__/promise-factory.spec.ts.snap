@@ -1,0 +1,12 @@
+exports[`Promise factory createPromise - returns payload as expected 1`] = `
+Object {
+  "promise": Object {
+    "fulfillmentValue": undefined,
+    "isFulfilled": false,
+    "isRejected": false,
+    "rejectionReason": undefined,
+  },
+  "reject": [Function],
+  "resolve": [Function],
+}
+`;

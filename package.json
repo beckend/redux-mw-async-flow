@@ -1,0 +1,128 @@
+{
+  "name": "redux-mw-async-flow",
+  "version": "1.0.0",
+  "description": "redux async handling for any actions without enforcing API client implementation",
+  "homepage": "https://github.com/beckend/redux-mw-async-flow#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beckend/redux-mw-async-flow.git"
+  },
+  "bugs": {
+    "url": "https://github.com/beckend/redux-mw-async-flow/issues"
+  },
+  "files": [
+    "build",
+    "build-es2015",
+    "build-es2017"
+  ],
+  "main": "./build-es2015/index.js",
+  "jsnext:main": "./build-es2015/index.js",
+  "types": "./build-es2015/index.d.ts",
+  "scripts": {
+    "prepare": "gulp",
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+    "test:coverage": "jest --coverage --no-cache",
+    "coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "docker-test": "docker-compose -f docker-compose.test.yml up"
+  },
+  "jest": {
+    "transform": {
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testResultsProcessor": "<rootDir>/node_modules/ts-jest/coverageprocessor.js",
+    "testRegex": "(/__tests__/.*|\\.(spec))\\.(ts|tsx)$",
+    "collectCoverage": false,
+    "coverageDirectory": "./coverage",
+    "coverageReporters": [
+      "html",
+      "text",
+      "lcov",
+      "lcovonly",
+      "json"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ],
+    "globals": {
+      "__TS_CONFIG__": "./src/tsconfig-test.json"
+    }
+  },
+  "keywords": [
+    "typescript",
+    "react",
+    "redux",
+    "middleware",
+    "middlewares",
+    "promise",
+    "promises",
+    "optimistic update",
+    "optimistic updates",
+    "async"
+  ],
+  "author": "Linken Dinh",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/bluebird": "^3.0.36",
+    "@types/debug": "0.0.29",
+    "@types/enzyme": "^2.5.39",
+    "@types/fs-extra": "0.0.35",
+    "@types/gulp": "^3.8.32",
+    "@types/gulp-debug": "^2.0.29",
+    "@types/gulp-typescript": "0.0.32",
+    "@types/jest": "^16.0.1",
+    "@types/lodash": "^4.14.43",
+    "@types/react": "^0.14.54",
+    "@types/react-dom": "^0.14.19",
+    "@types/redux-actions": "^0.8.34",
+    "@types/redux-mock-store": "^0.0.7",
+    "bluebird": "^3.4.6",
+    "cmd-spawn": "^1.4.0",
+    "coveralls": "^2.11.15",
+    "debug": "^2.3.3",
+    "enzyme": "^2.6.0",
+    "fs-extra": "^1.0.0",
+    "globby": "^6.1.0",
+    "google-closure-compiler-js": "^20161201.0.0",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-debug": "^3.0.0",
+    "gulp-run": "^1.7.1",
+    "gulp-sourcemap": "^1.0.1",
+    "gulp-tslint": "^6.1.3",
+    "gulp-typescript": "^3.1.3",
+    "jest": "^17.0.3",
+    "redux": "^3.6.0",
+    "redux-actions": "^1.1.0",
+    "redux-mock-store": "^1.2.1",
+    "ts-jest": "^17.0.3",
+    "ts-node": "^1.7.2",
+    "tslint": "^3.15.1",
+    "tslint-microsoft-contrib": "^2.0.14",
+    "tslint-react": "^1.1.0",
+    "tslint-stylish": "^2.1.0-beta",
+    "typescript": "next"
+  },
+  "peerDependencies": {
+    "redux": "3.*"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "lodash.get": "^4.4.2",
+    "lodash.merge": "^4.6.0",
+    "lodash.set": "^4.3.2",
+    "uniqueid": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=7.0.0"
+  }
+}

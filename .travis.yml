@@ -1,0 +1,20 @@
+language: node_js
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
+node_js:
+  - 7
+
+before_script:
+  - yarn global add gulp-cli jest-cli
+
+script:
+  - gulp ci
+
+sudo: false
+
+notifications:
+  email: true
