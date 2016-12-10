@@ -38,11 +38,6 @@ describe('Middleware', () => {
     mockStore = createMockStore();
   });
 
-  it('must return a function to handle next', () => {
-    const mw = createAsyncFlowMiddleware();
-    expect(typeof mw === 'function').toBe(true);
-  });
-
   it('can be disabled, the action simply passes through', () => {
     const action: ActionMeta<{}, any> = {
       type: `ACTION${_REQUEST}`,
