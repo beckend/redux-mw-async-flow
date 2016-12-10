@@ -49,8 +49,10 @@ describe('Middleware', () => {
     };
     mockStore.dispatch(action);
     const actions = mockStore.getActions();
-    (expect as any)(actions).toHaveLength(1);
-    expect(actions[0]).toEqual(action);
+    (expect as any)(actions)
+      .toHaveLength(1);
+    expect(actions[0])
+      .toEqual(action);
   });
 
   it('actions that does not match suffix will pass through', () => {
@@ -59,8 +61,10 @@ describe('Middleware', () => {
     };
     mockStore.dispatch(action);
     const actions = mockStore.getActions();
-    (expect as any)(actions).toHaveLength(1);
-    expect(actions[0]).toEqual(action);
+    (expect as any)(actions)
+      .toHaveLength(1);
+    expect(actions[0])
+      .toEqual(action);
   });
 
   it('action with _REQUEST suffix will have _PENDING and _REQUEST dispatched', () => {
@@ -69,8 +73,10 @@ describe('Middleware', () => {
     };
     mockStore.dispatch(action);
     const actions = mockStore.getActions();
-    (expect as any)(actions).toHaveLength(2);
-    expect(actions).toMatchSnapshot();
+    (expect as any)(actions)
+      .toHaveLength(2);
+    expect(actions)
+      .toMatchSnapshot();
   });
 
   it(`handle ${_FULFILLED} correctly with payload`, () => {
@@ -79,9 +85,12 @@ describe('Middleware', () => {
     };
     mockStore.dispatch(action);
     let actions = mockStore.getActions();
-    (expect as any)(actions).toHaveLength(2);
-    expect(actions[0].meta[defaultOpts.metaKey].promise.isFulfilled()).toBeFalsy();
-    expect(actions[1].meta[defaultOpts.metaKey].promise.isFulfilled()).toBeFalsy();
+    (expect as any)(actions)
+      .toHaveLength(2);
+    expect(actions[0].meta[defaultOpts.metaKey].promise.isFulfilled())
+      .toBeFalsy();
+    expect(actions[1].meta[defaultOpts.metaKey].promise.isFulfilled())
+      .toBeFalsy();
 
     const actionFullfill: ActionMeta<any, any> = {
       ...actions[0],
@@ -96,11 +105,16 @@ describe('Middleware', () => {
     };
     mockStore.dispatch(actionFullfill);
     actions = mockStore.getActions();
-    (expect as any)(actions).toHaveLength(3);
-    expect(actions[0].meta[defaultOpts.metaKey].promise.isFulfilled()).toBeTruthy();
-    expect(actions[1].meta[defaultOpts.metaKey].promise.isFulfilled()).toBeTruthy();
-    expect(actions[2].meta[defaultOpts.metaKey].promise.isFulfilled()).toBeTruthy();
-    expect(actions).toMatchSnapshot();
+    (expect as any)(actions)
+      .toHaveLength(3);
+    expect(actions[0].meta[defaultOpts.metaKey].promise.isFulfilled())
+      .toBeTruthy();
+    expect(actions[1].meta[defaultOpts.metaKey].promise.isFulfilled())
+      .toBeTruthy();
+    expect(actions[2].meta[defaultOpts.metaKey].promise.isFulfilled())
+      .toBeTruthy();
+    expect(actions)
+      .toMatchSnapshot();
   });
 
   it(`handle ${_REJECTED} correctly with payload`, () => {
@@ -109,9 +123,12 @@ describe('Middleware', () => {
     };
     mockStore.dispatch(action);
     let actions = mockStore.getActions();
-    (expect as any)(actions).toHaveLength(2);
-    expect(actions[0].meta[defaultOpts.metaKey].promise.isFulfilled()).toBeFalsy();
-    expect(actions[1].meta[defaultOpts.metaKey].promise.isFulfilled()).toBeFalsy();
+    (expect as any)(actions)
+      .toHaveLength(2);
+    expect(actions[0].meta[defaultOpts.metaKey].promise.isFulfilled())
+      .toBeFalsy();
+    expect(actions[1].meta[defaultOpts.metaKey].promise.isFulfilled())
+      .toBeFalsy();
 
     const actionReject: ActionMeta<any, any> = {
       ...actions[0],
@@ -121,11 +138,16 @@ describe('Middleware', () => {
     };
     mockStore.dispatch(actionReject);
     actions = mockStore.getActions();
-    (expect as any)(actions).toHaveLength(3);
-    expect(actions[0].meta[defaultOpts.metaKey].promise.isRejected()).toBeTruthy();
-    expect(actions[1].meta[defaultOpts.metaKey].promise.isRejected()).toBeTruthy();
-    expect(actions[2].meta[defaultOpts.metaKey].promise.isRejected()).toBeTruthy();
-    expect(actions).toMatchSnapshot();
+    (expect as any)(actions)
+      .toHaveLength(3);
+    expect(actions[0].meta[defaultOpts.metaKey].promise.isRejected())
+      .toBeTruthy();
+    expect(actions[1].meta[defaultOpts.metaKey].promise.isRejected())
+      .toBeTruthy();
+    expect(actions[2].meta[defaultOpts.metaKey].promise.isRejected())
+      .toBeTruthy();
+    expect(actions)
+      .toMatchSnapshot();
   });
 
   it(`handle ${_ABORTED} correctly with payload`, () => {
@@ -134,9 +156,12 @@ describe('Middleware', () => {
     };
     mockStore.dispatch(action);
     let actions = mockStore.getActions();
-    (expect as any)(actions).toHaveLength(2);
-    expect(actions[0].meta[defaultOpts.metaKey].promise.isFulfilled()).toBeFalsy();
-    expect(actions[1].meta[defaultOpts.metaKey].promise.isFulfilled()).toBeFalsy();
+    (expect as any)(actions)
+      .toHaveLength(2);
+    expect(actions[0].meta[defaultOpts.metaKey].promise.isFulfilled())
+      .toBeFalsy();
+    expect(actions[1].meta[defaultOpts.metaKey].promise.isFulfilled())
+      .toBeFalsy();
 
     const actionReject: ActionMeta<any, any> = {
       ...actions[0],
@@ -146,11 +171,16 @@ describe('Middleware', () => {
     };
     mockStore.dispatch(actionReject);
     actions = mockStore.getActions();
-    (expect as any)(actions).toHaveLength(3);
-    expect(actions[0].meta[defaultOpts.metaKey].promise.isRejected()).toBeTruthy();
-    expect(actions[1].meta[defaultOpts.metaKey].promise.isRejected()).toBeTruthy();
-    expect(actions[2].meta[defaultOpts.metaKey].promise.isRejected()).toBeTruthy();
-    expect(actions).toMatchSnapshot();
+    (expect as any)(actions)
+      .toHaveLength(3);
+    expect(actions[0].meta[defaultOpts.metaKey].promise.isRejected())
+      .toBeTruthy();
+    expect(actions[1].meta[defaultOpts.metaKey].promise.isRejected())
+      .toBeTruthy();
+    expect(actions[2].meta[defaultOpts.metaKey].promise.isRejected())
+      .toBeTruthy();
+    expect(actions)
+      .toMatchSnapshot();
   });
 });
 
@@ -180,7 +210,8 @@ describe('Lets user set options', () => {
     };
     mockStore.dispatch(actionFullfill);
     actions = mockStore.getActions();
-    expect(actions).toMatchSnapshot();
+    expect(actions)
+      .toMatchSnapshot();
   });
 
   it('metaKeyRequestID', () => {
@@ -208,7 +239,8 @@ describe('Lets user set options', () => {
     };
     mockStore.dispatch(actionFullfill);
     actions = mockStore.getActions();
-    expect(actions).toMatchSnapshot();
+    expect(actions)
+      .toMatchSnapshot();
   });
 
   it('global request timeout', () => {
@@ -222,7 +254,8 @@ describe('Lets user set options', () => {
     };
     mockStore.dispatch(action);
     const actions = mockStore.getActions();
-    expect(actions).toMatchSnapshot();
+    expect(actions)
+      .toMatchSnapshot();
   });
 
   it('per request timeout', () => {
@@ -237,7 +270,8 @@ describe('Lets user set options', () => {
     };
     mockStore.dispatch(action);
     const actions = mockStore.getActions();
-    expect(actions).toMatchSnapshot();
+    expect(actions)
+      .toMatchSnapshot();
   });
 
   it('generateId', () => {
@@ -261,6 +295,7 @@ describe('Lets user set options', () => {
     mockStore.dispatch(action3);
 
     const actions = mockStore.getActions();
-    expect(actions).toMatchSnapshot();
+    expect(actions)
+      .toMatchSnapshot();
   });
 });

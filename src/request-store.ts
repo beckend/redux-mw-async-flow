@@ -32,6 +32,10 @@ export class RequestStore {
     delete this.store[keyName];
   }
 
+  public get(keyName: string) {
+    return this.store[keyName];
+  }
+
   public resolve<TPayload>(keyName: string, payload: TPayload) {
     const promiseFn = lGet<TResolveFn<TPayload>>(this.store, [keyName, REQUEST_KEY_RESOLVEFN]);
     if (promiseFn) {

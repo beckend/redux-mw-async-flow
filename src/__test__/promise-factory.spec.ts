@@ -5,7 +5,9 @@ import * as Bluebird from 'bluebird';
 describe('Promise factory', () => {
   it('createPromise - returns payload as expected', () => {
     const payload = createPromise<any>();
-    expect(payload.promise).toBeInstanceOf(Bluebird);
-    expect(payload).toMatchSnapshot();
+    expect(payload.promise)
+      .toBeInstanceOf(Bluebird);
+    expect(payload)
+      .toMatchSnapshot();
   });
 });

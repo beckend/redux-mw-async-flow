@@ -1,0 +1,67 @@
+exports[`RequestStore add 1`] = `
+Object {
+  "requestKey1": Object {
+    "one": 1,
+  },
+  "requestKey2": Object {
+    "one": 1,
+  },
+  "requestKey32321": Object {
+    "one": 1,
+  },
+}
+`;
+
+exports[`RequestStore delete 1`] = `
+Object {
+  "myKey": Object {
+    "one": 1,
+  },
+}
+`;
+
+exports[`RequestStore delete 2`] = `Object {}`;
+
+exports[`RequestStore has not request initially 1`] = `Object {}`;
+
+exports[`RequestStore reject 1`] = `
+Object {
+  "myKey": Object {
+    "promise": Object {
+      "fulfillmentValue": undefined,
+      "isFulfilled": false,
+      "isRejected": true,
+      "rejectionReason": Object {
+        "data": Array [
+          1,
+          2,
+          3,
+        ],
+      },
+    },
+    "reject": [Function],
+    "resolve": [Function],
+  },
+}
+`;
+
+exports[`RequestStore resolve 1`] = `
+Object {
+  "myKey": Object {
+    "promise": Object {
+      "fulfillmentValue": Object {
+        "data": Array [
+          1,
+          2,
+          3,
+        ],
+      },
+      "isFulfilled": true,
+      "isRejected": false,
+      "rejectionReason": undefined,
+    },
+    "reject": [Function],
+    "resolve": [Function],
+  },
+}
+`;
