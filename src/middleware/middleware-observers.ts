@@ -4,6 +4,8 @@
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/filter';
 import { IAsyncFlowAction } from './create-middleware';
+import { Observable } from 'rxjs/Observable';
+export { Observable };
 
 export interface IAsyncTypes {
   REQUEST: string;

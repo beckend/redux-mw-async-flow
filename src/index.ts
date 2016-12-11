@@ -3,4 +3,4 @@ export {
   createAsyncFlowMiddleware,
   defaultOpts
 } from './middleware/create-middleware';
-export { createAsyncFlowReducer } from './reducer';
+// export { createAsyncFlowReducer } from './reducer';

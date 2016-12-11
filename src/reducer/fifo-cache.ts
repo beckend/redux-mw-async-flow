@@ -6,19 +6,19 @@
  */
 const { FifoXCache: FifoXCacheOriginal } = require('x-cache');
 
-interface IFifoXCacheConstructor {
+export interface IFifoXCacheConstructor {
   new (...args: any[]): IFifoXCacheClass;
 }
-interface IFifoXCacheClass {
+export interface IFifoXCacheClass {
   readonly tail: any;
   readonly put: any;
   readonly set: any;
   readonly get: any;
   readonly getArray: any;
 }
-const FifoXCacheOriginalClass: IFifoXCacheConstructor = FifoXCacheOriginal;
+export const FifoXCacheOriginalClass: IFifoXCacheConstructor = FifoXCacheOriginal;
 
-class FifoXCache extends FifoXCacheOriginalClass {
+export class FifoXCache extends FifoXCacheOriginalClass {
 
   constructor(...args: any[]) {
     super(...args);
@@ -37,5 +37,3 @@ class FifoXCache extends FifoXCacheOriginalClass {
   }
 
 }
-
-export { FifoXCache };

@@ -28,7 +28,6 @@ export const getAsyncTypeConstants = ({ types }: IGetAsyncTypeConstantsParams = 
   }
 );
 
-
 export const replaceSuffix = (targetStr: string, suffixToReplace: string, replacementString: string) =>
   `${targetStr.substring(0, targetStr.length - suffixToReplace.length)}${replacementString}`;
 

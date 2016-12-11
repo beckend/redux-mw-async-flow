@@ -1066,3 +1066,411 @@ Array [
   },
 ]
 `;
+
+exports[`Middleware observers works as expected 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "11-@@ASYNC_FLOW--ACTION_REQUEST",
+        "promise": Object {
+          "fulfillmentValue": Object {
+            "data": 1,
+            "even_more_data": Object {
+              "key": "value",
+            },
+            "more_data": Array [
+              1,
+              2,
+              3,
+            ],
+          },
+          "isFulfilled": true,
+          "isRejected": false,
+          "rejectionReason": undefined,
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "type": "ACTION_PENDING",
+  },
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "11-@@ASYNC_FLOW--ACTION_REQUEST",
+        "promise": Object {
+          "fulfillmentValue": Object {
+            "data": 1,
+            "even_more_data": Object {
+              "key": "value",
+            },
+            "more_data": Array [
+              1,
+              2,
+              3,
+            ],
+          },
+          "isFulfilled": true,
+          "isRejected": false,
+          "rejectionReason": undefined,
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "type": "ACTION_REQUEST",
+  },
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "11-@@ASYNC_FLOW--ACTION_REQUEST",
+        "promise": Object {
+          "fulfillmentValue": Object {
+            "data": 1,
+            "even_more_data": Object {
+              "key": "value",
+            },
+            "more_data": Array [
+              1,
+              2,
+              3,
+            ],
+          },
+          "isFulfilled": true,
+          "isRejected": false,
+          "rejectionReason": undefined,
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "payload": Object {
+      "data": 1,
+      "even_more_data": Object {
+        "key": "value",
+      },
+      "more_data": Array [
+        1,
+        2,
+        3,
+      ],
+    },
+    "type": "ACTION_FULFILLED",
+  },
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "11-@@ASYNC_FLOW--ACTION_REQUEST",
+        "promise": Object {
+          "fulfillmentValue": Object {
+            "data": 1,
+            "even_more_data": Object {
+              "key": "value",
+            },
+            "more_data": Array [
+              1,
+              2,
+              3,
+            ],
+          },
+          "isFulfilled": true,
+          "isRejected": false,
+          "rejectionReason": undefined,
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "payload": Object {
+      "data": 1,
+      "even_more_data": Object {
+        "key": "value",
+      },
+      "more_data": Array [
+        1,
+        2,
+        3,
+      ],
+    },
+    "type": "ACTION_END",
+  },
+]
+`;
+
+exports[`Middleware observers works as expected 2`] = `
+Array [
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "11-@@ASYNC_FLOW--ACTION_REQUEST",
+        "promise": Object {
+          "fulfillmentValue": Object {
+            "data": 1,
+            "even_more_data": Object {
+              "key": "value",
+            },
+            "more_data": Array [
+              1,
+              2,
+              3,
+            ],
+          },
+          "isFulfilled": true,
+          "isRejected": false,
+          "rejectionReason": undefined,
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "type": "ACTION_PENDING",
+  },
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "11-@@ASYNC_FLOW--ACTION_REQUEST",
+        "promise": Object {
+          "fulfillmentValue": Object {
+            "data": 1,
+            "even_more_data": Object {
+              "key": "value",
+            },
+            "more_data": Array [
+              1,
+              2,
+              3,
+            ],
+          },
+          "isFulfilled": true,
+          "isRejected": false,
+          "rejectionReason": undefined,
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "type": "ACTION_REQUEST",
+  },
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "11-@@ASYNC_FLOW--ACTION_REQUEST",
+        "promise": Object {
+          "fulfillmentValue": Object {
+            "data": 1,
+            "even_more_data": Object {
+              "key": "value",
+            },
+            "more_data": Array [
+              1,
+              2,
+              3,
+            ],
+          },
+          "isFulfilled": true,
+          "isRejected": false,
+          "rejectionReason": undefined,
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "payload": Object {
+      "data": 1,
+      "even_more_data": Object {
+        "key": "value",
+      },
+      "more_data": Array [
+        1,
+        2,
+        3,
+      ],
+    },
+    "type": "ACTION_FULFILLED",
+  },
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "11-@@ASYNC_FLOW--ACTION_REQUEST",
+        "promise": Object {
+          "fulfillmentValue": Object {
+            "data": 1,
+            "even_more_data": Object {
+              "key": "value",
+            },
+            "more_data": Array [
+              1,
+              2,
+              3,
+            ],
+          },
+          "isFulfilled": true,
+          "isRejected": false,
+          "rejectionReason": undefined,
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "payload": Object {
+      "data": 1,
+      "even_more_data": Object {
+        "key": "value",
+      },
+      "more_data": Array [
+        1,
+        2,
+        3,
+      ],
+    },
+    "type": "ACTION_END",
+  },
+]
+`;
+
+exports[`Middleware observers works as expected 3`] = `
+Array [
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "11-@@ASYNC_FLOW--ACTION_REQUEST",
+        "promise": Object {
+          "fulfillmentValue": Object {
+            "data": 1,
+            "even_more_data": Object {
+              "key": "value",
+            },
+            "more_data": Array [
+              1,
+              2,
+              3,
+            ],
+          },
+          "isFulfilled": true,
+          "isRejected": false,
+          "rejectionReason": undefined,
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "type": "ACTION_REQUEST",
+  },
+]
+`;
+
+exports[`Middleware observers works as expected 4`] = `
+Array [
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "11-@@ASYNC_FLOW--ACTION_REQUEST",
+        "promise": Object {
+          "fulfillmentValue": Object {
+            "data": 1,
+            "even_more_data": Object {
+              "key": "value",
+            },
+            "more_data": Array [
+              1,
+              2,
+              3,
+            ],
+          },
+          "isFulfilled": true,
+          "isRejected": false,
+          "rejectionReason": undefined,
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "type": "ACTION_REQUEST",
+  },
+]
+`;
+
+exports[`Middleware observers works as expected 5`] = `
+Array [
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "11-@@ASYNC_FLOW--ACTION_REQUEST",
+        "promise": Object {
+          "fulfillmentValue": Object {
+            "data": 1,
+            "even_more_data": Object {
+              "key": "value",
+            },
+            "more_data": Array [
+              1,
+              2,
+              3,
+            ],
+          },
+          "isFulfilled": true,
+          "isRejected": false,
+          "rejectionReason": undefined,
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "payload": Object {
+      "data": 1,
+      "even_more_data": Object {
+        "key": "value",
+      },
+      "more_data": Array [
+        1,
+        2,
+        3,
+      ],
+    },
+    "type": "ACTION_END",
+  },
+]
+`;
+
+exports[`Middleware observers works as expected 6`] = `
+Array [
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "11-@@ASYNC_FLOW--ACTION_REQUEST",
+        "promise": Object {
+          "fulfillmentValue": Object {
+            "data": 1,
+            "even_more_data": Object {
+              "key": "value",
+            },
+            "more_data": Array [
+              1,
+              2,
+              3,
+            ],
+          },
+          "isFulfilled": true,
+          "isRejected": false,
+          "rejectionReason": undefined,
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "payload": Object {
+      "data": 1,
+      "even_more_data": Object {
+        "key": "value",
+      },
+      "more_data": Array [
+        1,
+        2,
+        3,
+      ],
+    },
+    "type": "ACTION_END",
+  },
+]
+`;

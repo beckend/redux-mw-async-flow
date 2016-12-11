@@ -25,6 +25,9 @@ import {
 } from '../async-types';
 import { createPromise } from '../promise-factory';
 import { createObservers } from './middleware-observers';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+export { Observable, Subject };
 
 const merge: typeof lodash.merge = require('lodash.merge');
 const lSet: typeof lodash.set = require('lodash.set');
@@ -201,14 +204,10 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
           } = createPromise<any>();
           promise
             .timeout(timeoutRequest, 'timeout')
-            // .catch((er) => {
-            //   // Dispatch REJECTED when TimeoutError
-            //   if (er instanceof Bluebird.TimeoutError) {
-            //     handleEndAction(REJECTED, false, er);
-            //   } else {
-            //     throw er || new Error('Unknown error');
-            //   }
-            // })
+            .catch((er) => {
+              // force bluebird to normal reject on errors, fixes jest etc
+              reject(er);
+            })
             .finally(() => {
               // Cleanup from requestStore
               requestStore.delete(requestID);
@@ -230,8 +229,8 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
                 timeout,
                 timeoutRequest,
                 promise,
-              } as IAsyncFlowActionMetaAdded<any>
-            }
+              } as IAsyncFlowActionMetaAdded<any>,
+            },
           };
           const pendingAction: IAsyncFlowAction<any> = merge(
             {},
