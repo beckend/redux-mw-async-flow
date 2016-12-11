@@ -132,9 +132,6 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
   const middleware: Middleware = () => {
     return (next: Dispatch<TStoreState>) => {
       return (action: TAction) => {
-        /**
-         * Normal dispatch without async
-         */
         const dispatchNormal = () => next(action);
         const dispatchAsyncFlow = (actionArg: IAsyncFlowAction<any>) => {
           // Lets observers have a go before and after dispatches
@@ -145,8 +142,6 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
         const actionType = action.type;
         /**
          * If meta.asyncFlow.enable is explicit set to false, completely skip this middleware.
-         * The rest is up to the user to dispatch
-         * REJECTED and FULFILLED suffixes manually
          */
         if (lGet<boolean>(action, ['meta', metaKey, 'enable']) === false) {
           dispatchNormal();
