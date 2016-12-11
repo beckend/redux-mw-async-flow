@@ -357,7 +357,8 @@ describe('Lets user set options', () => {
 //       try {
 //         await lastAction.meta.asyncFlow.promise;
 //       } catch (er) {
-//         expect(er).toBeInstanceOf(Bluebird.TimeoutError);
+//         expect(er)
+//           .toBeInstanceOf(Bluebird.TimeoutError);
 //       }
 //     }
 //   });

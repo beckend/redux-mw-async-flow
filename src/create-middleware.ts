@@ -183,14 +183,14 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
           } = createPromise<any>();
           promise
             .timeout(timeoutRequest, 'timeout')
-            .catch((er) => {
-              // Dispatch REJECTED when TimeoutError
-              if (er instanceof Bluebird.TimeoutError) {
-                handleEndAction(REJECTED, false, er);
-              } else {
-                throw er || new Error('Unknown error');
-              }
-            })
+            // .catch((er) => {
+            //   // Dispatch REJECTED when TimeoutError
+            //   if (er instanceof Bluebird.TimeoutError) {
+            //     handleEndAction(REJECTED, false, er);
+            //   } else {
+            //     throw er || new Error('Unknown error');
+            //   }
+            // })
             .finally(() => {
               // Cleanup from requestStore
               requestStore.delete(requestID);
