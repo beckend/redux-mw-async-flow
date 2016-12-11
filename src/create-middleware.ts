@@ -28,16 +28,40 @@ const lSet: typeof lodash.set = require('lodash.set');
 const lGet: typeof lodash.get = require('lodash.get');
 const uniqueid = require('uniqueid');
 
-const asyncUniqueId = uniqueid(null, '-@@ASYNC_MIDDLEWARE');
+const asyncUniqueId = uniqueid(null, '-@@ASYNC_FLOW');
 
-export interface IAsyncFlowActionMeta<TPayload> {
+// Base and full options
+export interface IAsyncFlowActionMetaBase<TPayload> {
   // enable middleware, disabled will only acts as passthrough
-  enable?: boolean;
+  readonly enable: boolean;
   // the global timeout
-  timeout?: number;
+  readonly timeout: number;
   // override timeout only for this action
-  timeoutRequest?: number;
-  promise: Bluebird<TPayload>;
+  readonly timeoutRequest?: number;
+  readonly promise: Bluebird<TPayload>;
+}
+// Added by middleware
+export interface IAsyncFlowActionMetaAdded<TPayload> {
+  readonly enable?: boolean;
+  readonly timeout: number;
+  readonly timeoutRequest: number;
+  readonly promise: Bluebird<TPayload>;
+}
+// Optional version to pass what you want
+export type TAsyncFlowActionMetaOptional<TActionPayload> = {
+  readonly[P in keyof IAsyncFlowActionMetaBase<TActionPayload>]?: IAsyncFlowActionMetaBase<TActionPayload>[P];
+}
+// Can only apply to default metaKey
+export interface IAsyncFlowActionOptional<TActionPayload> extends Action<TActionPayload> {
+  meta: {
+    asyncFlow: TAsyncFlowActionMetaOptional<TActionPayload>;
+  };
+}
+// Action dispatched with meta added by middleware
+export interface IAsyncFlowAction<TActionPayload> extends Action<TActionPayload> {
+  meta: {
+    asyncFlow: IAsyncFlowActionMetaAdded<TActionPayload>;
+  };
 }
 export interface IGenerateIdFn<TAction> {
   (opts: { action: TAction }): string;
@@ -56,7 +80,7 @@ export const defaultOpts: IDefaultOpts<any> = {
   metaKey: 'asyncFlow',
   metaKeyRequestID: 'REQUEST_ID',
   timeout: 10000,
-  generateId: ({ action }: { action: Action<any> }) => `${asyncUniqueId()}-type--${action.type}`,
+  generateId: ({ action }: { action: Action<any> }) => `${asyncUniqueId()}--${action.type}`,
 };
 export type TRequestId = string;
 export type TDefaultOptsOptional<TAction> = {
@@ -64,7 +88,7 @@ export type TDefaultOptsOptional<TAction> = {
 }
 export interface ICreateAsyncFlowMiddlewareBaseOpts {
   // async constants
-  types?: TDefaultTypesOptional;
+  asyncTypes?: TDefaultTypesOptional;
 }
 export type TCreateAsyncFlowMiddlewareOpts<TAction> = ICreateAsyncFlowMiddlewareBaseOpts & TDefaultOptsOptional<TAction>;
 export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<any>>(opts: TCreateAsyncFlowMiddlewareOpts<TAction> = {
@@ -77,7 +101,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
     _FULFILLED,
     _REJECTED,
     _ABORTED,
-  } = getAsyncTypeConstants({ types: opts.types });
+  } = getAsyncTypeConstants({ types: opts.asyncTypes });
 
   const {
     metaKey,
@@ -155,29 +179,29 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
           /**
            * dispatch _PENDING with meta
            */
-          const pendingAction: TAction = merge({}, action, {
-            type: `${actionType.substring(0, actionType.length - _REQUEST.length)}${_PENDING}`,
+          const addedActionMetaData = {
             meta: {
               [metaKey]: {
                 timeout,
                 timeoutRequest,
                 promise,
-              } as IAsyncFlowActionMeta<any>,
+              } as IAsyncFlowActionMetaAdded<any>
+            }
+          };
+          const pendingAction: TAction = merge(
+            {},
+            action,
+            {
+              type: `${actionType.substring(0, actionType.length - _REQUEST.length)}${_PENDING}`,
             },
-          });
+            addedActionMetaData
+          );
           next(pendingAction);
 
           /**
            * dispatch orginal action with meta data
            */
-          const newAction = merge({}, action, {
-            meta: {
-              [metaKey]: {
-                promise,
-              } as IAsyncFlowActionMeta<any>,
-            },
-          });
-
+          const newAction: TAction = merge({}, action, addedActionMetaData);
           next(newAction);
           return;
         } else if (actionType.endsWith(_FULFILLED)) {

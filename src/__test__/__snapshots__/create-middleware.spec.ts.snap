@@ -1,3 +1,157 @@
+exports[`Lets user set options asyncTypes 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "4-@@ASYNC_FLOW--ACTION_FULLFILLED-request-suffix",
+        "promise": Object {
+          "fulfillmentValue": "fullfilled!",
+          "isFulfilled": true,
+          "isRejected": false,
+          "rejectionReason": undefined,
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "type": "ACTION_FULLFILLED-pending-SUFF",
+  },
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "4-@@ASYNC_FLOW--ACTION_FULLFILLED-request-suffix",
+        "promise": Object {
+          "fulfillmentValue": "fullfilled!",
+          "isFulfilled": true,
+          "isRejected": false,
+          "rejectionReason": undefined,
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "type": "ACTION_FULLFILLED-request-suffix",
+  },
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "4-@@ASYNC_FLOW--ACTION_FULLFILLED-request-suffix",
+        "promise": Object {
+          "fulfillmentValue": "fullfilled!",
+          "isFulfilled": true,
+          "isRejected": false,
+          "rejectionReason": undefined,
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "payload": "fullfilled!",
+    "type": "ACTION_FULLFILLEDfulfilledsuFf",
+  },
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "5-@@ASYNC_FLOW--ACTION_REJECT-request-suffix",
+        "promise": Object {
+          "fulfillmentValue": undefined,
+          "isFulfilled": false,
+          "isRejected": true,
+          "rejectionReason": [Error: rejected!],
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "type": "ACTION_REJECT-pending-SUFF",
+  },
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "5-@@ASYNC_FLOW--ACTION_REJECT-request-suffix",
+        "promise": Object {
+          "fulfillmentValue": undefined,
+          "isFulfilled": false,
+          "isRejected": true,
+          "rejectionReason": [Error: rejected!],
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "type": "ACTION_REJECT-request-suffix",
+  },
+  Object {
+    "error": true,
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "5-@@ASYNC_FLOW--ACTION_REJECT-request-suffix",
+        "promise": Object {
+          "fulfillmentValue": undefined,
+          "isFulfilled": false,
+          "isRejected": true,
+          "rejectionReason": [Error: rejected!],
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "payload": [Error: rejected!],
+    "type": "ACTION_REJECT____rejected___-",
+  },
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "6-@@ASYNC_FLOW--ACTION_ABORT-request-suffix",
+        "promise": Object {
+          "fulfillmentValue": undefined,
+          "isFulfilled": false,
+          "isRejected": true,
+          "rejectionReason": [Error: aborted!],
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "type": "ACTION_ABORT-pending-SUFF",
+  },
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "6-@@ASYNC_FLOW--ACTION_ABORT-request-suffix",
+        "promise": Object {
+          "fulfillmentValue": undefined,
+          "isFulfilled": false,
+          "isRejected": true,
+          "rejectionReason": [Error: aborted!],
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "type": "ACTION_ABORT-request-suffix",
+  },
+  Object {
+    "error": true,
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "6-@@ASYNC_FLOW--ACTION_ABORT-request-suffix",
+        "promise": Object {
+          "fulfillmentValue": undefined,
+          "isFulfilled": false,
+          "isRejected": true,
+          "rejectionReason": [Error: aborted!],
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "payload": [Error: aborted!],
+    "type": "ACTION_ABORT--__aborted-ab",
+  },
+]
+`;
+
 exports[`Lets user set options generateId 1`] = `
 Array [
   Object {
@@ -26,6 +180,8 @@ Array [
           "isRejected": false,
           "rejectionReason": undefined,
         },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
       },
     },
     "type": "ACTION_REQUEST",
@@ -56,6 +212,8 @@ Array [
           "isRejected": false,
           "rejectionReason": undefined,
         },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
       },
     },
     "type": "ACTION_REQUEST",
@@ -86,6 +244,8 @@ Array [
           "isRejected": false,
           "rejectionReason": undefined,
         },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
       },
     },
     "type": "ACTION_REQUEST",
@@ -98,7 +258,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "6-@@ASYNC_MIDDLEWARE-type--ACTION_REQUEST",
+        "REQUEST_ID": "9-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -114,13 +274,15 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "6-@@ASYNC_MIDDLEWARE-type--ACTION_REQUEST",
+        "REQUEST_ID": "9-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
           "isRejected": false,
           "rejectionReason": undefined,
         },
+        "timeout": 5000,
+        "timeoutRequest": 5000,
       },
     },
     "type": "ACTION_REQUEST",
@@ -133,7 +295,7 @@ Array [
   Object {
     "meta": Object {
       "Custom-Meta-Key": Object {
-        "REQUEST_ID": "4-@@ASYNC_MIDDLEWARE-type--ACTION_REQUEST",
+        "REQUEST_ID": "7-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -159,7 +321,7 @@ Array [
   Object {
     "meta": Object {
       "Custom-Meta-Key": Object {
-        "REQUEST_ID": "4-@@ASYNC_MIDDLEWARE-type--ACTION_REQUEST",
+        "REQUEST_ID": "7-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -176,6 +338,8 @@ Array [
           "isRejected": false,
           "rejectionReason": undefined,
         },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
       },
     },
     "type": "ACTION_REQUEST",
@@ -183,7 +347,7 @@ Array [
   Object {
     "meta": Object {
       "Custom-Meta-Key": Object {
-        "REQUEST_ID": "4-@@ASYNC_MIDDLEWARE-type--ACTION_REQUEST",
+        "REQUEST_ID": "7-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -225,7 +389,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "Custom-Meta-REQUEST-ID-Key": "5-@@ASYNC_MIDDLEWARE-type--ACTION_REQUEST",
+        "Custom-Meta-REQUEST-ID-Key": "8-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -251,7 +415,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "Custom-Meta-REQUEST-ID-Key": "5-@@ASYNC_MIDDLEWARE-type--ACTION_REQUEST",
+        "Custom-Meta-REQUEST-ID-Key": "8-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -268,6 +432,8 @@ Array [
           "isRejected": false,
           "rejectionReason": undefined,
         },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
       },
     },
     "type": "ACTION_REQUEST",
@@ -275,7 +441,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "Custom-Meta-REQUEST-ID-Key": "5-@@ASYNC_MIDDLEWARE-type--ACTION_REQUEST",
+        "Custom-Meta-REQUEST-ID-Key": "8-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -317,7 +483,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "7-@@ASYNC_MIDDLEWARE-type--ACTION_REQUEST",
+        "REQUEST_ID": "10-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -333,13 +499,14 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "7-@@ASYNC_MIDDLEWARE-type--ACTION_REQUEST",
+        "REQUEST_ID": "10-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
           "isRejected": false,
           "rejectionReason": undefined,
         },
+        "timeout": 10000,
         "timeoutRequest": 2500,
       },
     },
@@ -353,7 +520,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "0-@@ASYNC_MIDDLEWARE-type--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -369,13 +536,15 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "0-@@ASYNC_MIDDLEWARE-type--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
           "isRejected": false,
           "rejectionReason": undefined,
         },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
       },
     },
     "type": "ACTION_REQUEST",
@@ -388,7 +557,44 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "3-@@ASYNC_MIDDLEWARE-type--ACTION_REQUEST",
+        "REQUEST_ID": "3-@@ASYNC_FLOW--ACTION_REQUEST",
+        "promise": Object {
+          "fulfillmentValue": undefined,
+          "isFulfilled": false,
+          "isRejected": false,
+          "rejectionReason": undefined,
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "type": "ACTION_PENDING",
+  },
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "3-@@ASYNC_FLOW--ACTION_REQUEST",
+        "promise": Object {
+          "fulfillmentValue": undefined,
+          "isFulfilled": false,
+          "isRejected": false,
+          "rejectionReason": undefined,
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "type": "ACTION_REQUEST",
+  },
+]
+`;
+
+exports[`Middleware handle _ABORTED correctly with payload 2`] = `
+Array [
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "3-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -404,13 +610,15 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "3-@@ASYNC_MIDDLEWARE-type--ACTION_REQUEST",
+        "REQUEST_ID": "3-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
           "isRejected": true,
           "rejectionReason": [Error: Aborted!],
         },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
       },
     },
     "type": "ACTION_REQUEST",
@@ -419,7 +627,7 @@ Array [
     "error": true,
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "3-@@ASYNC_MIDDLEWARE-type--ACTION_REQUEST",
+        "REQUEST_ID": "3-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -441,7 +649,44 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "1-@@ASYNC_MIDDLEWARE-type--ACTION_REQUEST",
+        "REQUEST_ID": "1-@@ASYNC_FLOW--ACTION_REQUEST",
+        "promise": Object {
+          "fulfillmentValue": undefined,
+          "isFulfilled": false,
+          "isRejected": false,
+          "rejectionReason": undefined,
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "type": "ACTION_PENDING",
+  },
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "1-@@ASYNC_FLOW--ACTION_REQUEST",
+        "promise": Object {
+          "fulfillmentValue": undefined,
+          "isFulfilled": false,
+          "isRejected": false,
+          "rejectionReason": undefined,
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "type": "ACTION_REQUEST",
+  },
+]
+`;
+
+exports[`Middleware handle _FULFILLED correctly with payload 2`] = `
+Array [
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "1-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -467,7 +712,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "1-@@ASYNC_MIDDLEWARE-type--ACTION_REQUEST",
+        "REQUEST_ID": "1-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -484,6 +729,8 @@ Array [
           "isRejected": false,
           "rejectionReason": undefined,
         },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
       },
     },
     "type": "ACTION_REQUEST",
@@ -491,7 +738,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "1-@@ASYNC_MIDDLEWARE-type--ACTION_REQUEST",
+        "REQUEST_ID": "1-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -533,7 +780,44 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "2-@@ASYNC_MIDDLEWARE-type--ACTION_REQUEST",
+        "REQUEST_ID": "2-@@ASYNC_FLOW--ACTION_REQUEST",
+        "promise": Object {
+          "fulfillmentValue": undefined,
+          "isFulfilled": false,
+          "isRejected": false,
+          "rejectionReason": undefined,
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "type": "ACTION_PENDING",
+  },
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "2-@@ASYNC_FLOW--ACTION_REQUEST",
+        "promise": Object {
+          "fulfillmentValue": undefined,
+          "isFulfilled": false,
+          "isRejected": false,
+          "rejectionReason": undefined,
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "type": "ACTION_REQUEST",
+  },
+]
+`;
+
+exports[`Middleware handle _REJECTED correctly with payload 2`] = `
+Array [
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "2-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -549,13 +833,15 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "2-@@ASYNC_MIDDLEWARE-type--ACTION_REQUEST",
+        "REQUEST_ID": "2-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
           "isRejected": true,
           "rejectionReason": [Error: Rejected!],
         },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
       },
     },
     "type": "ACTION_REQUEST",
@@ -564,7 +850,7 @@ Array [
     "error": true,
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "2-@@ASYNC_MIDDLEWARE-type--ACTION_REQUEST",
+        "REQUEST_ID": "2-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,

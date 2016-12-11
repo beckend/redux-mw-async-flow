@@ -121,7 +121,8 @@
     "lodash.merge": "^4.6.0",
     "lodash.set": "^4.3.2",
     "tslib": "^1.2.0",
-    "uniqueid": "^1.0.0"
+    "uniqueid": "^1.0.0",
+    "x-cache": "beckend/x-cache"
   },
   "engines": {
     "node": ">=7.0.0"

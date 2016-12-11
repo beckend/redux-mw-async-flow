@@ -13,9 +13,9 @@ export const REQUEST_KEY_REJECTFN = 'reject';
 const lGet: typeof lodash.get = require('lodash.get');
 
 export interface IRequestMap<TPayload> {
-  promise: Bluebird<TPayload>;
-  resolve: TResolveFn<TPayload>;
-  reject: TRejectFn;
+  readonly promise: Bluebird<TPayload>;
+  readonly resolve: TResolveFn<TPayload>;
+  readonly reject: TRejectFn;
 }
 export interface IRequestStore {
   [requestName: string]: IRequestMap<any>;

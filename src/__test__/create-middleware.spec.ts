@@ -7,7 +7,8 @@ import {
   createAsyncFlowMiddleware,
   defaultOpts,
   TCreateAsyncFlowMiddlewareOpts,
-  IAsyncFlowActionMeta,
+  TAsyncFlowActionMetaOptional,
+  IAsyncFlowAction,
 } from '../create-middleware';
 import { getAsyncTypeConstants } from '../async-types';
 import { Action, ActionMeta } from 'redux-actions';
@@ -44,11 +45,11 @@ describe('Middleware', () => {
       meta: {
         [defaultOpts.metaKey]: {
           enable: false,
-        } as IAsyncFlowActionMeta<any>,
+        } as TAsyncFlowActionMetaOptional<{}>,
       },
     };
     mockStore.dispatch(action);
-    const actions = mockStore.getActions();
+    const actions: IAsyncFlowAction<{}>[] = mockStore.getActions();
     (expect as any)(actions)
       .toHaveLength(1);
     expect(actions[0])
@@ -60,7 +61,7 @@ describe('Middleware', () => {
       type: 'ACTION',
     };
     mockStore.dispatch(action);
-    const actions = mockStore.getActions();
+    const actions: IAsyncFlowAction<{}>[] = mockStore.getActions();
     (expect as any)(actions)
       .toHaveLength(1);
     expect(actions[0])
@@ -72,7 +73,7 @@ describe('Middleware', () => {
       type: `ACTION${_REQUEST}`,
     };
     mockStore.dispatch(action);
-    const actions = mockStore.getActions();
+    const actions: IAsyncFlowAction<{}>[] = mockStore.getActions();
     (expect as any)(actions)
       .toHaveLength(2);
     expect(actions)
@@ -84,14 +85,13 @@ describe('Middleware', () => {
       type: `ACTION${_REQUEST}`,
     };
     mockStore.dispatch(action);
-    let actions = mockStore.getActions();
-    (expect as any)(actions)
-      .toHaveLength(2);
-    expect(actions[0].meta[defaultOpts.metaKey].promise.isFulfilled())
-      .toBeFalsy();
-    expect(actions[1].meta[defaultOpts.metaKey].promise.isFulfilled())
-      .toBeFalsy();
-
+    let actions: IAsyncFlowAction<any>[] = mockStore.getActions();
+    actions.forEach((asyncAction) => {
+      expect(asyncAction.meta.asyncFlow.promise.isFulfilled())
+        .toBeFalsy();
+    });
+    expect(actions)
+      .toMatchSnapshot();
     const actionFullfill: ActionMeta<any, any> = {
       ...actions[0],
       type: `ACTION${_FULFILLED}`,
@@ -105,14 +105,10 @@ describe('Middleware', () => {
     };
     mockStore.dispatch(actionFullfill);
     actions = mockStore.getActions();
-    (expect as any)(actions)
-      .toHaveLength(3);
-    expect(actions[0].meta[defaultOpts.metaKey].promise.isFulfilled())
-      .toBeTruthy();
-    expect(actions[1].meta[defaultOpts.metaKey].promise.isFulfilled())
-      .toBeTruthy();
-    expect(actions[2].meta[defaultOpts.metaKey].promise.isFulfilled())
-      .toBeTruthy();
+    actions.forEach((asyncAction) => {
+      expect(asyncAction.meta.asyncFlow.promise.isFulfilled())
+        .toBeTruthy();
+    });
     expect(actions)
       .toMatchSnapshot();
   });
@@ -122,14 +118,13 @@ describe('Middleware', () => {
       type: `ACTION${_REQUEST}`,
     };
     mockStore.dispatch(action);
-    let actions = mockStore.getActions();
-    (expect as any)(actions)
-      .toHaveLength(2);
-    expect(actions[0].meta[defaultOpts.metaKey].promise.isFulfilled())
-      .toBeFalsy();
-    expect(actions[1].meta[defaultOpts.metaKey].promise.isFulfilled())
-      .toBeFalsy();
-
+    let actions: IAsyncFlowAction<any>[] = mockStore.getActions();
+    actions.forEach((asyncAction) => {
+      expect(asyncAction.meta.asyncFlow.promise.isFulfilled())
+        .toBeFalsy();
+    });
+    expect(actions)
+      .toMatchSnapshot();
     const actionReject: ActionMeta<any, any> = {
       ...actions[0],
       type: `ACTION${_REJECTED}`,
@@ -138,14 +133,10 @@ describe('Middleware', () => {
     };
     mockStore.dispatch(actionReject);
     actions = mockStore.getActions();
-    (expect as any)(actions)
-      .toHaveLength(3);
-    expect(actions[0].meta[defaultOpts.metaKey].promise.isRejected())
-      .toBeTruthy();
-    expect(actions[1].meta[defaultOpts.metaKey].promise.isRejected())
-      .toBeTruthy();
-    expect(actions[2].meta[defaultOpts.metaKey].promise.isRejected())
-      .toBeTruthy();
+    actions.forEach((asyncAction) => {
+      expect(asyncAction.meta.asyncFlow.promise.isRejected())
+        .toBeTruthy();
+    });
     expect(actions)
       .toMatchSnapshot();
   });
@@ -155,14 +146,13 @@ describe('Middleware', () => {
       type: `ACTION${_REQUEST}`,
     };
     mockStore.dispatch(action);
-    let actions = mockStore.getActions();
-    (expect as any)(actions)
-      .toHaveLength(2);
-    expect(actions[0].meta[defaultOpts.metaKey].promise.isFulfilled())
-      .toBeFalsy();
-    expect(actions[1].meta[defaultOpts.metaKey].promise.isFulfilled())
-      .toBeFalsy();
-
+    let actions: IAsyncFlowAction<any>[] = mockStore.getActions();
+    actions.forEach((asyncAction) => {
+      expect(asyncAction.meta.asyncFlow.promise.isFulfilled())
+        .toBeFalsy();
+    });
+    expect(actions)
+      .toMatchSnapshot();
     const actionReject: ActionMeta<any, any> = {
       ...actions[0],
       type: `ACTION${_ABORTED}`,
@@ -171,20 +161,69 @@ describe('Middleware', () => {
     };
     mockStore.dispatch(actionReject);
     actions = mockStore.getActions();
-    (expect as any)(actions)
-      .toHaveLength(3);
-    expect(actions[0].meta[defaultOpts.metaKey].promise.isRejected())
-      .toBeTruthy();
-    expect(actions[1].meta[defaultOpts.metaKey].promise.isRejected())
-      .toBeTruthy();
-    expect(actions[2].meta[defaultOpts.metaKey].promise.isRejected())
-      .toBeTruthy();
+    actions.forEach((asyncAction) => {
+      expect(asyncAction.meta.asyncFlow.promise.isRejected())
+        .toBeTruthy();
+    });
     expect(actions)
       .toMatchSnapshot();
   });
 });
 
 describe('Lets user set options', () => {
+  it('asyncTypes', () => {
+    const asyncTypes = {
+      REQUEST: '-request-suffix',
+      PENDING: '-pending-SUFF',
+      FULFILLED: 'fulfilledsuFf',
+      REJECTED: '____rejected___-',
+      ABORTED: '--__aborted-ab',
+    };
+    const mockStore = createMockStore({
+      asyncFlowOpts: {
+        asyncTypes,
+      },
+    });
+    const generatedTypes = getAsyncTypeConstants({ types: asyncTypes });
+    let actions: IAsyncFlowAction<any>[];
+
+    mockStore.dispatch({
+      type: `ACTION_FULLFILLED${generatedTypes._REQUEST}`,
+    });
+    actions = mockStore.getActions();
+    mockStore.dispatch({
+      ...actions[actions.length - 1],
+      type: `ACTION_FULLFILLED${generatedTypes._FULFILLED}`,
+      payload: 'fullfilled!',
+    });
+
+    mockStore.dispatch({
+      type: `ACTION_REJECT${generatedTypes._REQUEST}`,
+    });
+    actions = mockStore.getActions();
+    mockStore.dispatch({
+      ...actions[actions.length - 1],
+      type: `ACTION_REJECT${generatedTypes._REJECTED}`,
+      error: true,
+      payload: new Error('rejected!'),
+    });
+
+    mockStore.dispatch({
+      type: `ACTION_ABORT${generatedTypes._REQUEST}`,
+    });
+    actions = mockStore.getActions();
+    mockStore.dispatch({
+      ...actions[actions.length - 1],
+      type: `ACTION_ABORT${generatedTypes._ABORTED}`,
+      error: true,
+      payload: new Error('aborted!'),
+    });
+
+    actions = mockStore.getActions();
+    expect(actions)
+      .toMatchSnapshot();
+  });
+
   it('metaKey', () => {
     const CUSTOM_META_KEY = 'Custom-Meta-Key';
     const mockStore = createMockStore({
@@ -196,7 +235,7 @@ describe('Lets user set options', () => {
       type: `ACTION${_REQUEST}`,
     };
     mockStore.dispatch(action);
-    let actions = mockStore.getActions();
+    let actions: IAsyncFlowAction<any>[] = mockStore.getActions();
     const actionFullfill: ActionMeta<any, any> = {
       ...actions[0],
       type: `ACTION${_FULFILLED}`,
@@ -225,7 +264,7 @@ describe('Lets user set options', () => {
       type: `ACTION${_REQUEST}`,
     };
     mockStore.dispatch(action);
-    let actions = mockStore.getActions();
+    let actions: IAsyncFlowAction<any>[] = mockStore.getActions();
     const actionFullfill: ActionMeta<any, any> = {
       ...actions[0],
       type: `ACTION${_FULFILLED}`,
@@ -253,7 +292,7 @@ describe('Lets user set options', () => {
       type: `ACTION${_REQUEST}`,
     };
     mockStore.dispatch(action);
-    const actions = mockStore.getActions();
+    const actions: IAsyncFlowAction<any>[] = mockStore.getActions();
     expect(actions)
       .toMatchSnapshot();
   });
@@ -265,11 +304,11 @@ describe('Lets user set options', () => {
       meta: {
         [defaultOpts.metaKey]: {
           timeoutRequest: 2500,
-        } as IAsyncFlowActionMeta<any>,
+        } as TAsyncFlowActionMetaOptional<any>,
       },
     };
     mockStore.dispatch(action);
-    const actions = mockStore.getActions();
+    const actions: IAsyncFlowAction<any>[] = mockStore.getActions();
     expect(actions)
       .toMatchSnapshot();
   });
@@ -294,7 +333,7 @@ describe('Lets user set options', () => {
     mockStore.dispatch(action2);
     mockStore.dispatch(action3);
 
-    const actions = mockStore.getActions();
+    const actions: IAsyncFlowAction<any>[] = mockStore.getActions();
     expect(actions)
       .toMatchSnapshot();
   });

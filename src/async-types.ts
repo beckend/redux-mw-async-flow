@@ -6,18 +6,18 @@ export interface IDefaultTypes {
   readonly ABORTED: string;
 }
 export const defaultTypes: IDefaultTypes = {
-  REQUEST: 'REQUEST',
-  PENDING: 'PENDING',
-  FULFILLED: 'FULFILLED',
-  REJECTED: 'REJECTED',
-  ABORTED: 'ABORTED',
+  REQUEST: '_REQUEST',
+  PENDING: '_PENDING',
+  FULFILLED: '_FULFILLED',
+  REJECTED: '_REJECTED',
+  ABORTED: '_ABORTED',
 };
 
 export type TDefaultTypesOptional = {
   readonly[P in keyof IDefaultTypes]?: IDefaultTypes[P];
 };
 export interface IGetAsyncTypeConstantsParams {
-  types?: TDefaultTypesOptional;
+  readonly types?: TDefaultTypesOptional;
 }
 export const getAsyncTypeConstants = ({ types }: IGetAsyncTypeConstantsParams = {}) => {
   const {
@@ -31,10 +31,10 @@ export const getAsyncTypeConstants = ({ types }: IGetAsyncTypeConstantsParams = 
       ...types,
     };
   return {
-    _REQUEST: `_${REQUEST}`,
-    _PENDING: `_${PENDING}`,
-    _FULFILLED: `_${FULFILLED}`,
-    _REJECTED: `_${REJECTED}`,
-    _ABORTED: `_${ABORTED}`,
+    _REQUEST: REQUEST,
+    _PENDING: PENDING,
+    _FULFILLED: FULFILLED,
+    _REJECTED: REJECTED,
+    _ABORTED: ABORTED,
   };
 };

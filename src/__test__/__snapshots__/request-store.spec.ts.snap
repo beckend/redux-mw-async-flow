@@ -22,7 +22,7 @@ Object {
 
 exports[`RequestStore delete 2`] = `Object {}`;
 
-exports[`RequestStore has not request initially 1`] = `Object {}`;
+exports[`RequestStore has not requests initially 1`] = `Object {}`;
 
 exports[`RequestStore reject 1`] = `
 Object {

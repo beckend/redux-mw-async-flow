@@ -9,7 +9,7 @@ describe('RequestStore', () => {
     requestStore = new RequestStore();
   });
 
-  it('has not request initially', () => {
+  it('has not requests initially', () => {
     expect(requestStore.store)
       .toMatchSnapshot();
   });
