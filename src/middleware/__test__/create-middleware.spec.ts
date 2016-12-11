@@ -29,15 +29,21 @@ interface ICreateMockStoreOpts<TAction> {
 const createMockStore = <TStoreState, TAction extends Action<any>>({ initialState, asyncFlowOpts }: ICreateMockStoreOpts<TAction> = {
   initialState: {},
 }) => {
-  return configureStore<any>([
-    createAsyncFlowMiddleware<TStoreState, TAction>(asyncFlowOpts),
+  const asyncFlowPayload = createAsyncFlowMiddleware<TStoreState, TAction>(asyncFlowOpts);
+  const mockStore = configureStore<any>([
+    asyncFlowPayload.middleware,
   ])(initialState);
+
+  return {
+    mockStore,
+    observers: asyncFlowPayload.observers,
+  };
 };
 
 describe('Middleware', () => {
   let mockStore: IStore<any>;
   beforeEach(() => {
-    mockStore = createMockStore();
+    mockStore = createMockStore().mockStore;
   });
 
   it('can be disabled, the action simply passes through', () => {
@@ -184,7 +190,7 @@ describe('Lets user set options', () => {
       asyncFlowOpts: {
         asyncTypes,
       },
-    });
+    }).mockStore;
     const generatedTypes = getAsyncTypeConstants({ types: asyncTypes });
     let actions: IAsyncFlowAction<any>[];
 
@@ -231,7 +237,7 @@ describe('Lets user set options', () => {
       asyncFlowOpts: {
         metaKey: CUSTOM_META_KEY,
       },
-    });
+    }).mockStore;
     const action: Action<{}> = {
       type: `ACTION${REQUEST}`,
     };
@@ -260,7 +266,7 @@ describe('Lets user set options', () => {
       asyncFlowOpts: {
         metaKeyRequestID: CUSTOM_META_KEYREQUEST_ID,
       },
-    });
+    }).mockStore;
     const action: Action<{}> = {
       type: `ACTION${REQUEST}`,
     };
@@ -288,7 +294,7 @@ describe('Lets user set options', () => {
       asyncFlowOpts: {
         timeout: 5000,
       },
-    });
+    }).mockStore;
     const action: Action<{}> = {
       type: `ACTION${REQUEST}`,
     };
@@ -299,7 +305,7 @@ describe('Lets user set options', () => {
   });
 
   it('per request timeout', () => {
-    const mockStore = createMockStore();
+    const mockStore = createMockStore().mockStore;
     const action: ActionMeta<{}, any> = {
       type: `ACTION${REQUEST}`,
       meta: {
@@ -320,7 +326,7 @@ describe('Lets user set options', () => {
       asyncFlowOpts: {
         generateId: ({ action }) => `${action.type}-${idCounter++}`,
       },
-    });
+    }).mockStore;
     const action1: Action<any> = {
       type: `ACTION${REQUEST}`,
     };
@@ -346,7 +352,7 @@ describe('Lets user set options', () => {
 //       asyncFlowOpts: {
 //         timeout: 1,
 //       },
-//     });
+//     }).mockStore;
 //     const action: Action<{}> = {
 //       type: `ACTION${REQUEST}`,
 //     };

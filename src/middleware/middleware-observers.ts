@@ -1,0 +1,45 @@
+/**
+ * Rxjs observers only triggered when the async action is matched/enabled
+ */
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/filter';
+import { IAsyncFlowAction } from './create-middleware';
+
+export interface IAsyncTypes {
+  REQUEST: string;
+  END: string;
+}
+export interface ICreateObserversArgs {
+  // async constants
+  asyncTypes: IAsyncTypes;
+}
+export const createObservers = ({ asyncTypes }: ICreateObserversArgs) => {
+  const createAllObservers = () => {
+    // Gets all the actions through the middleware
+    const rootSubject = new Subject<IAsyncFlowAction<any>>();
+
+    // lock out .next api etc
+    const obsOnAll = rootSubject.asObservable();
+
+    // filter by requests
+    const obsOnRequest = obsOnAll
+      .filter((action) => action.type.endsWith(asyncTypes.REQUEST));
+
+    const obsOnEnd = obsOnAll
+      .filter((action) => action.type.endsWith(asyncTypes.END));
+
+    return {
+      rootSubject,
+      obsOnAll,
+      obsOnRequest,
+      obsOnEnd,
+    };
+  };
+
+  return {
+    // before dispatch
+    before: createAllObservers(),
+    // after dispatch
+    after: createAllObservers(),
+  };
+};

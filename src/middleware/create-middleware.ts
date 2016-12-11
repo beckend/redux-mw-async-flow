@@ -24,6 +24,7 @@ import {
   TDefaultTypesOptional,
 } from '../async-types';
 import { createPromise } from '../promise-factory';
+import { createObservers } from './middleware-observers';
 
 const merge: typeof lodash.merge = require('lodash.merge');
 const lSet: typeof lodash.set = require('lodash.set');
@@ -106,6 +107,13 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
     END,
   } = getAsyncTypeConstants({ types: opts.asyncTypes });
 
+  const mwObservers = createObservers({
+    asyncTypes: {
+      REQUEST,
+      END,
+    },
+  });
+
   const {
     metaKey,
     timeout,
@@ -124,19 +132,29 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
         /**
          * Normal dispatch without async
          */
-        const getDispatchResult = () => next(action);
+        const dispatchNormal = () => next(action);
+        const dispatchAsyncFlow = (actionArg: IAsyncFlowAction<any>) => {
+          // Lets observers have a go before and after dispatches
+          mwObservers.before.rootSubject.next(actionArg);
+          const dispatchResult = next(actionArg);
+          mwObservers.after.rootSubject.next(dispatchResult);
+        };
         const actionType = action.type;
         /**
          * If meta.asyncFlow.enable is explicit set to false, completely skip this middleware.
          * The rest is up to the user to dispatch
          * REJECTED and FULFILLED suffixes manually
          */
-        if (lGet<boolean>(action, ['meta', metaKey, 'enable']) === false) { return getDispatchResult(); }
+        if (lGet<boolean>(action, ['meta', metaKey, 'enable']) === false) {
+          dispatchNormal();
+          return;
+        }
 
         // used to get deep in action object
         const metaRequestIdPath = ['meta', metaKey, metaKeyRequestID];
         // iF set will dispatch en END action
         let actionEnd;
+        // Resole, reject and then set dispatch END payload
         const handleEndAction = (suffixType: string, resolve: boolean, payloadArg?: any) => {
           const requestID = lGet<TRequestId>(action, metaRequestIdPath);
           if (requestID) {
@@ -196,14 +214,13 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
               requestStore.delete(requestID);
             });
 
-          // typescript being an asshole so need to do tricks
-          const tmpRequestStoreAddPayload: any = {
+          const tmpRequestStoreAddPayload: IRequestMap<any> = {
             [REQUEST_KEY_PROMISE]: promise,
             [REQUEST_KEY_RESOLVEFN]: resolve,
             [REQUEST_KEY_REJECTFN]: reject,
-          };
+          } as any;
           // Register promise to requestStore
-          requestStore.add(requestID, tmpRequestStoreAddPayload as IRequestMap<any>);
+          requestStore.add(requestID, tmpRequestStoreAddPayload);
           /**
            * dispatch PENDING with meta
            */
@@ -216,21 +233,21 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
               } as IAsyncFlowActionMetaAdded<any>
             }
           };
-          const pendingAction: TAction = merge(
+          const pendingAction: IAsyncFlowAction<any> = merge(
             {},
             action,
             {
               type: replaceSuffix(actionType, REQUEST, PENDING),
             },
             addedActionMetaData
-          );
-          next(pendingAction);
+          ) as any;
+          dispatchAsyncFlow(pendingAction);
 
           /**
            * Dispatch orginal action with meta data
            */
-          const newAction: TAction = merge({}, action, addedActionMetaData);
-          next(newAction);
+          const newAction: IAsyncFlowAction<any> = merge({}, action, addedActionMetaData) as any;
+          dispatchAsyncFlow(newAction);
           return;
         } else if (actionType.endsWith(FULFILLED)) {
           handleEndAction(FULFILLED, true);
@@ -238,18 +255,26 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
           handleEndAction(REJECTED, false);
         } else if (actionType.endsWith(ABORTED)) {
           handleEndAction(ABORTED, false);
+        } else {
+          /**
+           * Normal dispatch when unmatched by suffixes
+           */
+          dispatchNormal();
+          return;
         }
-        /**
-         * Normal dispatch all but on REQUEST
-         */
-        getDispatchResult();
+
+        // Reaching here it's atually a IAsyncFlowAction
+        dispatchAsyncFlow(action as any);
         /**
          * Dispatch actionEnd if set for completion
          */
-        if (actionEnd) { next(actionEnd); }
+        if (actionEnd) { dispatchAsyncFlow(actionEnd); }
       };
     };
   };
 
-  return middleware;
+  return {
+    middleware,
+    observers: mwObservers,
+  };
 };
