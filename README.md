@@ -4,8 +4,9 @@
 [![DevDependency Status](https://img.shields.io/david/dev/beckend/redux-mw-async-flow.svg?maxAge=2592000)](https://david-dm.org/beckend/redux-mw-async-flow?type=dev)
 
 # redux-mw-async-flow - redux async handling for any actions without enforcing API client implementation
+* Uses redux standard action objects
 * ES5/ES2015/ES2017 commonjs module, main is ES2015
-* note: ES5 module version needs a string.prototype.endsWith polyfill
+* Note: ES5 module version needs a string.prototype.endsWith polyfill
 
 # Contributing
 

@@ -4,6 +4,7 @@ export interface IDefaultTypes {
   readonly FULFILLED: string;
   readonly REJECTED: string;
   readonly ABORTED: string;
+  readonly END: string;
 }
 export const defaultTypes: IDefaultTypes = {
   REQUEST: '_REQUEST',
@@ -11,6 +12,7 @@ export const defaultTypes: IDefaultTypes = {
   FULFILLED: '_FULFILLED',
   REJECTED: '_REJECTED',
   ABORTED: '_ABORTED',
+  END: '_END',
 };
 
 export type TDefaultTypesOptional = {
@@ -20,21 +22,11 @@ export interface IGetAsyncTypeConstantsParams {
   readonly types?: TDefaultTypesOptional;
 }
 export const getAsyncTypeConstants = ({ types }: IGetAsyncTypeConstantsParams = {}) => {
-  const {
-    REQUEST,
-    PENDING,
-    FULFILLED,
-    REJECTED,
-    ABORTED,
-  }: IDefaultTypes = {
-      ...defaultTypes,
-      ...types,
-    };
   return {
-    _REQUEST: REQUEST,
-    _PENDING: PENDING,
-    _FULFILLED: FULFILLED,
-    _REJECTED: REJECTED,
-    _ABORTED: ABORTED,
-  };
+    ...defaultTypes,
+    ...types,
+  } as IDefaultTypes;
 };
+
+export const replaceSuffix = (targetStr: string, suffixToReplace: string, replacementString: string) =>
+  `${targetStr.substring(0, targetStr.length - suffixToReplace.length)}${replacementString}`;

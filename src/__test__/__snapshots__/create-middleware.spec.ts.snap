@@ -3,7 +3,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "4-@@ASYNC_FLOW--ACTION_FULLFILLED-request-suffix",
+        "REQUEST_ID": "4-@@ASYNC_FLOW--ACTION_one-request-suffix",
         "promise": Object {
           "fulfillmentValue": "fullfilled!",
           "isFulfilled": true,
@@ -14,12 +14,12 @@ Array [
         "timeoutRequest": 10000,
       },
     },
-    "type": "ACTION_FULLFILLED-pending-SUFF",
+    "type": "ACTION_one-pending-SUFF",
   },
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "4-@@ASYNC_FLOW--ACTION_FULLFILLED-request-suffix",
+        "REQUEST_ID": "4-@@ASYNC_FLOW--ACTION_one-request-suffix",
         "promise": Object {
           "fulfillmentValue": "fullfilled!",
           "isFulfilled": true,
@@ -30,12 +30,12 @@ Array [
         "timeoutRequest": 10000,
       },
     },
-    "type": "ACTION_FULLFILLED-request-suffix",
+    "type": "ACTION_one-request-suffix",
   },
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "4-@@ASYNC_FLOW--ACTION_FULLFILLED-request-suffix",
+        "REQUEST_ID": "4-@@ASYNC_FLOW--ACTION_one-request-suffix",
         "promise": Object {
           "fulfillmentValue": "fullfilled!",
           "isFulfilled": true,
@@ -47,12 +47,29 @@ Array [
       },
     },
     "payload": "fullfilled!",
-    "type": "ACTION_FULLFILLEDfulfilledsuFf",
+    "type": "ACTION_onefulfilledsuFf",
   },
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "5-@@ASYNC_FLOW--ACTION_REJECT-request-suffix",
+        "REQUEST_ID": "4-@@ASYNC_FLOW--ACTION_one-request-suffix",
+        "promise": Object {
+          "fulfillmentValue": "fullfilled!",
+          "isFulfilled": true,
+          "isRejected": false,
+          "rejectionReason": undefined,
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "payload": "fullfilled!",
+    "type": "ACTION_one_END",
+  },
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "5-@@ASYNC_FLOW--ACTION_two-request-suffix",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -63,12 +80,12 @@ Array [
         "timeoutRequest": 10000,
       },
     },
-    "type": "ACTION_REJECT-pending-SUFF",
+    "type": "ACTION_two-pending-SUFF",
   },
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "5-@@ASYNC_FLOW--ACTION_REJECT-request-suffix",
+        "REQUEST_ID": "5-@@ASYNC_FLOW--ACTION_two-request-suffix",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -79,13 +96,13 @@ Array [
         "timeoutRequest": 10000,
       },
     },
-    "type": "ACTION_REJECT-request-suffix",
+    "type": "ACTION_two-request-suffix",
   },
   Object {
     "error": true,
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "5-@@ASYNC_FLOW--ACTION_REJECT-request-suffix",
+        "REQUEST_ID": "5-@@ASYNC_FLOW--ACTION_two-request-suffix",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -97,45 +114,63 @@ Array [
       },
     },
     "payload": [Error: rejected!],
-    "type": "ACTION_REJECT____rejected___-",
-  },
-  Object {
-    "meta": Object {
-      "asyncFlow": Object {
-        "REQUEST_ID": "6-@@ASYNC_FLOW--ACTION_ABORT-request-suffix",
-        "promise": Object {
-          "fulfillmentValue": undefined,
-          "isFulfilled": false,
-          "isRejected": true,
-          "rejectionReason": [Error: aborted!],
-        },
-        "timeout": 10000,
-        "timeoutRequest": 10000,
-      },
-    },
-    "type": "ACTION_ABORT-pending-SUFF",
-  },
-  Object {
-    "meta": Object {
-      "asyncFlow": Object {
-        "REQUEST_ID": "6-@@ASYNC_FLOW--ACTION_ABORT-request-suffix",
-        "promise": Object {
-          "fulfillmentValue": undefined,
-          "isFulfilled": false,
-          "isRejected": true,
-          "rejectionReason": [Error: aborted!],
-        },
-        "timeout": 10000,
-        "timeoutRequest": 10000,
-      },
-    },
-    "type": "ACTION_ABORT-request-suffix",
+    "type": "ACTION_two____rejected___-",
   },
   Object {
     "error": true,
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "6-@@ASYNC_FLOW--ACTION_ABORT-request-suffix",
+        "REQUEST_ID": "5-@@ASYNC_FLOW--ACTION_two-request-suffix",
+        "promise": Object {
+          "fulfillmentValue": undefined,
+          "isFulfilled": false,
+          "isRejected": true,
+          "rejectionReason": [Error: rejected!],
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "payload": [Error: rejected!],
+    "type": "ACTION_two_END",
+  },
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "6-@@ASYNC_FLOW--ACTION_three-request-suffix",
+        "promise": Object {
+          "fulfillmentValue": undefined,
+          "isFulfilled": false,
+          "isRejected": true,
+          "rejectionReason": [Error: aborted!],
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "type": "ACTION_three-pending-SUFF",
+  },
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "6-@@ASYNC_FLOW--ACTION_three-request-suffix",
+        "promise": Object {
+          "fulfillmentValue": undefined,
+          "isFulfilled": false,
+          "isRejected": true,
+          "rejectionReason": [Error: aborted!],
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "type": "ACTION_three-request-suffix",
+  },
+  Object {
+    "error": true,
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "6-@@ASYNC_FLOW--ACTION_three-request-suffix",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -147,7 +182,25 @@ Array [
       },
     },
     "payload": [Error: aborted!],
-    "type": "ACTION_ABORT--__aborted-ab",
+    "type": "ACTION_three--__aborted-ab",
+  },
+  Object {
+    "error": true,
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "6-@@ASYNC_FLOW--ACTION_three-request-suffix",
+        "promise": Object {
+          "fulfillmentValue": undefined,
+          "isFulfilled": false,
+          "isRejected": true,
+          "rejectionReason": [Error: aborted!],
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "payload": [Error: aborted!],
+    "type": "ACTION_three_END",
   },
 ]
 `;
@@ -381,6 +434,43 @@ Array [
     },
     "type": "ACTION_FULFILLED",
   },
+  Object {
+    "meta": Object {
+      "Custom-Meta-Key": Object {
+        "REQUEST_ID": "7-@@ASYNC_FLOW--ACTION_REQUEST",
+        "promise": Object {
+          "fulfillmentValue": Object {
+            "data": 1,
+            "even_more_data": Object {
+              "key": "value",
+            },
+            "more_data": Array [
+              1,
+              2,
+              3,
+            ],
+          },
+          "isFulfilled": true,
+          "isRejected": false,
+          "rejectionReason": undefined,
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "payload": Object {
+      "data": 1,
+      "even_more_data": Object {
+        "key": "value",
+      },
+      "more_data": Array [
+        1,
+        2,
+        3,
+      ],
+    },
+    "type": "ACTION_END",
+  },
 ]
 `;
 
@@ -475,6 +565,43 @@ Array [
     },
     "type": "ACTION_FULFILLED",
   },
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "Custom-Meta-REQUEST-ID-Key": "8-@@ASYNC_FLOW--ACTION_REQUEST",
+        "promise": Object {
+          "fulfillmentValue": Object {
+            "data": 1,
+            "even_more_data": Object {
+              "key": "value",
+            },
+            "more_data": Array [
+              1,
+              2,
+              3,
+            ],
+          },
+          "isFulfilled": true,
+          "isRejected": false,
+          "rejectionReason": undefined,
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "payload": Object {
+      "data": 1,
+      "even_more_data": Object {
+        "key": "value",
+      },
+      "more_data": Array [
+        1,
+        2,
+        3,
+      ],
+    },
+    "type": "ACTION_END",
+  },
 ]
 `;
 
@@ -515,7 +642,7 @@ Array [
 ]
 `;
 
-exports[`Middleware action with _REQUEST suffix will have _PENDING and _REQUEST dispatched 1`] = `
+exports[`Middleware action with REQUEST suffix will have PENDING and REQUEST dispatched 1`] = `
 Array [
   Object {
     "meta": Object {
@@ -640,6 +767,24 @@ Array [
     },
     "payload": [Error: Aborted!],
     "type": "ACTION_ABORTED",
+  },
+  Object {
+    "error": true,
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "3-@@ASYNC_FLOW--ACTION_REQUEST",
+        "promise": Object {
+          "fulfillmentValue": undefined,
+          "isFulfilled": false,
+          "isRejected": true,
+          "rejectionReason": [Error: Aborted!],
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "payload": [Error: Aborted!],
+    "type": "ACTION_END",
   },
 ]
 `;
@@ -772,6 +917,43 @@ Array [
     },
     "type": "ACTION_FULFILLED",
   },
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "1-@@ASYNC_FLOW--ACTION_REQUEST",
+        "promise": Object {
+          "fulfillmentValue": Object {
+            "data": 1,
+            "even_more_data": Object {
+              "key": "value",
+            },
+            "more_data": Array [
+              1,
+              2,
+              3,
+            ],
+          },
+          "isFulfilled": true,
+          "isRejected": false,
+          "rejectionReason": undefined,
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "payload": Object {
+      "data": 1,
+      "even_more_data": Object {
+        "key": "value",
+      },
+      "more_data": Array [
+        1,
+        2,
+        3,
+      ],
+    },
+    "type": "ACTION_END",
+  },
 ]
 `;
 
@@ -863,6 +1045,24 @@ Array [
     },
     "payload": [Error: Rejected!],
     "type": "ACTION_REJECTED",
+  },
+  Object {
+    "error": true,
+    "meta": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "2-@@ASYNC_FLOW--ACTION_REQUEST",
+        "promise": Object {
+          "fulfillmentValue": undefined,
+          "isFulfilled": false,
+          "isRejected": true,
+          "rejectionReason": [Error: Rejected!],
+        },
+        "timeout": 10000,
+        "timeoutRequest": 10000,
+      },
+    },
+    "payload": [Error: Rejected!],
+    "type": "ACTION_END",
   },
 ]
 `;

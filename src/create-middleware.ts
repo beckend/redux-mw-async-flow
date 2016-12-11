@@ -1,10 +1,11 @@
 /* tslint:disable: no-unnecessary-local-variable */
 /* tslint:disable: max-func-body-length */
 /**
- * Detects action types with names ending with _REQUEST, _REJECTED, _FULFILLED, _ABORTED
- * Will dispatch _PENDING if _REQUEST
- * Will resolve if _FULFILLED
- * REJECT when _REJECTED or _ABORTED
+ * Detects action types with names ending with REQUEST, REJECTED, FULFILLED, ABORTED
+ * Will dispatch PENDING if REQUEST
+ * Will resolve if FULFILLED
+ * REJECT when REJECTED or ABORTED
+ * END after FULFILLED/REJECTED/ABORTED
  */
 import { Middleware, Dispatch } from 'redux';
 import { Action } from 'redux-actions';
@@ -19,6 +20,7 @@ import {
 } from './request-store';
 import {
   getAsyncTypeConstants,
+  replaceSuffix,
   TDefaultTypesOptional,
 } from './async-types';
 import { createPromise } from './promise-factory';
@@ -96,11 +98,12 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
   timeout: defaultOpts.timeout,
 }) => {
   const {
-    _REQUEST,
-    _PENDING,
-    _FULFILLED,
-    _REJECTED,
-    _ABORTED,
+    REQUEST,
+    PENDING,
+    FULFILLED,
+    REJECTED,
+    ABORTED,
+    END,
   } = getAsyncTypeConstants({ types: opts.asyncTypes });
 
   const {
@@ -132,10 +135,12 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
 
         // used to get deep in action object
         const metaRequestIdPath = ['meta', metaKey, metaKeyRequestID];
+        // iF set will dispatch en END action
+        let actionEnd;
         /**
-         * handle _REQUEST, dispatches _PENDING then dispatches _REQUEST with meta data
+         * handle REQUEST, dispatches PENDING then dispatches REQUEST with meta data
          */
-        if (actionType.endsWith(_REQUEST)) {
+        if (actionType.endsWith(REQUEST)) {
           /**
            * Generate uniqueid, make sure it does not exist
            */
@@ -154,7 +159,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
           /**
            * Dispatch pending first, with a twist, send a promise resolve reject with it
            * So this way user can use to the promise to do stuff after the action
-           * The promise will be resolved later when getting _ABORTED, _REJECTED, or _FULFILLED
+           * The promise will be resolved later when getting ABORTED, REJECTED, or FULFILLED
            */
           const {
             promise,
@@ -177,7 +182,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
           // Register promise to requestStore
           requestStore.add(currentRequestID, tmpRequestStoreAddPayload as IRequestMap<any>);
           /**
-           * dispatch _PENDING with meta
+           * dispatch PENDING with meta
            */
           const addedActionMetaData = {
             meta: {
@@ -192,7 +197,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
             {},
             action,
             {
-              type: `${actionType.substring(0, actionType.length - _REQUEST.length)}${_PENDING}`,
+              type: replaceSuffix(actionType, REQUEST, PENDING),
             },
             addedActionMetaData
           );
@@ -204,41 +209,54 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
           const newAction: TAction = merge({}, action, addedActionMetaData);
           next(newAction);
           return;
-        } else if (actionType.endsWith(_FULFILLED)) {
+        } else if (actionType.endsWith(FULFILLED)) {
           /**
-           * handle _FULFILLED
+           * handle FULFILLED
            */
           const requestID = lGet<TRequestId>(action, metaRequestIdPath);
           if (requestID) {
             requestStore.resolve(lGet<TRequestId>(action, metaRequestIdPath), action.payload);
+            actionEnd = merge({}, action, {
+              type: replaceSuffix(actionType, FULFILLED, END),
+            });
           } else {
             console.warn(`${action.type} - meta data not found, did you forget to send it?`);
           }
-        } else if (actionType.endsWith(_REJECTED)) {
+        } else if (actionType.endsWith(REJECTED)) {
           /**
-           * handle _REJECTED
+           * handle REJECTED
            */
           const requestID = lGet<TRequestId>(action, metaRequestIdPath);
           if (requestID) {
             requestStore.reject(requestID, action.payload);
+            actionEnd = merge({}, action, {
+              type: replaceSuffix(actionType, REJECTED, END),
+            });
           } else {
             console.warn(`${action.type} - meta data not found, did you forget to send it?`);
           }
-        } else if (actionType.endsWith(_ABORTED)) {
+        } else if (actionType.endsWith(ABORTED)) {
           /**
-           * handle _ABORTED
+           * handle ABORTED
            */
           const requestID = lGet<TRequestId>(action, metaRequestIdPath);
           if (requestID) {
             requestStore.reject(requestID, action.payload);
+            actionEnd = merge({}, action, {
+              type: replaceSuffix(actionType, ABORTED, END),
+            });
           } else {
             console.warn(`${action.type} - meta data not found, did you forget to send it?`);
           }
         }
         /**
-         * Normal dispatch all but on _REQUEST
+         * Normal dispatch all but on REQUEST
          */
-        return getDispatchResult();
+        getDispatchResult();
+        /**
+         * Dispatch actionEnd if set for completion
+         */
+        if (actionEnd) { next(actionEnd); }
       };
     };
   };
