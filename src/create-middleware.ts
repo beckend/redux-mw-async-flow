@@ -137,13 +137,13 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
         const metaRequestIdPath = ['meta', metaKey, metaKeyRequestID];
         // iF set will dispatch en END action
         let actionEnd;
-        const handleEndAction = (suffixType: string, resolve: boolean) => {
+        const handleEndAction = (suffixType: string, resolve: boolean, payloadArg?: any) => {
           const requestID = lGet<TRequestId>(action, metaRequestIdPath);
           if (requestID) {
             if (resolve) {
-              requestStore.resolve(requestID, action.payload);
+              requestStore.resolve(requestID, payloadArg || action.payload);
             } else {
-              requestStore.reject(requestID, action.payload);
+              requestStore.reject(requestID, payloadArg || action.payload);
             }
             actionEnd = merge({}, action, {
               type: replaceSuffix(actionType, suffixType, END),
@@ -183,6 +183,14 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
           } = createPromise<any>();
           promise
             .timeout(timeoutRequest, 'timeout')
+            .catch((er) => {
+              // Dispatch REJECTED when TimeoutError
+              if (er instanceof Bluebird.TimeoutError) {
+                handleEndAction(REJECTED, false, er);
+              } else {
+                throw er || new Error('Unknown error');
+              }
+            })
             .finally(() => {
               // Cleanup from requestStore
               requestStore.delete(requestID);
@@ -219,7 +227,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
           next(pendingAction);
 
           /**
-           * dispatch orginal action with meta data
+           * Dispatch orginal action with meta data
            */
           const newAction: TAction = merge({}, action, addedActionMetaData);
           next(newAction);

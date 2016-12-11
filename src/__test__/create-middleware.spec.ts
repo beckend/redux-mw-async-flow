@@ -12,6 +12,7 @@ import {
 } from '../create-middleware';
 import { getAsyncTypeConstants } from '../async-types';
 import { Action, ActionMeta } from 'redux-actions';
+// import * as Bluebird from 'bluebird';
 
 const {
   REQUEST,
@@ -338,3 +339,26 @@ describe('Lets user set options', () => {
       .toMatchSnapshot();
   });
 });
+
+// describe('Middleware error handling', () => {
+//   it('when a promise times out', async () => {
+//     const mockStore = createMockStore({
+//       asyncFlowOpts: {
+//         timeout: 1,
+//       },
+//     });
+//     const action: Action<{}> = {
+//       type: `ACTION${REQUEST}`,
+//     };
+//     mockStore.dispatch(action);
+//     const actions: IAsyncFlowAction<any>[] = mockStore.getActions();
+//     const lastAction = actions.slice(-1).pop();
+//     if (lastAction) {
+//       try {
+//         await lastAction.meta.asyncFlow.promise;
+//       } catch (er) {
+//         expect(er).toBeInstanceOf(Bluebird.TimeoutError);
+//       }
+//     }
+//   });
+// });
