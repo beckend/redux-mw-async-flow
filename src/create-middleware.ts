@@ -137,6 +137,21 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
         const metaRequestIdPath = ['meta', metaKey, metaKeyRequestID];
         // iF set will dispatch en END action
         let actionEnd;
+        const handleEndAction = (suffixType: string, resolve: boolean) => {
+          const requestID = lGet<TRequestId>(action, metaRequestIdPath);
+          if (requestID) {
+            if (resolve) {
+              requestStore.resolve(requestID, action.payload);
+            } else {
+              requestStore.reject(requestID, action.payload);
+            }
+            actionEnd = merge({}, action, {
+              type: replaceSuffix(actionType, suffixType, END),
+            });
+          } else {
+            console.warn(`${action.type} - meta data not found, did you forget to send it?`);
+          }
+        };
         /**
          * handle REQUEST, dispatches PENDING then dispatches REQUEST with meta data
          */
@@ -144,13 +159,13 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
           /**
            * Generate uniqueid, make sure it does not exist
            */
-          let currentRequestID = lGet<TRequestId>(action, metaRequestIdPath);
-          if (!currentRequestID || {}.hasOwnProperty.call(requestStore, currentRequestID)) {
+          let requestID = lGet<TRequestId>(action, metaRequestIdPath);
+          if (!requestID || {}.hasOwnProperty.call(requestStore, requestID)) {
             do {
-              currentRequestID = generateId({ action });
-            } while ({}.hasOwnProperty.call(requestStore, currentRequestID));
+              requestID = generateId({ action });
+            } while ({}.hasOwnProperty.call(requestStore, requestID));
 
-            lSet<TRequestId>(action, metaRequestIdPath, currentRequestID);
+            lSet<TRequestId>(action, metaRequestIdPath, requestID);
           }
 
           // User override of the timeout for each request
@@ -170,7 +185,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
             .timeout(timeoutRequest, 'timeout')
             .finally(() => {
               // Cleanup from requestStore
-              requestStore.delete(currentRequestID);
+              requestStore.delete(requestID);
             });
 
           // typescript being an asshole so need to do tricks
@@ -180,7 +195,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
             [REQUEST_KEY_REJECTFN]: reject,
           };
           // Register promise to requestStore
-          requestStore.add(currentRequestID, tmpRequestStoreAddPayload as IRequestMap<any>);
+          requestStore.add(requestID, tmpRequestStoreAddPayload as IRequestMap<any>);
           /**
            * dispatch PENDING with meta
            */
@@ -210,44 +225,11 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
           next(newAction);
           return;
         } else if (actionType.endsWith(FULFILLED)) {
-          /**
-           * handle FULFILLED
-           */
-          const requestID = lGet<TRequestId>(action, metaRequestIdPath);
-          if (requestID) {
-            requestStore.resolve(lGet<TRequestId>(action, metaRequestIdPath), action.payload);
-            actionEnd = merge({}, action, {
-              type: replaceSuffix(actionType, FULFILLED, END),
-            });
-          } else {
-            console.warn(`${action.type} - meta data not found, did you forget to send it?`);
-          }
+          handleEndAction(FULFILLED, true);
         } else if (actionType.endsWith(REJECTED)) {
-          /**
-           * handle REJECTED
-           */
-          const requestID = lGet<TRequestId>(action, metaRequestIdPath);
-          if (requestID) {
-            requestStore.reject(requestID, action.payload);
-            actionEnd = merge({}, action, {
-              type: replaceSuffix(actionType, REJECTED, END),
-            });
-          } else {
-            console.warn(`${action.type} - meta data not found, did you forget to send it?`);
-          }
+          handleEndAction(REJECTED, false);
         } else if (actionType.endsWith(ABORTED)) {
-          /**
-           * handle ABORTED
-           */
-          const requestID = lGet<TRequestId>(action, metaRequestIdPath);
-          if (requestID) {
-            requestStore.reject(requestID, action.payload);
-            actionEnd = merge({}, action, {
-              type: replaceSuffix(actionType, ABORTED, END),
-            });
-          } else {
-            console.warn(`${action.type} - meta data not found, did you forget to send it?`);
-          }
+          handleEndAction(ABORTED, false);
         }
         /**
          * Normal dispatch all but on REQUEST
