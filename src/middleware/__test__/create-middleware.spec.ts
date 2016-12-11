@@ -10,7 +10,7 @@ import {
   TAsyncFlowActionMetaOptional,
   IAsyncFlowAction,
 } from '../create-middleware';
-import { getAsyncTypeConstants } from '../async-types';
+import { getAsyncTypeConstants } from '../../async-types';
 import { Action, ActionMeta } from 'redux-actions';
 // import * as Bluebird from 'bluebird';
 

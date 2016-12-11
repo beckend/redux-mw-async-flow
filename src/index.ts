@@ -2,5 +2,5 @@ import 'tslib';
 export {
   createAsyncFlowMiddleware,
   defaultOpts
-} from './create-middleware';
+} from './middleware/create-middleware';
 export { createAsyncFlowReducer } from './reducer';

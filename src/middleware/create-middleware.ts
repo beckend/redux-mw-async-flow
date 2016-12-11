@@ -17,13 +17,13 @@ import {
   REQUEST_KEY_PROMISE,
   REQUEST_KEY_RESOLVEFN,
   REQUEST_KEY_REJECTFN,
-} from './request-store';
+} from '../request-store';
 import {
   getAsyncTypeConstants,
   replaceSuffix,
   TDefaultTypesOptional,
-} from './async-types';
-import { createPromise } from './promise-factory';
+} from '../async-types';
+import { createPromise } from '../promise-factory';
 
 const merge: typeof lodash.merge = require('lodash.merge');
 const lSet: typeof lodash.set = require('lodash.set');
