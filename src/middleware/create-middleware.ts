@@ -269,6 +269,18 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
 
   return {
     middleware,
-    observers: mwObservers
+    // Do not expose rootSubject
+    observers: {
+      before: {
+        obsOnAll: mwObservers.before.obsOnAll,
+        obsOnRequest: mwObservers.before.obsOnRequest,
+        obsOnEnd: mwObservers.before.obsOnEnd
+      },
+      after: {
+        obsOnAll: mwObservers.after.obsOnAll,
+        obsOnRequest: mwObservers.after.obsOnRequest,
+        obsOnEnd: mwObservers.after.obsOnEnd
+      }
+    }
   };
 };
