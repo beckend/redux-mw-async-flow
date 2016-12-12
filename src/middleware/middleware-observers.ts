@@ -34,7 +34,7 @@ export const createObservers = ({ asyncTypes }: ICreateObserversArgs) => {
       rootSubject,
       obsOnAll,
       obsOnRequest,
-      obsOnEnd,
+      obsOnEnd
     };
   };
 
@@ -42,6 +42,6 @@ export const createObservers = ({ asyncTypes }: ICreateObserversArgs) => {
     // before dispatch
     before: createAllObservers(),
     // after dispatch
-    after: createAllObservers(),
+    after: createAllObservers()
   };
 };

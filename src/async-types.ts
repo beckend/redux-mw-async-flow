@@ -12,7 +12,7 @@ export const defaultTypes: IDefaultTypes = {
   FULFILLED: '_FULFILLED',
   REJECTED: '_REJECTED',
   ABORTED: '_ABORTED',
-  END: '_END',
+  END: '_END'
 };
 
 export type TDefaultTypesOptional = {
@@ -24,7 +24,7 @@ export interface IGetAsyncTypeConstantsParams {
 export const getAsyncTypeConstants = ({ types }: IGetAsyncTypeConstantsParams = {}) => (
   {
     ...defaultTypes,
-    ...types,
+    ...types
   }
 );
 
@@ -51,6 +51,6 @@ export const getMetaResult = (types: IGetMetaResultTypes, overrides: IGetMetaRes
     [types.END]: false,
     PAYLOAD: null,
     ERROR: null,
-    ...overrides,
+    ...overrides
   }
 );

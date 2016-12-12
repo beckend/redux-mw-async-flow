@@ -9,7 +9,7 @@ import {
   defaultOpts,
   TCreateAsyncFlowMiddlewareOpts,
   TAsyncFlowActionMetaOptional,
-  IAsyncFlowAction,
+  IAsyncFlowAction
 } from '../create-middleware';
 import { getAsyncTypeConstants } from '../../async-types';
 import { Action, ActionMeta } from 'redux-actions';
@@ -22,7 +22,7 @@ const {
   FULFILLED,
   REJECTED,
   ABORTED,
-  END,
+  END
 } = getAsyncTypeConstants();
 
 interface ICreateMockStoreOpts<TAction> {
@@ -30,16 +30,16 @@ interface ICreateMockStoreOpts<TAction> {
   asyncFlowOpts?: TCreateAsyncFlowMiddlewareOpts<TAction>;
 }
 const createMockStore = <TStoreState, TAction extends Action<any>>({ initialState, asyncFlowOpts }: ICreateMockStoreOpts<TAction> = {
-  initialState: {},
+  initialState: {}
 }) => {
   const asyncFlowPayload = createAsyncFlowMiddleware<TStoreState, TAction>(asyncFlowOpts);
   const mockStore = configureStore<any>([
-    asyncFlowPayload.middleware,
+    asyncFlowPayload.middleware
   ])(initialState);
 
   return {
     mockStore,
-    observers: asyncFlowPayload.observers,
+    observers: asyncFlowPayload.observers
   };
 };
 
@@ -54,9 +54,9 @@ describe('Middleware', () => {
       type: `ACTION${REQUEST}`,
       meta: {
         [defaultOpts.metaKey]: {
-          enable: false,
-        } as TAsyncFlowActionMetaOptional<{}>,
-      },
+          enable: false
+        } as TAsyncFlowActionMetaOptional<{}>
+      }
     };
     mockStore.dispatch(action);
     const actions: IAsyncFlowAction<{}>[] = mockStore.getActions();
@@ -68,7 +68,7 @@ describe('Middleware', () => {
 
   it('actions that does not match suffix will pass through', () => {
     const action: Action<{}> = {
-      type: 'ACTION',
+      type: 'ACTION'
     };
     mockStore.dispatch(action);
     const actions: IAsyncFlowAction<{}>[] = mockStore.getActions();
@@ -80,7 +80,7 @@ describe('Middleware', () => {
 
   it('action with REQUEST suffix will have PENDING and REQUEST dispatched', () => {
     const action: Action<{}> = {
-      type: `ACTION${REQUEST}`,
+      type: `ACTION${REQUEST}`
     };
     mockStore.dispatch(action);
     const actions: IAsyncFlowAction<{}>[] = mockStore.getActions();
@@ -92,7 +92,7 @@ describe('Middleware', () => {
 
   it(`handle ${FULFILLED} correctly with payload`, () => {
     const action: Action<{}> = {
-      type: `ACTION${REQUEST}`,
+      type: `ACTION${REQUEST}`
     };
     mockStore.dispatch(action);
     let actions: IAsyncFlowAction<any>[] = mockStore.getActions();
@@ -109,9 +109,9 @@ describe('Middleware', () => {
         data: 1,
         more_data: [1, 2, 3],
         even_more_data: {
-          key: 'value',
-        },
-      },
+          key: 'value'
+        }
+      }
     };
     mockStore.dispatch(actionFullfill);
     actions = mockStore.getActions();
@@ -125,7 +125,7 @@ describe('Middleware', () => {
 
   it(`handle ${REJECTED} correctly with payload`, () => {
     const action: Action<{}> = {
-      type: `ACTION${REQUEST}`,
+      type: `ACTION${REQUEST}`
     };
     mockStore.dispatch(action);
     let actions: IAsyncFlowAction<any>[] = mockStore.getActions();
@@ -139,7 +139,7 @@ describe('Middleware', () => {
       ...actions[0],
       type: `ACTION${REJECTED}`,
       error: true,
-      payload: new Error('Rejected!'),
+      payload: new Error('Rejected!')
     };
     mockStore.dispatch(actionReject);
     actions = mockStore.getActions();
@@ -153,7 +153,7 @@ describe('Middleware', () => {
 
   it(`handle ${ABORTED} correctly with payload`, () => {
     const action: Action<{}> = {
-      type: `ACTION${REQUEST}`,
+      type: `ACTION${REQUEST}`
     };
     mockStore.dispatch(action);
     let actions: IAsyncFlowAction<any>[] = mockStore.getActions();
@@ -167,7 +167,7 @@ describe('Middleware', () => {
       ...actions[0],
       type: `ACTION${ABORTED}`,
       error: true,
-      payload: new Error('Aborted!'),
+      payload: new Error('Aborted!')
     };
     mockStore.dispatch(actionReject);
     actions = mockStore.getActions();
@@ -187,46 +187,46 @@ describe('Lets user set options', () => {
       PENDING: '-pending-SUFF',
       FULFILLED: 'fulfilledsuFf',
       REJECTED: '____rejected___-',
-      ABORTED: '--__aborted-ab',
+      ABORTED: '--__aborted-ab'
     };
     const { mockStore } = createMockStore({
       asyncFlowOpts: {
-        asyncTypes,
-      },
+        asyncTypes
+      }
     });
     const generatedTypes = getAsyncTypeConstants({ types: asyncTypes });
     let actions: IAsyncFlowAction<any>[];
 
     mockStore.dispatch({
-      type: `ACTION_one${generatedTypes.REQUEST}`,
+      type: `ACTION_one${generatedTypes.REQUEST}`
     });
     actions = mockStore.getActions();
     mockStore.dispatch({
       ...actions[actions.length - 1],
       type: `ACTION_one${generatedTypes.FULFILLED}`,
-      payload: 'fullfilled!',
+      payload: 'fullfilled!'
     });
 
     mockStore.dispatch({
-      type: `ACTION_two${generatedTypes.REQUEST}`,
+      type: `ACTION_two${generatedTypes.REQUEST}`
     });
     actions = mockStore.getActions();
     mockStore.dispatch({
       ...actions[actions.length - 1],
       type: `ACTION_two${generatedTypes.REJECTED}`,
       error: true,
-      payload: new Error('rejected!'),
+      payload: new Error('rejected!')
     });
 
     mockStore.dispatch({
-      type: `ACTION_three${generatedTypes.REQUEST}`,
+      type: `ACTION_three${generatedTypes.REQUEST}`
     });
     actions = mockStore.getActions();
     mockStore.dispatch({
       ...actions[actions.length - 1],
       type: `ACTION_three${generatedTypes.ABORTED}`,
       error: true,
-      payload: new Error('aborted!'),
+      payload: new Error('aborted!')
     });
 
     actions = mockStore.getActions();
@@ -238,11 +238,11 @@ describe('Lets user set options', () => {
     const CUSTOM_META_KEY = 'Custom-Meta-Key';
     const { mockStore } = createMockStore({
       asyncFlowOpts: {
-        metaKey: CUSTOM_META_KEY,
-      },
+        metaKey: CUSTOM_META_KEY
+      }
     });
     const action: Action<{}> = {
-      type: `ACTION${REQUEST}`,
+      type: `ACTION${REQUEST}`
     };
     mockStore.dispatch(action);
     let actions: IAsyncFlowAction<any>[] = mockStore.getActions();
@@ -253,9 +253,9 @@ describe('Lets user set options', () => {
         data: 1,
         more_data: [1, 2, 3],
         even_more_data: {
-          key: 'value',
-        },
-      },
+          key: 'value'
+        }
+      }
     };
     mockStore.dispatch(actionFullfill);
     actions = mockStore.getActions();
@@ -267,11 +267,11 @@ describe('Lets user set options', () => {
     const CUSTOM_META_KEYREQUEST_ID = 'Custom-Meta-REQUEST-ID-Key';
     const { mockStore } = createMockStore({
       asyncFlowOpts: {
-        metaKeyRequestID: CUSTOM_META_KEYREQUEST_ID,
-      },
+        metaKeyRequestID: CUSTOM_META_KEYREQUEST_ID
+      }
     });
     const action: Action<{}> = {
-      type: `ACTION${REQUEST}`,
+      type: `ACTION${REQUEST}`
     };
     mockStore.dispatch(action);
     let actions: IAsyncFlowAction<any>[] = mockStore.getActions();
@@ -282,9 +282,9 @@ describe('Lets user set options', () => {
         data: 1,
         more_data: [1, 2, 3],
         even_more_data: {
-          key: 'value',
-        },
-      },
+          key: 'value'
+        }
+      }
     };
     mockStore.dispatch(actionFullfill);
     actions = mockStore.getActions();
@@ -295,11 +295,11 @@ describe('Lets user set options', () => {
   it('global request timeout', () => {
     const { mockStore } = createMockStore({
       asyncFlowOpts: {
-        timeout: 5000,
-      },
+        timeout: 5000
+      }
     });
     const action: Action<{}> = {
-      type: `ACTION${REQUEST}`,
+      type: `ACTION${REQUEST}`
     };
     mockStore.dispatch(action);
     const actions: IAsyncFlowAction<any>[] = mockStore.getActions();
@@ -313,9 +313,9 @@ describe('Lets user set options', () => {
       type: `ACTION${REQUEST}`,
       meta: {
         [defaultOpts.metaKey]: {
-          timeoutRequest: 2500,
-        } as TAsyncFlowActionMetaOptional<any>,
-      },
+          timeoutRequest: 2500
+        } as TAsyncFlowActionMetaOptional<any>
+      }
     };
     mockStore.dispatch(action);
     const actions: IAsyncFlowAction<any>[] = mockStore.getActions();
@@ -327,17 +327,17 @@ describe('Lets user set options', () => {
     let idCounter = 2000;
     const { mockStore } = createMockStore({
       asyncFlowOpts: {
-        generateId: ({ action }) => `${action.type}-${idCounter++}`,
-      },
+        generateId: ({ action }) => `${action.type}-${idCounter++}`
+      }
     });
     const action1: Action<any> = {
-      type: `ACTION${REQUEST}`,
+      type: `ACTION${REQUEST}`
     };
     const action2: Action<any> = {
-      type: `ACTION${REQUEST}`,
+      type: `ACTION${REQUEST}`
     };
     const action3: Action<any> = {
-      type: `ACTION${REQUEST}`,
+      type: `ACTION${REQUEST}`
     };
     mockStore.dispatch(action1);
     mockStore.dispatch(action2);
@@ -425,7 +425,7 @@ describe('Middleware observers', () => {
 
     // Trigger everything to action
     mockStore.dispatch({
-      type: actionRequest,
+      type: actionRequest
     });
     const actions: IAsyncFlowAction<any>[] = mockStore.getActions();
     mockStore.dispatch({
@@ -435,9 +435,9 @@ describe('Middleware observers', () => {
         data: 1,
         more_data: [1, 2, 3],
         even_more_data: {
-          key: 'value',
-        },
-      },
+          key: 'value'
+        }
+      }
     });
 
     await Bluebird.all(allJobs);
@@ -461,11 +461,11 @@ describe('Middleware error handling', () => {
   it('when a promise times out', async () => {
     const { mockStore } = createMockStore({
       asyncFlowOpts: {
-        timeout: 1,
-      },
+        timeout: 1
+      }
     });
     const action: Action<{}> = {
-      type: `ACTION${REQUEST}`,
+      type: `ACTION${REQUEST}`
     };
     mockStore.dispatch(action);
     const actions: IAsyncFlowAction<any>[] = mockStore.getActions();

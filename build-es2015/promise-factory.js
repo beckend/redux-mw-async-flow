@@ -10,7 +10,7 @@ exports.createPromise = () => {
     return {
         promise,
         resolve: resolve,
-        reject: reject,
+        reject: reject
     };
 };
 //# sourceMappingURL=promise-factory.js.map

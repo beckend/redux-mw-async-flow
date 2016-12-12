@@ -14,6 +14,6 @@ export const createPromise = <TPayload>() => {
   return {
     promise,
     resolve: resolve as TResolveFn<TPayload>,
-    reject: reject as TRejectFn,
+    reject: reject as TRejectFn
   };
 };

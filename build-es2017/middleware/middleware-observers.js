@@ -21,14 +21,14 @@ exports.createObservers = ({ asyncTypes }) => {
             rootSubject,
             obsOnAll,
             obsOnRequest,
-            obsOnEnd,
+            obsOnEnd
         };
     };
     return {
         // before dispatch
         before: createAllObservers(),
         // after dispatch
-        after: createAllObservers(),
+        after: createAllObservers()
     };
 };
 //# sourceMappingURL=middleware-observers.js.map

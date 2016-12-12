@@ -17,27 +17,24 @@ exports.defaultOpts = {
     metaKey: 'asyncFlow',
     metaKeyRequestID: 'REQUEST_ID',
     timeout: 10000,
-    generateId: ({ action }) => `${asyncUniqueId()}--${action.type}`,
+    generateId: ({ action }) => `${asyncUniqueId()}--${action.type}`
 };
 exports.createAsyncFlowMiddleware = (opts = {
         metaKey: exports.defaultOpts.metaKey,
-        timeout: exports.defaultOpts.timeout,
+        timeout: exports.defaultOpts.timeout
     }) => {
-    const { REQUEST, PENDING, FULFILLED, REJECTED, ABORTED, END, } = async_types_1.getAsyncTypeConstants({ types: opts.asyncTypes });
+    const { REQUEST, PENDING, FULFILLED, REJECTED, ABORTED, END } = async_types_1.getAsyncTypeConstants({ types: opts.asyncTypes });
     const mwObservers = middleware_observers_1.createObservers({
         asyncTypes: {
             REQUEST,
-            END,
-        },
+            END
+        }
     });
-    const { metaKey, timeout, metaKeyRequestID, generateId, } = tslib_1.__assign({}, exports.defaultOpts, opts);
+    const { metaKey, timeout, metaKeyRequestID, generateId } = tslib_1.__assign({}, exports.defaultOpts, opts);
     const requestStore = new request_store_1.RequestStore();
     const middleware = () => {
         return (next) => {
             return (action) => {
-                /**
-                 * Normal dispatch without async
-                 */
                 const dispatchNormal = () => next(action);
                 const dispatchAsyncFlow = (actionArg) => {
                     // Lets observers have a go before and after dispatches
@@ -48,8 +45,6 @@ exports.createAsyncFlowMiddleware = (opts = {
                 const actionType = action.type;
                 /**
                  * If meta.asyncFlow.enable is explicit set to false, completely skip this middleware.
-                 * The rest is up to the user to dispatch
-                 * REJECTED and FULFILLED suffixes manually
                  */
                 if (lGet(action, ['meta', metaKey, 'enable']) === false) {
                     dispatchNormal();
@@ -70,7 +65,7 @@ exports.createAsyncFlowMiddleware = (opts = {
                             requestStore.reject(requestID, payloadArg || action.payload);
                         }
                         actionEnd = merge({}, action, {
-                            type: async_types_1.replaceSuffix(actionType, suffixType, END),
+                            type: async_types_1.replaceSuffix(actionType, suffixType, END)
                         });
                     }
                     else {
@@ -99,7 +94,7 @@ exports.createAsyncFlowMiddleware = (opts = {
                      * So this way user can use to the promise to do stuff after the action
                      * The promise will be resolved later when getting ABORTED, REJECTED, or FULFILLED
                      */
-                    const { promise, reject, resolve, } = promise_factory_1.createPromise();
+                    const { promise, reject, resolve } = promise_factory_1.createPromise();
                     promise
                         .timeout(timeoutRequest, 'timeout')
                         .catch((er) => {
@@ -113,7 +108,7 @@ exports.createAsyncFlowMiddleware = (opts = {
                     const tmpRequestStoreAddPayload = {
                         [request_store_1.REQUEST_KEY_PROMISE]: promise,
                         [request_store_1.REQUEST_KEY_RESOLVEFN]: resolve,
-                        [request_store_1.REQUEST_KEY_REJECTFN]: reject,
+                        [request_store_1.REQUEST_KEY_REJECTFN]: reject
                     };
                     // Register promise to requestStore
                     requestStore.add(requestID, tmpRequestStoreAddPayload);
@@ -125,12 +120,12 @@ exports.createAsyncFlowMiddleware = (opts = {
                             [metaKey]: {
                                 timeout,
                                 timeoutRequest,
-                                promise,
-                            },
-                        },
+                                promise
+                            }
+                        }
                     };
                     const pendingAction = merge({}, action, {
-                        type: async_types_1.replaceSuffix(actionType, REQUEST, PENDING),
+                        type: async_types_1.replaceSuffix(actionType, REQUEST, PENDING)
                     }, addedActionMetaData);
                     dispatchAsyncFlow(pendingAction);
                     /**
@@ -169,7 +164,7 @@ exports.createAsyncFlowMiddleware = (opts = {
     };
     return {
         middleware,
-        observers: mwObservers,
+        observers: mwObservers
     };
 };
 //# sourceMappingURL=create-middleware.js.map

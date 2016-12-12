@@ -16,12 +16,12 @@ import {
   IRequestMap,
   REQUEST_KEY_PROMISE,
   REQUEST_KEY_RESOLVEFN,
-  REQUEST_KEY_REJECTFN,
+  REQUEST_KEY_REJECTFN
 } from '../request-store';
 import {
   getAsyncTypeConstants,
   replaceSuffix,
-  TDefaultTypesOptional,
+  TDefaultTypesOptional
 } from '../async-types';
 import { createPromise } from '../promise-factory';
 import { createObservers } from './middleware-observers';
@@ -56,7 +56,7 @@ export interface IAsyncFlowActionMetaAdded<TPayload> {
 // Optional version to pass what you want
 export type TAsyncFlowActionMetaOptional<TActionPayload> = {
   readonly[P in keyof IAsyncFlowActionMetaBase<TActionPayload>]?: IAsyncFlowActionMetaBase<TActionPayload>[P];
-}
+};
 // Can only apply to default metaKey
 export interface IAsyncFlowActionOptional<TActionPayload> extends Action<TActionPayload> {
   meta: {
@@ -86,12 +86,12 @@ export const defaultOpts: IDefaultOpts<any> = {
   metaKey: 'asyncFlow',
   metaKeyRequestID: 'REQUEST_ID',
   timeout: 10000,
-  generateId: ({ action }: { action: Action<any> }) => `${asyncUniqueId()}--${action.type}`,
+  generateId: ({ action }: { action: Action<any> }) => `${asyncUniqueId()}--${action.type}`
 };
 export type TRequestId = string;
 export type TDefaultOptsOptional<TAction> = {
   readonly[P in keyof IDefaultOpts<TAction>]?: IDefaultOpts<TAction>[P];
-}
+};
 export interface ICreateAsyncFlowMiddlewareBaseOpts {
   // async constants
   asyncTypes?: TDefaultTypesOptional;
@@ -99,7 +99,7 @@ export interface ICreateAsyncFlowMiddlewareBaseOpts {
 export type TCreateAsyncFlowMiddlewareOpts<TAction> = ICreateAsyncFlowMiddlewareBaseOpts & TDefaultOptsOptional<TAction>;
 export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<any>>(opts: TCreateAsyncFlowMiddlewareOpts<TAction> = {
   metaKey: defaultOpts.metaKey,
-  timeout: defaultOpts.timeout,
+  timeout: defaultOpts.timeout
 }) => {
   const {
     REQUEST,
@@ -107,24 +107,24 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
     FULFILLED,
     REJECTED,
     ABORTED,
-    END,
+    END
   } = getAsyncTypeConstants({ types: opts.asyncTypes });
 
   const mwObservers = createObservers({
     asyncTypes: {
       REQUEST,
-      END,
-    },
+      END
+    }
   });
 
   const {
     metaKey,
     timeout,
     metaKeyRequestID,
-    generateId,
+    generateId
   }: IDefaultOpts<TAction> = {
       ...defaultOpts,
-      ...opts,
+      ...opts
     };
 
   const requestStore = new RequestStore();
@@ -162,7 +162,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
               requestStore.reject(requestID, payloadArg || action.payload);
             }
             actionEnd = merge({}, action, {
-              type: replaceSuffix(actionType, suffixType, END),
+              type: replaceSuffix(actionType, suffixType, END)
             });
           } else {
             console.warn(`${action.type} - meta data not found, did you forget to send it?`);
@@ -195,7 +195,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
           const {
             promise,
             reject,
-            resolve,
+            resolve
           } = createPromise<any>();
           promise
             .timeout(timeoutRequest, 'timeout')
@@ -211,7 +211,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
           const tmpRequestStoreAddPayload: IRequestMap<any> = {
             [REQUEST_KEY_PROMISE]: promise,
             [REQUEST_KEY_RESOLVEFN]: resolve,
-            [REQUEST_KEY_REJECTFN]: reject,
+            [REQUEST_KEY_REJECTFN]: reject
           } as any;
           // Register promise to requestStore
           requestStore.add(requestID, tmpRequestStoreAddPayload);
@@ -223,15 +223,15 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
               [metaKey]: {
                 timeout,
                 timeoutRequest,
-                promise,
-              } as IAsyncFlowActionMetaAdded<any>,
-            },
+                promise
+              } as IAsyncFlowActionMetaAdded<any>
+            }
           };
           const pendingAction: IAsyncFlowAction<any> = merge(
             {},
             action,
             {
-              type: replaceSuffix(actionType, REQUEST, PENDING),
+              type: replaceSuffix(actionType, REQUEST, PENDING)
             },
             addedActionMetaData
           ) as any;
@@ -269,6 +269,6 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
 
   return {
     middleware,
-    observers: mwObservers,
+    observers: mwObservers
   };
 };
