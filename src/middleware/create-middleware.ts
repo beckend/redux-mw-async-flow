@@ -34,8 +34,6 @@ const lSet: typeof lodash.set = require('lodash.set');
 const lGet: typeof lodash.get = require('lodash.get');
 const uniqueid = require('uniqueid');
 
-const asyncUniqueId = uniqueid(null, '-@@ASYNC_FLOW');
-
 // Base and full options
 export interface IAsyncFlowActionMetaBase<TPayload> {
   // enable middleware, disabled will only acts as passthrough
@@ -80,13 +78,16 @@ export interface IDefaultOpts<TAction> {
   // timeout for promise before rejecting
   readonly timeout: number;
   // function to override generation of async ids
-  readonly generateId: IGenerateIdFn<TAction>;
+  readonly generateId?: IGenerateIdFn<TAction>;
 }
 export const defaultOpts: IDefaultOpts<any> = {
   metaKey: 'asyncFlow',
   metaKeyRequestID: 'REQUEST_ID',
-  timeout: 10000,
-  generateId: ({ action }: { action: Action<any> }) => `${asyncUniqueId()}--${action.type}`
+  timeout: 10000
+};
+const getGenerateId = () => {
+  const asyncUniqueId = uniqueid(null, '-@@ASYNC_FLOW');
+  return ({ action }: { action: Action<any> }) => `${asyncUniqueId()}--${action.type}`;
 };
 export type TRequestId = string;
 export type TDefaultOptsOptional<TAction> = {
@@ -121,11 +122,12 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
     metaKey,
     timeout,
     metaKeyRequestID,
-    generateId
+    generateId: generateIdMerged
   }: IDefaultOpts<TAction> = {
       ...defaultOpts,
       ...opts
     };
+  const generateId = generateIdMerged || getGenerateId();
 
   const requestStore = new RequestStore();
 
@@ -176,6 +178,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
            * Generate uniqueid, make sure it does not exist
            */
           let requestID = lGet<TRequestId>(action, metaRequestIdPath);
+          /* istanbul ignore next */
           if (!requestID || {}.hasOwnProperty.call(requestStore, requestID)) {
             do {
               requestID = generateId({ action });

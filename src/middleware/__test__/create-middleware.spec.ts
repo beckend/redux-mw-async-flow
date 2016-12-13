@@ -60,22 +60,26 @@ describe('Middleware', () => {
     };
     mockStore.dispatch(action);
     const actions: IAsyncFlowAction<{}>[] = mockStore.getActions();
-    (expect as any)(actions)
-      .toHaveLength(1);
-    expect(actions[0])
-      .toEqual(action);
+    expect(actions)
+      .toMatchSnapshot();
   });
 
   it('actions that does not match suffix will pass through', () => {
-    const action: Action<{}> = {
+    mockStore.dispatch({
       type: 'ACTION'
-    };
-    mockStore.dispatch(action);
+    } as Action<{}>);
     const actions: IAsyncFlowAction<{}>[] = mockStore.getActions();
-    (expect as any)(actions)
-      .toHaveLength(1);
-    expect(actions[0])
-      .toEqual(action);
+    expect(actions)
+      .toMatchSnapshot();
+  });
+
+  it('warns you when you exclude meta from payload', () => {
+    mockStore.dispatch({
+      type: `ACTION${REQUEST}`
+    } as Action<{}>);
+    mockStore.dispatch({
+      type: `ACTION${FULFILLED}`
+    } as Action<{}>);
   });
 
   it('action with REQUEST suffix will have PENDING and REQUEST dispatched', () => {

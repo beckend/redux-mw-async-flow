@@ -3,7 +3,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "4-@@ASYNC_FLOW--ACTION_one-request-suffix",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_one-request-suffix",
         "promise": Object {
           "fulfillmentValue": "fullfilled!",
           "isFulfilled": true,
@@ -19,7 +19,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "4-@@ASYNC_FLOW--ACTION_one-request-suffix",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_one-request-suffix",
         "promise": Object {
           "fulfillmentValue": "fullfilled!",
           "isFulfilled": true,
@@ -35,7 +35,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "4-@@ASYNC_FLOW--ACTION_one-request-suffix",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_one-request-suffix",
         "promise": Object {
           "fulfillmentValue": "fullfilled!",
           "isFulfilled": true,
@@ -52,7 +52,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "4-@@ASYNC_FLOW--ACTION_one-request-suffix",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_one-request-suffix",
         "promise": Object {
           "fulfillmentValue": "fullfilled!",
           "isFulfilled": true,
@@ -69,7 +69,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "5-@@ASYNC_FLOW--ACTION_two-request-suffix",
+        "REQUEST_ID": "1-@@ASYNC_FLOW--ACTION_two-request-suffix",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -85,7 +85,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "5-@@ASYNC_FLOW--ACTION_two-request-suffix",
+        "REQUEST_ID": "1-@@ASYNC_FLOW--ACTION_two-request-suffix",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -102,7 +102,7 @@ Array [
     "error": true,
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "5-@@ASYNC_FLOW--ACTION_two-request-suffix",
+        "REQUEST_ID": "1-@@ASYNC_FLOW--ACTION_two-request-suffix",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -120,7 +120,7 @@ Array [
     "error": true,
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "5-@@ASYNC_FLOW--ACTION_two-request-suffix",
+        "REQUEST_ID": "1-@@ASYNC_FLOW--ACTION_two-request-suffix",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -137,7 +137,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "6-@@ASYNC_FLOW--ACTION_three-request-suffix",
+        "REQUEST_ID": "2-@@ASYNC_FLOW--ACTION_three-request-suffix",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -153,7 +153,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "6-@@ASYNC_FLOW--ACTION_three-request-suffix",
+        "REQUEST_ID": "2-@@ASYNC_FLOW--ACTION_three-request-suffix",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -170,7 +170,7 @@ Array [
     "error": true,
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "6-@@ASYNC_FLOW--ACTION_three-request-suffix",
+        "REQUEST_ID": "2-@@ASYNC_FLOW--ACTION_three-request-suffix",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -188,7 +188,7 @@ Array [
     "error": true,
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "6-@@ASYNC_FLOW--ACTION_three-request-suffix",
+        "REQUEST_ID": "2-@@ASYNC_FLOW--ACTION_three-request-suffix",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -311,7 +311,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "9-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -327,7 +327,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "9-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -348,7 +348,7 @@ Array [
   Object {
     "meta": Object {
       "Custom-Meta-Key": Object {
-        "REQUEST_ID": "7-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -374,7 +374,7 @@ Array [
   Object {
     "meta": Object {
       "Custom-Meta-Key": Object {
-        "REQUEST_ID": "7-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -400,7 +400,7 @@ Array [
   Object {
     "meta": Object {
       "Custom-Meta-Key": Object {
-        "REQUEST_ID": "7-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -437,7 +437,7 @@ Array [
   Object {
     "meta": Object {
       "Custom-Meta-Key": Object {
-        "REQUEST_ID": "7-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -479,7 +479,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "Custom-Meta-REQUEST-ID-Key": "8-@@ASYNC_FLOW--ACTION_REQUEST",
+        "Custom-Meta-REQUEST-ID-Key": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -505,7 +505,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "Custom-Meta-REQUEST-ID-Key": "8-@@ASYNC_FLOW--ACTION_REQUEST",
+        "Custom-Meta-REQUEST-ID-Key": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -531,7 +531,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "Custom-Meta-REQUEST-ID-Key": "8-@@ASYNC_FLOW--ACTION_REQUEST",
+        "Custom-Meta-REQUEST-ID-Key": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -568,7 +568,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "Custom-Meta-REQUEST-ID-Key": "8-@@ASYNC_FLOW--ACTION_REQUEST",
+        "Custom-Meta-REQUEST-ID-Key": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -610,7 +610,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "10-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -626,7 +626,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "10-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -679,12 +679,33 @@ Array [
 ]
 `;
 
+exports[`Middleware actions that does not match suffix will pass through 1`] = `
+Array [
+  Object {
+    "type": "ACTION",
+  },
+]
+`;
+
+exports[`Middleware can be disabled, the action simply passes through 1`] = `
+Array [
+  Object {
+    "meta": Object {
+      "asyncFlow": Object {
+        "enable": false,
+      },
+    },
+    "type": "ACTION_REQUEST",
+  },
+]
+`;
+
 exports[`Middleware handle _ABORTED correctly with payload 1`] = `
 Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "3-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -700,7 +721,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "3-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -721,7 +742,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "3-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -737,7 +758,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "3-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -754,7 +775,7 @@ Array [
     "error": true,
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "3-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -772,7 +793,7 @@ Array [
     "error": true,
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "3-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -794,7 +815,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "1-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -810,7 +831,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "1-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -831,7 +852,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "1-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -857,7 +878,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "1-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -883,7 +904,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "1-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -920,7 +941,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "1-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -962,7 +983,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "2-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -978,7 +999,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "2-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -999,7 +1020,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "2-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -1015,7 +1036,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "2-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -1032,7 +1053,7 @@ Array [
     "error": true,
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "2-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -1050,7 +1071,7 @@ Array [
     "error": true,
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "2-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -1072,7 +1093,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "11-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -1098,7 +1119,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "11-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -1124,7 +1145,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "11-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -1161,7 +1182,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "11-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -1203,7 +1224,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "11-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -1229,7 +1250,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "11-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -1255,7 +1276,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "11-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -1292,7 +1313,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "11-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -1334,7 +1355,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "11-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -1365,7 +1386,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "11-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -1396,7 +1417,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "11-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -1438,7 +1459,7 @@ Array [
   Object {
     "meta": Object {
       "asyncFlow": Object {
-        "REQUEST_ID": "11-@@ASYNC_FLOW--ACTION_REQUEST",
+        "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
