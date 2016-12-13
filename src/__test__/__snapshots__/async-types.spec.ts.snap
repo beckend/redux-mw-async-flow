@@ -1,0 +1,10 @@
+exports[`async-types getAsyncTypeConstants 1`] = `
+Object {
+  "ABORTED": "_ABORTED___",
+  "END": "_END___",
+  "FULFILLED": "_FULFILLED___",
+  "PENDING": "_PENDING___",
+  "REJECTED": "_REJECTED___",
+  "REQUEST": "_REQUEST___",
+}
+`;

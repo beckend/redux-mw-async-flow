@@ -190,7 +190,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
           /**
            * Dispatch pending first, with a twist, send a promise resolve reject with it
            * So this way user can use to the promise to do stuff after the action
-           * The promise will be resolved later when getting ABORTED, REJECTED, or FULFILLED
+           * The promise will be resolved/rejected later when getting ABORTED, REJECTED, or FULFILLED
            */
           const {
             promise,

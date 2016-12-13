@@ -3285,9 +3285,9 @@ reduce-reducers@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/reduce-reducers/-/reduce-reducers-0.1.2.tgz#fa1b4718bc5292a71ddd1e5d839c9bea9770f14b"
 
-redux-actions@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/redux-actions/-/redux-actions-1.1.0.tgz#df8ec791d9e267544e58a8ba2b72fc5c30afba3b"
+redux-actions@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/redux-actions/-/redux-actions-1.2.0.tgz#4f421f1aa74c827d5e8abce6c009d5872c4af3e6"
   dependencies:
     invariant "^2.2.1"
     lodash "^4.13.1"
@@ -3439,9 +3439,9 @@ rimraf@2, rimraf@^2.4.3, rimraf@^2.4.4, rimraf@~2.5.1, rimraf@~2.5.4:
   dependencies:
     glob "^7.0.5"
 
-rxjs@^5.0.0-rc.5:
-  version "5.0.0-rc.5"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.0.0-rc.5.tgz#8cbd17fc242a54c07ef9116da23b0ec8e7d5cea9"
+rxjs@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.0.1.tgz#3a69bdf9f0ca0a986303370d4708f72bdfac8356"
   dependencies:
     symbol-observable "^1.0.1"
 
@@ -3883,9 +3883,9 @@ type-check@~0.3.2:
   dependencies:
     prelude-ls "~1.1.2"
 
-typescript@next:
-  version "2.2.0-dev.20161210"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.2.0-dev.20161210.tgz#9bfa2186c9fd8976f7fb54aa74aa3fe65b3f5e2d"
+typescript@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.1.4.tgz#b53b69fb841126acb1dd4b397d21daba87572251"
 
 uglify-js@^2.6:
   version "2.7.5"
