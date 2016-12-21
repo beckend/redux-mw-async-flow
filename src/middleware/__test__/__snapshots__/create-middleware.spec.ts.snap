@@ -4,6 +4,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_one-request-suffix",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": "fullfilled!",
           "isFulfilled": true,
@@ -20,6 +21,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_one-request-suffix",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": "fullfilled!",
           "isFulfilled": true,
@@ -36,6 +38,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_one-request-suffix",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": "fullfilled!",
           "isFulfilled": true,
@@ -53,6 +56,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_one-request-suffix",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": "fullfilled!",
           "isFulfilled": true,
@@ -63,6 +67,11 @@ Array [
         "timeoutRequest": 10000,
       },
     },
+    "mete": Object {
+      "asyncFlow": Object {
+        "endActionType": "ACTION_onefulfilledsuFf",
+      },
+    },
     "payload": "fullfilled!",
     "type": "ACTION_one_END",
   },
@@ -70,6 +79,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "1-@@ASYNC_FLOW--ACTION_two-request-suffix",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -86,6 +96,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "1-@@ASYNC_FLOW--ACTION_two-request-suffix",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -103,6 +114,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "1-@@ASYNC_FLOW--ACTION_two-request-suffix",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -121,6 +133,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "1-@@ASYNC_FLOW--ACTION_two-request-suffix",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -131,6 +144,11 @@ Array [
         "timeoutRequest": 10000,
       },
     },
+    "mete": Object {
+      "asyncFlow": Object {
+        "endActionType": "ACTION_two____rejected___-",
+      },
+    },
     "payload": [Error: rejected!],
     "type": "ACTION_two_END",
   },
@@ -138,6 +156,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "2-@@ASYNC_FLOW--ACTION_three-request-suffix",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -154,6 +173,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "2-@@ASYNC_FLOW--ACTION_three-request-suffix",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -171,6 +191,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "2-@@ASYNC_FLOW--ACTION_three-request-suffix",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -189,6 +210,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "2-@@ASYNC_FLOW--ACTION_three-request-suffix",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -197,6 +219,11 @@ Array [
         },
         "timeout": 10000,
         "timeoutRequest": 10000,
+      },
+    },
+    "mete": Object {
+      "asyncFlow": Object {
+        "endActionType": "ACTION_three--__aborted-ab",
       },
     },
     "payload": [Error: aborted!],
@@ -211,6 +238,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "ACTION_REQUEST-2000",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -227,6 +255,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "ACTION_REQUEST-2000",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -243,6 +272,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "ACTION_REQUEST-2001",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -259,6 +289,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "ACTION_REQUEST-2001",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -275,6 +306,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "ACTION_REQUEST-2002",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -291,6 +323,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "ACTION_REQUEST-2002",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -312,6 +345,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -328,6 +362,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -349,6 +384,7 @@ Array [
     "meta": Object {
       "Custom-Meta-Key": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -375,6 +411,7 @@ Array [
     "meta": Object {
       "Custom-Meta-Key": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -401,6 +438,7 @@ Array [
     "meta": Object {
       "Custom-Meta-Key": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -438,6 +476,7 @@ Array [
     "meta": Object {
       "Custom-Meta-Key": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -456,6 +495,11 @@ Array [
         },
         "timeout": 10000,
         "timeoutRequest": 10000,
+      },
+    },
+    "mete": Object {
+      "Custom-Meta-Key": Object {
+        "endActionType": "ACTION_FULFILLED",
       },
     },
     "payload": Object {
@@ -480,6 +524,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "Custom-Meta-REQUEST-ID-Key": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -506,6 +551,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "Custom-Meta-REQUEST-ID-Key": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -532,6 +578,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "Custom-Meta-REQUEST-ID-Key": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -569,6 +616,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "Custom-Meta-REQUEST-ID-Key": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -587,6 +635,11 @@ Array [
         },
         "timeout": 10000,
         "timeoutRequest": 10000,
+      },
+    },
+    "mete": Object {
+      "asyncFlow": Object {
+        "endActionType": "ACTION_FULFILLED",
       },
     },
     "payload": Object {
@@ -611,6 +664,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -627,6 +681,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -648,6 +703,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -664,6 +720,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -706,6 +763,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -722,6 +780,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -743,6 +802,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -759,6 +819,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -776,6 +837,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -794,6 +856,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -802,6 +865,11 @@ Array [
         },
         "timeout": 10000,
         "timeoutRequest": 10000,
+      },
+    },
+    "mete": Object {
+      "asyncFlow": Object {
+        "endActionType": "ACTION_ABORTED",
       },
     },
     "payload": [Error: Aborted!],
@@ -816,6 +884,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -832,6 +901,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -853,6 +923,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -879,6 +950,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -905,6 +977,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -942,6 +1015,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -960,6 +1034,11 @@ Array [
         },
         "timeout": 10000,
         "timeoutRequest": 10000,
+      },
+    },
+    "mete": Object {
+      "asyncFlow": Object {
+        "endActionType": "ACTION_FULFILLED",
       },
     },
     "payload": Object {
@@ -984,6 +1063,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -1000,6 +1080,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -1021,6 +1102,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -1037,6 +1119,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -1054,6 +1137,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -1072,6 +1156,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": undefined,
           "isFulfilled": false,
@@ -1080,6 +1165,11 @@ Array [
         },
         "timeout": 10000,
         "timeoutRequest": 10000,
+      },
+    },
+    "mete": Object {
+      "asyncFlow": Object {
+        "endActionType": "ACTION_REJECTED",
       },
     },
     "payload": [Error: Rejected!],
@@ -1094,6 +1184,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -1120,6 +1211,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -1146,6 +1238,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -1183,6 +1276,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -1201,6 +1295,11 @@ Array [
         },
         "timeout": 10000,
         "timeoutRequest": 10000,
+      },
+    },
+    "mete": Object {
+      "asyncFlow": Object {
+        "endActionType": "ACTION_FULFILLED",
       },
     },
     "payload": Object {
@@ -1225,6 +1324,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -1251,6 +1351,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -1277,6 +1378,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -1314,6 +1416,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -1332,6 +1435,11 @@ Array [
         },
         "timeout": 10000,
         "timeoutRequest": 10000,
+      },
+    },
+    "mete": Object {
+      "asyncFlow": Object {
+        "endActionType": "ACTION_FULFILLED",
       },
     },
     "payload": Object {
@@ -1356,6 +1464,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -1387,6 +1496,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -1418,6 +1528,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -1436,6 +1547,11 @@ Array [
         },
         "timeout": 10000,
         "timeoutRequest": 10000,
+      },
+    },
+    "mete": Object {
+      "asyncFlow": Object {
+        "endActionType": "ACTION_FULFILLED",
       },
     },
     "payload": Object {
@@ -1460,6 +1576,7 @@ Array [
     "meta": Object {
       "asyncFlow": Object {
         "REQUEST_ID": "0-@@ASYNC_FLOW--ACTION_REQUEST",
+        "endActionType": null,
         "promise": Object {
           "fulfillmentValue": Object {
             "data": 1,
@@ -1478,6 +1595,11 @@ Array [
         },
         "timeout": 10000,
         "timeoutRequest": 10000,
+      },
+    },
+    "mete": Object {
+      "asyncFlow": Object {
+        "endActionType": "ACTION_FULFILLED",
       },
     },
     "payload": Object {

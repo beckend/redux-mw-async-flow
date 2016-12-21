@@ -34,26 +34,22 @@ const lSet: typeof lodash.set = require('lodash.set');
 const lGet: typeof lodash.get = require('lodash.get');
 const uniqueid = require('uniqueid');
 
-// Base and full options
-export interface IAsyncFlowActionMetaBase<TPayload> {
+// Meta added by middleware
+export interface IAsyncFlowActionMeta<TPayload> {
   // enable middleware, disabled will only acts as passthrough
-  readonly enable: boolean;
+  readonly enable?: boolean;
   // the global timeout
   readonly timeout: number;
   // override timeout only for this action
-  readonly timeoutRequest?: number;
-  readonly promise: Bluebird<TPayload>;
-}
-// Added by middleware
-export interface IAsyncFlowActionMetaAdded<TPayload> {
-  readonly enable?: boolean;
-  readonly timeout: number;
   readonly timeoutRequest: number;
+  // main promise of the action
   readonly promise: Bluebird<TPayload>;
+  // the original action type when dispatching and END action, user may want to check what kind if action it ended with
+  readonly endActionType: string | null;
 }
 // Optional version to pass what you want
 export type TAsyncFlowActionMetaOptional<TActionPayload> = {
-  readonly[P in keyof IAsyncFlowActionMetaBase<TActionPayload>]?: IAsyncFlowActionMetaBase<TActionPayload>[P];
+  readonly[P in keyof IAsyncFlowActionMeta<TActionPayload>]?: IAsyncFlowActionMeta<TActionPayload>[P];
 };
 // Can only apply to default metaKey
 export interface IAsyncFlowActionOptional<TActionPayload> extends Action<TActionPayload> {
@@ -64,7 +60,7 @@ export interface IAsyncFlowActionOptional<TActionPayload> extends Action<TAction
 // Action dispatched with meta added by middleware
 export interface IAsyncFlowAction<TActionPayload> extends Action<TActionPayload> {
   meta: {
-    asyncFlow: IAsyncFlowActionMetaAdded<TActionPayload>;
+    asyncFlow: IAsyncFlowActionMeta<TActionPayload>;
   };
 }
 export interface IGenerateIdFn<TAction> {
@@ -164,7 +160,12 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
               requestStore.reject(requestID, payloadArg || action.payload);
             }
             actionEnd = merge({}, action, {
-              type: replaceSuffix(actionType, suffixType, END)
+              type: replaceSuffix(actionType, suffixType, END),
+              mete: {
+                [metaKey]: {
+                  endActionType: actionType
+                }
+              }
             });
           } else {
             console.warn(`${action.type} - meta data not found, did you forget to send it?`);
@@ -226,8 +227,9 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
               [metaKey]: {
                 timeout,
                 timeoutRequest,
-                promise
-              } as IAsyncFlowActionMetaAdded<any>
+                promise,
+                endActionType: null
+              } as IAsyncFlowActionMeta<any>
             }
           };
           const pendingAction: IAsyncFlowAction<any> = merge(
