@@ -48,7 +48,7 @@ export interface IDefaultOpts<TAction> {
     readonly metaKey: string;
     readonly metaKeyRequestID: string;
     readonly timeout: number;
-    readonly generateId: IGenerateIdFn<TAction>;
+    readonly generateId?: IGenerateIdFn<TAction>;
 }
 export declare const defaultOpts: IDefaultOpts<any>;
 export declare type TRequestId = string;
@@ -63,13 +63,11 @@ export declare const createAsyncFlowMiddleware: <TStoreState, TAction extends Ac
     middleware: Middleware;
     observers: {
         before: {
-            rootSubject: Subject<IAsyncFlowAction<any>>;
             obsOnAll: Observable<IAsyncFlowAction<any>>;
             obsOnRequest: Observable<IAsyncFlowAction<any>>;
             obsOnEnd: Observable<IAsyncFlowAction<any>>;
         };
         after: {
-            rootSubject: Subject<IAsyncFlowAction<any>>;
             obsOnAll: Observable<IAsyncFlowAction<any>>;
             obsOnRequest: Observable<IAsyncFlowAction<any>>;
             obsOnEnd: Observable<IAsyncFlowAction<any>>;

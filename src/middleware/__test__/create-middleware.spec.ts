@@ -74,12 +74,18 @@ describe('Middleware', () => {
   });
 
   it('warns you when you exclude meta from payload', () => {
+    const originalConsoleWarn = console.warn;
+    console.warn = (str: any) => {
+      expect(typeof str === 'string')
+        .toBeTruthy();
+    };
     mockStore.dispatch({
       type: `ACTION${REQUEST}`
     } as Action<{}>);
     mockStore.dispatch({
       type: `ACTION${FULFILLED}`
     } as Action<{}>);
+    console.warn = originalConsoleWarn;
   });
 
   it('action with REQUEST suffix will have PENDING and REQUEST dispatched', () => {

@@ -10,5 +10,4 @@ exports.defaultTypes = {
 };
 exports.getAsyncTypeConstants = ({ types } = {}) => (tslib_1.__assign({}, exports.defaultTypes, types));
 exports.replaceSuffix = (targetStr, suffixToReplace, replacementString) => `${targetStr.substring(0, targetStr.length - suffixToReplace.length)}${replacementString}`;
-exports.getMetaResult = (types, overrides) => (tslib_1.__assign({ [types.PENDING]: false, [types.FULFILLED]: false, [types.REJECTED]: false, [types.END]: false, PAYLOAD: null, ERROR: null }, overrides));
 //# sourceMappingURL=async-types.js.map

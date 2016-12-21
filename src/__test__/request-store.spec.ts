@@ -33,6 +33,10 @@ describe('RequestStore', () => {
   });
 
   it('delete', () => {
+    console.warn = (str: any) => {
+      expect(typeof str === 'string')
+        .toBeTruthy();
+    };
     const requestKey = 'myKey';
     requestStore.add(requestKey, { one: 1 } as any);
     expect(requestStore.store)
@@ -44,6 +48,11 @@ describe('RequestStore', () => {
   });
 
   it('resolve', () => {
+    const originalConsoleWarn = console.warn;
+    console.warn = (str: any) => {
+      expect(typeof str === 'string')
+        .toBeTruthy();
+    };
     const requestKey = 'myKey';
     const resolvePayload = { data: [1, 2, 3] };
     requestStore.add(requestKey, createPromise<any>());
@@ -53,9 +62,15 @@ describe('RequestStore', () => {
       .toMatchSnapshot();
     expect(requestStore.get(requestKey).promise.value())
       .toEqual(resolvePayload);
+    console.warn = originalConsoleWarn;
   });
 
   it('reject', () => {
+    const originalConsoleWarn = console.warn;
+    console.warn = (str: any) => {
+      expect(typeof str === 'string')
+        .toBeTruthy();
+    };
     const requestKey = 'myKey';
     const rejectPayload = { data: [1, 2, 3] };
     requestStore.add(requestKey, createPromise<any>());
@@ -65,5 +80,6 @@ describe('RequestStore', () => {
       .toMatchSnapshot();
     expect(requestStore.get(requestKey).promise.reason())
       .toEqual(rejectPayload);
+    console.warn = originalConsoleWarn;
   });
 });

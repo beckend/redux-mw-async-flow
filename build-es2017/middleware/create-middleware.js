@@ -12,12 +12,14 @@ const merge = require('lodash.merge');
 const lSet = require('lodash.set');
 const lGet = require('lodash.get');
 const uniqueid = require('uniqueid');
-const asyncUniqueId = uniqueid(null, '-@@ASYNC_FLOW');
 exports.defaultOpts = {
     metaKey: 'asyncFlow',
     metaKeyRequestID: 'REQUEST_ID',
-    timeout: 10000,
-    generateId: ({ action }) => `${asyncUniqueId()}--${action.type}`
+    timeout: 10000
+};
+const getGenerateId = () => {
+    const asyncUniqueId = uniqueid(null, '-@@ASYNC_FLOW');
+    return ({ action }) => `${asyncUniqueId()}--${action.type}`;
 };
 exports.createAsyncFlowMiddleware = (opts = {
         metaKey: exports.defaultOpts.metaKey,
@@ -30,7 +32,8 @@ exports.createAsyncFlowMiddleware = (opts = {
             END
         }
     });
-    const { metaKey, timeout, metaKeyRequestID, generateId } = tslib_1.__assign({}, exports.defaultOpts, opts);
+    const { metaKey, timeout, metaKeyRequestID, generateId: generateIdMerged } = tslib_1.__assign({}, exports.defaultOpts, opts);
+    const generateId = generateIdMerged || getGenerateId();
     const requestStore = new request_store_1.RequestStore();
     const middleware = () => {
         return (next) => {
@@ -80,6 +83,7 @@ exports.createAsyncFlowMiddleware = (opts = {
                      * Generate uniqueid, make sure it does not exist
                      */
                     let requestID = lGet(action, metaRequestIdPath);
+                    /* istanbul ignore next */
                     if (!requestID || {}.hasOwnProperty.call(requestStore, requestID)) {
                         do {
                             requestID = generateId({ action });
@@ -92,7 +96,7 @@ exports.createAsyncFlowMiddleware = (opts = {
                     /**
                      * Dispatch pending first, with a twist, send a promise resolve reject with it
                      * So this way user can use to the promise to do stuff after the action
-                     * The promise will be resolved later when getting ABORTED, REJECTED, or FULFILLED
+                     * The promise will be resolved/rejected later when getting ABORTED, REJECTED, or FULFILLED
                      */
                     const { promise, reject, resolve } = promise_factory_1.createPromise();
                     promise
@@ -164,7 +168,19 @@ exports.createAsyncFlowMiddleware = (opts = {
     };
     return {
         middleware,
-        observers: mwObservers
+        // Do not expose rootSubject
+        observers: {
+            before: {
+                obsOnAll: mwObservers.before.obsOnAll,
+                obsOnRequest: mwObservers.before.obsOnRequest,
+                obsOnEnd: mwObservers.before.obsOnEnd
+            },
+            after: {
+                obsOnAll: mwObservers.after.obsOnAll,
+                obsOnRequest: mwObservers.after.obsOnRequest,
+                obsOnEnd: mwObservers.after.obsOnEnd
+            }
+        }
     };
 };
 //# sourceMappingURL=create-middleware.js.map

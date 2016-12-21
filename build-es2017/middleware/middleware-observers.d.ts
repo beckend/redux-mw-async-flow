@@ -2,7 +2,7 @@
  * Rxjs observers only triggered when the async action is matched/enabled
  */
 import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/operator/filter';
+import '../rxjs/add/__invoke';
 import { IAsyncFlowAction } from './create-middleware';
 import { Observable } from 'rxjs/Observable';
 export { Observable };

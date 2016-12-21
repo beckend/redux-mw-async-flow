@@ -3,7 +3,8 @@
  * Rxjs observers only triggered when the async action is matched/enabled
  */
 const Subject_1 = require("rxjs/Subject");
-require("rxjs/add/operator/filter");
+require("../rxjs/add/__invoke");
+const filter_1 = require("rxjs/operator/filter");
 const Observable_1 = require("rxjs/Observable");
 exports.Observable = Observable_1.Observable;
 exports.createObservers = ({ asyncTypes }) => {
@@ -14,9 +15,9 @@ exports.createObservers = ({ asyncTypes }) => {
         const obsOnAll = rootSubject.asObservable();
         // filter by requests
         const obsOnRequest = obsOnAll
-            .filter((action) => action.type.endsWith(asyncTypes.REQUEST));
+            .__invoke(filter_1.filter, (action) => action.type.endsWith(asyncTypes.REQUEST));
         const obsOnEnd = obsOnAll
-            .filter((action) => action.type.endsWith(asyncTypes.END));
+            .__invoke(filter_1.filter, (action) => action.type.endsWith(asyncTypes.END));
         return {
             rootSubject,
             obsOnAll,
