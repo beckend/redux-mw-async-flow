@@ -14,20 +14,17 @@ import { TDefaultTypesOptional } from '../async-types';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 export { Observable, Subject };
-export interface IAsyncFlowActionMetaBase<TPayload> {
-    readonly enable: boolean;
-    readonly timeout: number;
-    readonly timeoutRequest?: number;
-    readonly promise: Bluebird<TPayload>;
-}
-export interface IAsyncFlowActionMetaAdded<TPayload> {
+export interface IAsyncFlowActionMeta<TPayload> {
     readonly enable?: boolean;
     readonly timeout: number;
     readonly timeoutRequest: number;
     readonly promise: Bluebird<TPayload>;
+    readonly endActionType: string | null;
+    readonly timeStart: Date;
+    readonly timeEnd: Date | null;
 }
 export declare type TAsyncFlowActionMetaOptional<TActionPayload> = {
-    readonly [P in keyof IAsyncFlowActionMetaBase<TActionPayload>]?: IAsyncFlowActionMetaBase<TActionPayload>[P];
+    readonly [P in keyof IAsyncFlowActionMeta<TActionPayload>]?: IAsyncFlowActionMeta<TActionPayload>[P];
 };
 export interface IAsyncFlowActionOptional<TActionPayload> extends Action<TActionPayload> {
     meta: {
@@ -36,7 +33,7 @@ export interface IAsyncFlowActionOptional<TActionPayload> extends Action<TAction
 }
 export interface IAsyncFlowAction<TActionPayload> extends Action<TActionPayload> {
     meta: {
-        asyncFlow: IAsyncFlowActionMetaAdded<TActionPayload>;
+        asyncFlow: IAsyncFlowActionMeta<TActionPayload>;
     };
 }
 export interface IGenerateIdFn<TAction> {
@@ -50,7 +47,6 @@ export interface IDefaultOpts<TAction> {
     readonly timeout: number;
     readonly generateId?: IGenerateIdFn<TAction>;
 }
-export declare const defaultOpts: IDefaultOpts<any>;
 export declare type TRequestId = string;
 export declare type TDefaultOptsOptional<TAction> = {
     readonly [P in keyof IDefaultOpts<TAction>]?: IDefaultOpts<TAction>[P];

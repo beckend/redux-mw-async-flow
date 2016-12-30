@@ -11,6 +11,8 @@ import { Middleware, Dispatch } from 'redux';
 import { Action } from 'redux-actions';
 import * as Bluebird from 'bluebird';
 import * as lodash from 'lodash';
+import { newDate } from './date';
+import { defaultOpts } from './default-options';
 import {
   RequestStore,
   IRequestMap,
@@ -46,6 +48,10 @@ export interface IAsyncFlowActionMeta<TPayload> {
   readonly promise: Bluebird<TPayload>;
   // the original action type when dispatching and END action, user may want to check what kind if action it ended with
   readonly endActionType: string | null;
+  // start of the async action
+  readonly timeStart: Date;
+  // end of the async action if it reaches end
+  readonly timeEnd: Date | null;
 }
 // Optional version to pass what you want
 export type TAsyncFlowActionMetaOptional<TActionPayload> = {
@@ -76,11 +82,6 @@ export interface IDefaultOpts<TAction> {
   // function to override generation of async ids
   readonly generateId?: IGenerateIdFn<TAction>;
 }
-export const defaultOpts: IDefaultOpts<any> = {
-  metaKey: 'asyncFlow',
-  metaKeyRequestID: 'REQUEST_ID',
-  timeout: 10000
-};
 const getGenerateId = () => {
   const asyncUniqueId = uniqueid(null, '-@@ASYNC_FLOW');
   return ({ action }: { action: Action<any> }) => `${asyncUniqueId()}--${action.type}`;
@@ -161,9 +162,10 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
             }
             actionEnd = merge({}, action, {
               type: replaceSuffix(actionType, suffixType, END),
-              mete: {
+              meta: {
                 [metaKey]: {
-                  endActionType: actionType
+                  endActionType: actionType,
+                  timeEnd: newDate()
                 }
               }
             });
@@ -228,7 +230,9 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
                 timeout,
                 timeoutRequest,
                 promise,
-                endActionType: null
+                endActionType: null,
+                timeStart: newDate(),
+                timeEnd: null
               } as IAsyncFlowActionMeta<any>
             }
           };

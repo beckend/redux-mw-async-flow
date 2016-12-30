@@ -2,19 +2,22 @@
 /* tslint:disable: max-line-length */
 /* tslint:disable: no-increment-decrement */
 /* tslint:disable: max-func-body-length */
-// import { createStore, applyMiddleware } from 'redux';
 import configureStore, { IStore } from 'redux-mock-store';
 import {
-  createAsyncFlowMiddleware,
-  defaultOpts,
+  createAsyncFlowMiddleware as createAsyncFlowMiddlewareFn,
   TCreateAsyncFlowMiddlewareOpts,
   TAsyncFlowActionMetaOptional,
   IAsyncFlowAction
 } from '../create-middleware';
+import { defaultOpts } from '../default-options';
 import { getAsyncTypeConstants } from '../../async-types';
 import { Action, ActionMeta } from 'redux-actions';
 import { createPromise } from '../../promise-factory';
 import * as Bluebird from 'bluebird';
+
+jest.mock('../date');
+
+const { createAsyncFlowMiddleware }: { createAsyncFlowMiddleware: typeof createAsyncFlowMiddlewareFn } = require('../create-middleware');
 
 const {
   REQUEST,

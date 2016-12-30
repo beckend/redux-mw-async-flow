@@ -1,5 +1,7 @@
 "use strict";
 const tslib_1 = require("tslib");
+const date_1 = require("./date");
+const default_options_1 = require("./default-options");
 const request_store_1 = require("../request-store");
 const async_types_1 = require("../async-types");
 const promise_factory_1 = require("../promise-factory");
@@ -12,18 +14,13 @@ const merge = require('lodash.merge');
 const lSet = require('lodash.set');
 const lGet = require('lodash.get');
 const uniqueid = require('uniqueid');
-exports.defaultOpts = {
-    metaKey: 'asyncFlow',
-    metaKeyRequestID: 'REQUEST_ID',
-    timeout: 10000
-};
 const getGenerateId = () => {
     const asyncUniqueId = uniqueid(null, '-@@ASYNC_FLOW');
     return ({ action }) => `${asyncUniqueId()}--${action.type}`;
 };
 exports.createAsyncFlowMiddleware = (opts = {
-        metaKey: exports.defaultOpts.metaKey,
-        timeout: exports.defaultOpts.timeout
+        metaKey: default_options_1.defaultOpts.metaKey,
+        timeout: default_options_1.defaultOpts.timeout
     }) => {
     const { REQUEST, PENDING, FULFILLED, REJECTED, ABORTED, END } = async_types_1.getAsyncTypeConstants({ types: opts.asyncTypes });
     const mwObservers = middleware_observers_1.createObservers({
@@ -32,7 +29,7 @@ exports.createAsyncFlowMiddleware = (opts = {
             END
         }
     });
-    const { metaKey, timeout, metaKeyRequestID, generateId: generateIdMerged } = tslib_1.__assign({}, exports.defaultOpts, opts);
+    const { metaKey, timeout, metaKeyRequestID, generateId: generateIdMerged } = tslib_1.__assign({}, default_options_1.defaultOpts, opts);
     const generateId = generateIdMerged || getGenerateId();
     const requestStore = new request_store_1.RequestStore();
     const middleware = () => {
@@ -68,7 +65,13 @@ exports.createAsyncFlowMiddleware = (opts = {
                             requestStore.reject(requestID, payloadArg || action.payload);
                         }
                         actionEnd = merge({}, action, {
-                            type: async_types_1.replaceSuffix(actionType, suffixType, END)
+                            type: async_types_1.replaceSuffix(actionType, suffixType, END),
+                            meta: {
+                                [metaKey]: {
+                                    endActionType: actionType,
+                                    timeEnd: date_1.newDate()
+                                }
+                            }
                         });
                     }
                     else {
@@ -124,7 +127,10 @@ exports.createAsyncFlowMiddleware = (opts = {
                             [metaKey]: {
                                 timeout,
                                 timeoutRequest,
-                                promise
+                                promise,
+                                endActionType: null,
+                                timeStart: date_1.newDate(),
+                                timeEnd: null
                             }
                         }
                     };
