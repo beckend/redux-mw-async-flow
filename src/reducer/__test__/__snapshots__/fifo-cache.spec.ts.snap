@@ -1,7 +1,0 @@
-exports[`FifoXCache getAll added function works, returns unique keys 1`] = `
-Object {
-  "elwin": 1215,
-  "leon": 1233,
-  "tom": 1234,
-}
-`;

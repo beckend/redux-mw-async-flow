@@ -1,5 +1,4 @@
 /// <reference types="bluebird" />
-/// <reference types="redux-actions" />
 /**
  * Detects action types with names ending with REQUEST, REJECTED, FULFILLED, ABORTED
  * Will dispatch PENDING if REQUEST

@@ -13,6 +13,7 @@ exports.Subject = Subject_1.Subject;
 const merge = require('lodash.merge');
 const lSet = require('lodash.set');
 const lGet = require('lodash.get');
+const cloneDeep = require('lodash.clonedeep');
 const uniqueid = require('uniqueid');
 const getGenerateId = () => {
     const asyncUniqueId = uniqueid(null, '-@@ASYNC_FLOW');
@@ -52,11 +53,23 @@ exports.createAsyncFlowMiddleware = (opts = {
                 }
                 // used to get deep in action object
                 const metaRequestIdPath = ['meta', metaKey, metaKeyRequestID];
-                // iF set will dispatch en END action
-                let actionEnd;
-                // Resole, reject and then set dispatch END payload
+                const metaPromisePath = ['meta', metaKey, 'promise'];
+                // Resolve, reject and then set dispatch END payload
                 const handleEndAction = (suffixType, resolve, payloadArg) => {
+                    /**
+                     * First dispatch the original action
+                     */
                     const requestID = lGet(action, metaRequestIdPath);
+                    const theAsyncFlowPromise = lGet(action, metaPromisePath);
+                    // Normal dispatch and opt out if not a asyncflow action
+                    if (!requestID || !theAsyncFlowPromise) {
+                        dispatchNormal();
+                        return;
+                    }
+                    else {
+                        // Can dispatch as async flow action
+                        dispatchAsyncFlow(action);
+                    }
                     if (requestID) {
                         if (resolve) {
                             requestStore.resolve(requestID, payloadArg || action.payload);
@@ -64,7 +77,7 @@ exports.createAsyncFlowMiddleware = (opts = {
                         else {
                             requestStore.reject(requestID, payloadArg || action.payload);
                         }
-                        actionEnd = merge({}, action, {
+                        const actionEnd = merge({}, action, {
                             type: async_types_1.replaceSuffix(actionType, suffixType, END),
                             meta: {
                                 [metaKey]: {
@@ -73,6 +86,7 @@ exports.createAsyncFlowMiddleware = (opts = {
                                 }
                             }
                         });
+                        dispatchAsyncFlow(actionEnd);
                     }
                     else {
                         console.warn(`${action.type} - meta data not found, did you forget to send it?`);
@@ -82,19 +96,22 @@ exports.createAsyncFlowMiddleware = (opts = {
                  * handle REQUEST, dispatches PENDING then dispatches REQUEST with meta data
                  */
                 if (actionType.endsWith(REQUEST)) {
+                    // Don't touch and mutate original action
+                    const actionClone = cloneDeep(action);
                     /**
                      * Generate uniqueid, make sure it does not exist
                      */
-                    let requestID = lGet(action, metaRequestIdPath);
+                    let requestID = lGet(actionClone, metaRequestIdPath);
                     /* istanbul ignore next */
                     if (!requestID || {}.hasOwnProperty.call(requestStore, requestID)) {
                         do {
-                            requestID = generateId({ action });
+                            requestID = generateId({ action: actionClone });
                         } while ({}.hasOwnProperty.call(requestStore, requestID));
-                        lSet(action, metaRequestIdPath, requestID);
+                        // This adds the id to the meta path, since it should not exist in this clause it's created in action object
+                        lSet(actionClone, metaRequestIdPath, requestID);
                     }
                     // User override of the timeout for each request
-                    const metaTimeoutKey = lGet(action, ['meta', metaKey, 'timeoutRequest']);
+                    const metaTimeoutKey = lGet(actionClone, ['meta', metaKey, 'timeoutRequest']);
                     const timeoutRequest = metaTimeoutKey || timeout;
                     /**
                      * Dispatch pending first, with a twist, send a promise resolve reject with it
@@ -134,14 +151,14 @@ exports.createAsyncFlowMiddleware = (opts = {
                             }
                         }
                     };
-                    const pendingAction = merge({}, action, {
+                    const pendingAction = merge({}, actionClone, {
                         type: async_types_1.replaceSuffix(actionType, REQUEST, PENDING)
                     }, addedActionMetaData);
                     dispatchAsyncFlow(pendingAction);
                     /**
                      * Dispatch orginal action with meta data
                      */
-                    const newAction = merge({}, action, addedActionMetaData);
+                    const newAction = merge({}, actionClone, addedActionMetaData);
                     dispatchAsyncFlow(newAction);
                     return;
                 }
@@ -159,15 +176,6 @@ exports.createAsyncFlowMiddleware = (opts = {
                      * Normal dispatch when unmatched by suffixes
                      */
                     dispatchNormal();
-                    return;
-                }
-                // Reaching here it's atually a IAsyncFlowAction
-                dispatchAsyncFlow(action);
-                /**
-                 * Dispatch actionEnd if set for completion
-                 */
-                if (actionEnd) {
-                    dispatchAsyncFlow(actionEnd);
                 }
             };
         };

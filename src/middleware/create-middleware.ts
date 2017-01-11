@@ -34,6 +34,7 @@ export { Observable, Subject };
 const merge: typeof lodash.merge = require('lodash.merge');
 const lSet: typeof lodash.set = require('lodash.set');
 const lGet: typeof lodash.get = require('lodash.get');
+const cloneDeep: typeof lodash.cloneDeep = require('lodash.clonedeep');
 const uniqueid = require('uniqueid');
 
 // Meta added by middleware
@@ -149,18 +150,29 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
 
         // used to get deep in action object
         const metaRequestIdPath = ['meta', metaKey, metaKeyRequestID];
-        // iF set will dispatch en END action
-        let actionEnd;
-        // Resole, reject and then set dispatch END payload
+        const metaPromisePath = ['meta', metaKey, 'promise'];
+        // Resolve, reject and then set dispatch END payload
         const handleEndAction = (suffixType: string, resolve: boolean, payloadArg?: any) => {
+          /**
+           * First dispatch the original action
+           */
           const requestID = lGet<TRequestId>(action, metaRequestIdPath);
+          const theAsyncFlowPromise = lGet<Bluebird<any>>(action, metaPromisePath);
+          // Normal dispatch and opt out if not a asyncflow action
+          if (!requestID || !theAsyncFlowPromise) {
+            dispatchNormal();
+            return;
+          } else {
+            // Can dispatch as async flow action
+            dispatchAsyncFlow(action as any);
+          }
           if (requestID) {
             if (resolve) {
               requestStore.resolve(requestID, payloadArg || action.payload);
             } else {
               requestStore.reject(requestID, payloadArg || action.payload);
             }
-            actionEnd = merge({}, action, {
+            const actionEnd = merge({}, action, {
               type: replaceSuffix(actionType, suffixType, END),
               meta: {
                 [metaKey]: {
@@ -169,6 +181,8 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
                 }
               }
             });
+
+            dispatchAsyncFlow(actionEnd as any);
           } else {
             console.warn(`${action.type} - meta data not found, did you forget to send it?`);
           }
@@ -177,21 +191,24 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
          * handle REQUEST, dispatches PENDING then dispatches REQUEST with meta data
          */
         if (actionType.endsWith(REQUEST)) {
+          // Don't touch and mutate original action
+          const actionClone = cloneDeep(action);
           /**
            * Generate uniqueid, make sure it does not exist
            */
-          let requestID = lGet<TRequestId>(action, metaRequestIdPath);
+          let requestID = lGet<TRequestId>(actionClone, metaRequestIdPath);
           /* istanbul ignore next */
           if (!requestID || {}.hasOwnProperty.call(requestStore, requestID)) {
             do {
-              requestID = generateId({ action });
+              requestID = generateId({ action: actionClone });
             } while ({}.hasOwnProperty.call(requestStore, requestID));
 
-            lSet<TRequestId>(action, metaRequestIdPath, requestID);
+            // This adds the id to the meta path, since it should not exist in this clause it's created in action object
+            lSet<TRequestId>(actionClone, metaRequestIdPath, requestID);
           }
 
           // User override of the timeout for each request
-          const metaTimeoutKey = lGet<number>(action, ['meta', metaKey, 'timeoutRequest']);
+          const metaTimeoutKey = lGet<number>(actionClone, ['meta', metaKey, 'timeoutRequest']);
           const timeoutRequest = metaTimeoutKey || timeout;
           /**
            * Dispatch pending first, with a twist, send a promise resolve reject with it
@@ -238,7 +255,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
           };
           const pendingAction: IAsyncFlowAction<any> = merge(
             {},
-            action,
+            actionClone,
             {
               type: replaceSuffix(actionType, REQUEST, PENDING)
             },
@@ -249,7 +266,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
           /**
            * Dispatch orginal action with meta data
            */
-          const newAction: IAsyncFlowAction<any> = merge({}, action, addedActionMetaData) as any;
+          const newAction: IAsyncFlowAction<any> = merge({}, actionClone, addedActionMetaData) as any;
           dispatchAsyncFlow(newAction);
           return;
         } else if (actionType.endsWith(FULFILLED)) {
@@ -263,15 +280,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
            * Normal dispatch when unmatched by suffixes
            */
           dispatchNormal();
-          return;
         }
-
-        // Reaching here it's atually a IAsyncFlowAction
-        dispatchAsyncFlow(action as any);
-        /**
-         * Dispatch actionEnd if set for completion
-         */
-        if (actionEnd) { dispatchAsyncFlow(actionEnd); }
       };
     };
   };

@@ -1,0 +1,307 @@
+exports[`reducer creation can create with options and works 1`] = `
+Object {
+  "counters": Object {
+    "--__aborted-ab": 0,
+    "-pending-SUFF": 0,
+    "-request-suffix": 1,
+    "_END": 0,
+    "____rejected___-": 0,
+    "fulfilledsuFf": 0,
+  },
+  "latestActions": Object {
+    "something-request-suffix": Object {
+      "__THE_META_KEY": Object {
+        "__THE_META_REQ_ID": "myId",
+      },
+      "type": "something-request-suffix",
+    },
+  },
+}
+`;
+
+exports[`reducer creation can create without options 1`] = `
+Object {
+  "counters": Object {
+    "_ABORTED": 0,
+    "_END": 0,
+    "_FULFILLED": 0,
+    "_PENDING": 0,
+    "_REJECTED": 0,
+    "_REQUEST": 1,
+  },
+  "latestActions": Object {
+    "MY_ACTION_REQUEST": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "myId",
+      },
+      "type": "MY_ACTION_REQUEST",
+    },
+  },
+}
+`;
+
+exports[`reducer tests handle _ABORTED 1`] = `
+Object {
+  "counters": Object {
+    "_ABORTED": 1,
+    "_END": 0,
+    "_FULFILLED": 0,
+    "_PENDING": 0,
+    "_REJECTED": 0,
+    "_REQUEST": 0,
+  },
+  "latestActions": Object {
+    "MYACTION_REQUEST": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "hello",
+      },
+      "type": "MYACTION_ABORTED",
+    },
+  },
+}
+`;
+
+exports[`reducer tests handle _ABORTED 2`] = `
+Object {
+  "counters": Object {
+    "_ABORTED": 2,
+    "_END": 0,
+    "_FULFILLED": 0,
+    "_PENDING": 0,
+    "_REJECTED": 0,
+    "_REQUEST": 0,
+  },
+  "latestActions": Object {
+    "MYACTION_REQUEST": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "hello2",
+      },
+      "type": "MYACTION_ABORTED",
+    },
+  },
+}
+`;
+
+exports[`reducer tests handle _END 1`] = `
+Object {
+  "counters": Object {
+    "_ABORTED": 0,
+    "_END": 1,
+    "_FULFILLED": 0,
+    "_PENDING": 0,
+    "_REJECTED": 0,
+    "_REQUEST": 0,
+  },
+  "latestActions": Object {
+    "MYACTION_REQUEST": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "hello",
+      },
+      "type": "MYACTION_END",
+    },
+  },
+}
+`;
+
+exports[`reducer tests handle _END 2`] = `
+Object {
+  "counters": Object {
+    "_ABORTED": 0,
+    "_END": 2,
+    "_FULFILLED": 0,
+    "_PENDING": 0,
+    "_REJECTED": 0,
+    "_REQUEST": 0,
+  },
+  "latestActions": Object {
+    "MYACTION_REQUEST": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "hello2",
+      },
+      "type": "MYACTION_END",
+    },
+  },
+}
+`;
+
+exports[`reducer tests handle _FULFILLED 1`] = `
+Object {
+  "counters": Object {
+    "_ABORTED": 0,
+    "_END": 0,
+    "_FULFILLED": 1,
+    "_PENDING": 0,
+    "_REJECTED": 0,
+    "_REQUEST": 0,
+  },
+  "latestActions": Object {
+    "MYACTION_REQUEST": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "hello",
+      },
+      "type": "MYACTION_FULFILLED",
+    },
+  },
+}
+`;
+
+exports[`reducer tests handle _FULFILLED 2`] = `
+Object {
+  "counters": Object {
+    "_ABORTED": 0,
+    "_END": 0,
+    "_FULFILLED": 2,
+    "_PENDING": 0,
+    "_REJECTED": 0,
+    "_REQUEST": 0,
+  },
+  "latestActions": Object {
+    "MYACTION_REQUEST": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "hello2",
+      },
+      "type": "MYACTION_FULFILLED",
+    },
+  },
+}
+`;
+
+exports[`reducer tests handle _PENDING 1`] = `
+Object {
+  "counters": Object {
+    "_ABORTED": 0,
+    "_END": 0,
+    "_FULFILLED": 0,
+    "_PENDING": 1,
+    "_REJECTED": 0,
+    "_REQUEST": 0,
+  },
+  "latestActions": Object {
+    "MYACTION_REQUEST": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "hello",
+      },
+      "type": "MYACTION_PENDING",
+    },
+  },
+}
+`;
+
+exports[`reducer tests handle _PENDING 2`] = `
+Object {
+  "counters": Object {
+    "_ABORTED": 0,
+    "_END": 0,
+    "_FULFILLED": 0,
+    "_PENDING": 2,
+    "_REJECTED": 0,
+    "_REQUEST": 0,
+  },
+  "latestActions": Object {
+    "MYACTION_REQUEST": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "hello2",
+      },
+      "type": "MYACTION_PENDING",
+    },
+  },
+}
+`;
+
+exports[`reducer tests handle _REJECTED 1`] = `
+Object {
+  "counters": Object {
+    "_ABORTED": 0,
+    "_END": 0,
+    "_FULFILLED": 0,
+    "_PENDING": 0,
+    "_REJECTED": 1,
+    "_REQUEST": 0,
+  },
+  "latestActions": Object {
+    "MYACTION_REQUEST": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "hello",
+      },
+      "type": "MYACTION_REJECTED",
+    },
+  },
+}
+`;
+
+exports[`reducer tests handle _REJECTED 2`] = `
+Object {
+  "counters": Object {
+    "_ABORTED": 0,
+    "_END": 0,
+    "_FULFILLED": 0,
+    "_PENDING": 0,
+    "_REJECTED": 2,
+    "_REQUEST": 0,
+  },
+  "latestActions": Object {
+    "MYACTION_REQUEST": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "hello2",
+      },
+      "type": "MYACTION_REJECTED",
+    },
+  },
+}
+`;
+
+exports[`reducer tests handle _REQUEST 1`] = `
+Object {
+  "counters": Object {
+    "_ABORTED": 0,
+    "_END": 0,
+    "_FULFILLED": 0,
+    "_PENDING": 0,
+    "_REJECTED": 0,
+    "_REQUEST": 1,
+  },
+  "latestActions": Object {
+    "MYACTION_REQUEST": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "hello",
+      },
+      "type": "MYACTION_REQUEST",
+    },
+  },
+}
+`;
+
+exports[`reducer tests handle _REQUEST 2`] = `
+Object {
+  "counters": Object {
+    "_ABORTED": 0,
+    "_END": 0,
+    "_FULFILLED": 0,
+    "_PENDING": 0,
+    "_REJECTED": 0,
+    "_REQUEST": 2,
+  },
+  "latestActions": Object {
+    "MYACTION_REQUEST": Object {
+      "asyncFlow": Object {
+        "REQUEST_ID": "hello2",
+      },
+      "type": "MYACTION_REQUEST",
+    },
+  },
+}
+`;
+
+exports[`reducer tests initial state, with any action works 1`] = `
+Object {
+  "counters": Object {
+    "_ABORTED": 0,
+    "_END": 0,
+    "_FULFILLED": 0,
+    "_PENDING": 0,
+    "_REJECTED": 0,
+    "_REQUEST": 0,
+  },
+  "latestActions": Object {},
+}
+`;
