@@ -1,9 +1,17 @@
 /* tslint:disable: chai-vague-errors */
-import { createAsyncFlowMiddleware } from '../index';
+import {
+  createAsyncFlowMiddleware,
+  createAsyncFlowReducer
+} from '../index';
 
 describe('index exports', () => {
   it('createAsyncFlowMiddleware', () => {
     expect(createAsyncFlowMiddleware)
+      .toBeTruthy();
+  });
+
+  it('createAsyncFlowMiddleware', () => {
+    expect(createAsyncFlowReducer)
       .toBeTruthy();
   });
 });
