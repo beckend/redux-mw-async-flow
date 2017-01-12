@@ -81,7 +81,11 @@
     "@types/gulp-debug": "^2.0.29",
     "@types/jest": "^16.0.3",
     "@types/lodash": "^4.14.48",
-    "@types/react": "0.14.57",
+    "@types/lodash.clonedeep": "^4.5.0",
+    "@types/lodash.get": "^4.4.0",
+    "@types/lodash.merge": "^4.6.0",
+    "@types/lodash.set": "^4.3.0",
+    "@types/react": "^15.0.0",
     "@types/react-dom": "^0.14.19",
     "@types/redux-actions": "^1.2.2",
     "@types/redux-mock-store": "^0.0.7",
@@ -91,7 +95,7 @@
     "fs-extra": "^1.0.0",
     "globby": "^6.1.0",
     "google-closure-compiler-js": "^20161201.0.0",
-    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp": "gulpjs/gulp.git#4.0",
     "gulp-debug": "^3.0.0",
     "gulp-run": "^1.7.1",
     "gulp-sourcemap": "^1.0.1",
@@ -100,13 +104,14 @@
     "redux": "^3.6.0",
     "redux-actions": "^1.2.0",
     "redux-mock-store": "^1.2.1",
+    "remove": "^0.1.5",
     "ts-jest": "18.0.1",
     "ts-node": "2.0.0",
     "tslint": "^4.3.1",
     "tslint-microsoft-contrib": "^4.0.0",
     "tslint-react": "^2.3.0",
     "tslint-stylish": "^2.1.0-beta",
-    "typescript": "next"
+    "typescript": "^2.1.5"
   },
   "peerDependencies": {
     "redux": "3.*"
@@ -118,8 +123,7 @@
     "lodash.set": "^4.3.2",
     "rxjs": "^5.0.3",
     "tslib": "^1.5.0",
-    "uniqueid": "^1.0.0",
-    "x-cache": "beckend/x-cache"
+    "uniqueid": "^1.0.0"
   },
   "engines": {
     "node": ">=7.0.0"

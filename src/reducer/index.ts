@@ -3,7 +3,7 @@
 /**
  * Intercept action types of all the defaultTypes and set state
  */
-import * as lodash from 'lodash';
+import lGet = require('lodash.get');
 import { TRequestId } from '../middleware/create-middleware';
 import { defaultOpts as middlewareDefaultOpts } from '../middleware/default-options';
 import {
@@ -12,8 +12,6 @@ import {
   replaceSuffix
 } from '../async-types';
 import { ReducerMeta, ActionMeta } from 'redux-actions';
-
-const lGet: typeof lodash.get = require('lodash.get');
 
 export interface IActionsByActionType {
   [actionType: string]: IActionsByActionId;

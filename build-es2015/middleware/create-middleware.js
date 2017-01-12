@@ -10,10 +10,10 @@ const Observable_1 = require("rxjs/Observable");
 exports.Observable = Observable_1.Observable;
 const Subject_1 = require("rxjs/Subject");
 exports.Subject = Subject_1.Subject;
-const merge = require('lodash.merge');
-const lSet = require('lodash.set');
-const lGet = require('lodash.get');
-const cloneDeep = require('lodash.clonedeep');
+const merge = require("lodash.merge");
+const lSet = require("lodash.set");
+const lGet = require("lodash.get");
+const cloneDeep = require("lodash.clonedeep");
 const uniqueid = require('uniqueid');
 const getGenerateId = () => {
     const asyncUniqueId = uniqueid(null, '-@@ASYNC_FLOW');

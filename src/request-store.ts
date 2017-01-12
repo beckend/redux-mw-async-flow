@@ -4,14 +4,11 @@
  */
 import * as Bluebird from 'bluebird';
 import { TResolveFn, TRejectFn } from './promise-factory';
-import * as lodash from 'lodash';
+import lGet = require('lodash.get');
 
 export const REQUEST_KEY_PROMISE = 'promise';
 export const REQUEST_KEY_RESOLVEFN = 'resolve';
 export const REQUEST_KEY_REJECTFN = 'reject';
-
-const lGet: typeof lodash.get = require('lodash.get');
-
 export interface IRequestMap<TPayload> {
   readonly promise: Bluebird<TPayload>;
   readonly resolve: TResolveFn<TPayload>;

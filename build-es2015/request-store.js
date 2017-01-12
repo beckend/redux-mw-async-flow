@@ -1,8 +1,8 @@
 "use strict";
+const lGet = require("lodash.get");
 exports.REQUEST_KEY_PROMISE = 'promise';
 exports.REQUEST_KEY_RESOLVEFN = 'resolve';
 exports.REQUEST_KEY_REJECTFN = 'reject';
-const lGet = require('lodash.get');
 class RequestStore {
     constructor() {
         this.store = {};

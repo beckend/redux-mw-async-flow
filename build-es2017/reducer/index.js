@@ -1,8 +1,13 @@
 "use strict";
 const tslib_1 = require("tslib");
+/* tslint:disable: no-unnecessary-local-variable */
+/* tslint:disable: max-func-body-length */
+/**
+ * Intercept action types of all the defaultTypes and set state
+ */
+const lGet = require("lodash.get");
 const default_options_1 = require("../middleware/default-options");
 const async_types_1 = require("../async-types");
-const lGet = require('lodash.get');
 exports.createAsyncFlowReducer = (opts = {
         metaKey: default_options_1.defaultOpts.metaKey,
         metaKeyRequestID: default_options_1.defaultOpts.metaKeyRequestID

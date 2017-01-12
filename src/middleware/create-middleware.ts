@@ -10,7 +10,6 @@
 import { Middleware, Dispatch } from 'redux';
 import { Action } from 'redux-actions';
 import * as Bluebird from 'bluebird';
-import * as lodash from 'lodash';
 import { newDate } from './date';
 import { defaultOpts } from './default-options';
 import {
@@ -29,12 +28,12 @@ import { createPromise } from '../promise-factory';
 import { createObservers } from './middleware-observers';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import merge = require('lodash.merge');
+import lSet = require('lodash.set');
+import lGet = require('lodash.get');
+import cloneDeep = require('lodash.clonedeep');
 export { Observable, Subject };
 
-const merge: typeof lodash.merge = require('lodash.merge');
-const lSet: typeof lodash.set = require('lodash.set');
-const lGet: typeof lodash.get = require('lodash.get');
-const cloneDeep: typeof lodash.cloneDeep = require('lodash.clonedeep');
 const uniqueid = require('uniqueid');
 
 // Meta added by middleware
