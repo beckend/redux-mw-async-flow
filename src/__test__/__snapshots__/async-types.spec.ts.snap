@@ -1,3 +1,25 @@
+exports[`async-types generateAsyncAction with defaults 1`] = `
+Object {
+  "namespace/MYACTION_ABORTED": "namespace/MYACTION_ABORTED",
+  "namespace/MYACTION_END": "namespace/MYACTION_END",
+  "namespace/MYACTION_FULFILLED": "namespace/MYACTION_FULFILLED",
+  "namespace/MYACTION_PENDING": "namespace/MYACTION_PENDING",
+  "namespace/MYACTION_REJECTED": "namespace/MYACTION_REJECTED",
+  "namespace/MYACTION_REQUEST": "namespace/MYACTION_REQUEST",
+}
+`;
+
+exports[`async-types generateAsyncAction with types 1`] = `
+Object {
+  "namespaceAnother/MYACTION_ABORTED___": "namespaceAnother/MYACTION_ABORTED___",
+  "namespaceAnother/MYACTION_END___": "namespaceAnother/MYACTION_END___",
+  "namespaceAnother/MYACTION_FULFILLED___": "namespaceAnother/MYACTION_FULFILLED___",
+  "namespaceAnother/MYACTION_PENDING___": "namespaceAnother/MYACTION_PENDING___",
+  "namespaceAnother/MYACTION_REJECTED___": "namespaceAnother/MYACTION_REJECTED___",
+  "namespaceAnother/MYACTION_REQUEST___": "namespaceAnother/MYACTION_REQUEST___",
+}
+`;
+
 exports[`async-types getAsyncTypeConstants 1`] = `
 Object {
   "ABORTED": "_ABORTED___",
