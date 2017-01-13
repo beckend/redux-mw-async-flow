@@ -142,7 +142,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
         /**
          * If meta.asyncFlow.enable is explicit set to false, completely skip this middleware.
          */
-        if (lGet<boolean>(action, ['meta', metaKey, 'enable']) === false) {
+        if (!actionType || lGet<boolean>(action, ['meta', metaKey, 'enable']) === false) {
           dispatchNormal();
           return;
         }
