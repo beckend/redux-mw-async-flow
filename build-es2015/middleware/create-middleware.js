@@ -47,7 +47,7 @@ exports.createAsyncFlowMiddleware = (opts = {
                 /**
                  * If meta.asyncFlow.enable is explicit set to false, completely skip this middleware.
                  */
-                if (lGet(action, ['meta', metaKey, 'enable']) === false) {
+                if (!actionType || lGet(action, ['meta', metaKey, 'enable']) === false) {
                     dispatchNormal();
                     return;
                 }
