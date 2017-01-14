@@ -15,9 +15,9 @@
     "build-es2015",
     "build-es2017"
   ],
-  "main": "./build-es2015/index.js",
+  "main": "./build-es5/index.js",
   "jsnext:main": "./build-es2015/index.js",
-  "types": "./build-es2015/index.d.ts",
+  "types": "./build-es5/index.d.ts",
   "scripts": {
     "prepare": "gulp",
     "test": "jest",
