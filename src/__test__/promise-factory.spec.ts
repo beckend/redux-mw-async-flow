@@ -1,6 +1,6 @@
 /* tslint:disable: chai-vague-errors */
-import { createPromise } from '../promise-factory';
 import * as Bluebird from 'bluebird';
+import { createPromise } from '../promise-factory';
 
 describe('Promise factory', () => {
   it('createPromise - returns payload as expected', () => {

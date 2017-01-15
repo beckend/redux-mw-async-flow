@@ -1,24 +1,24 @@
 /* tslint:disable: chai-vague-errors */
+import { ReducerMeta } from 'redux-actions';
 import {
   createAsyncFlowReducer,
-  IState
+  IState,
 } from '..';
-import { ReducerMeta } from 'redux-actions';
-import { defaultOpts as middlewareDefaultOpts } from '../../middleware/default-options';
 import { defaultTypes } from '../../async-types';
+import { defaultOpts as middlewareDefaultOpts } from '../../middleware/default-options';
 
 describe('reducer creation', () => {
   it('can create without options', () => {
     const reducer = createAsyncFlowReducer();
     const {
       metaKey,
-      metaKeyRequestID
+      metaKeyRequestID,
     } = middlewareDefaultOpts;
     expect(reducer(undefined as any, {
       type: 'MY_ACTION_REQUEST',
       [metaKey]: {
-        [metaKeyRequestID]: 'myId'
-      }
+        [metaKeyRequestID]: 'myId',
+      },
     } as any))
       .toMatchSnapshot();
   });
@@ -29,21 +29,21 @@ describe('reducer creation', () => {
     const metaKeyRequestID = '__THE_META_REQ_ID';
     const reducer = createAsyncFlowReducer({
       asyncTypes: {
-        REQUEST: asyncRequestSuffix,
-        PENDING: '-pending-SUFF',
+        ABORTED: '--__aborted-ab',
         FULFILLED: 'fulfilledsuFf',
+        PENDING: '-pending-SUFF',
         REJECTED: '____rejected___-',
-        ABORTED: '--__aborted-ab'
+        REQUEST: asyncRequestSuffix,
       },
       metaKey,
-      metaKeyRequestID
+      metaKeyRequestID,
     });
 
     expect(reducer(undefined as any, {
       type: `something${asyncRequestSuffix}`,
       [metaKey]: {
-        [metaKeyRequestID]: 'myId'
-      }
+        [metaKeyRequestID]: 'myId',
+      },
     } as any))
       .toMatchSnapshot();
   });
@@ -53,7 +53,7 @@ describe('reducer tests', () => {
   let reducer: ReducerMeta<IState, any, any>;
   const {
     metaKey,
-    metaKeyRequestID
+    metaKeyRequestID,
   } = middlewareDefaultOpts;
   beforeEach(() => {
     reducer = createAsyncFlowReducer();
@@ -61,7 +61,7 @@ describe('reducer tests', () => {
 
   it('initial state, with any action works', () => {
     expect(reducer(undefined as any, {
-      type: 'MYACTION'
+      type: 'MYACTION',
     } as any))
       .toMatchSnapshot();
   });
@@ -71,16 +71,16 @@ describe('reducer tests', () => {
         const firstState = reducer(undefined as any, {
           type: `MYACTION${asyncSuffix}`,
           [metaKey]: {
-            [metaKeyRequestID]: 'hello'
-          }
+            [metaKeyRequestID]: 'hello',
+          },
         } as any);
         expect(firstState)
           .toMatchSnapshot();
         expect(reducer(firstState, {
           type: `MYACTION${asyncSuffix}`,
           [metaKey]: {
-            [metaKeyRequestID]: 'hello2'
-          }
+            [metaKeyRequestID]: 'hello2',
+          },
         } as any))
           .toMatchSnapshot();
       });

@@ -1,5 +1,6 @@
 /* tslint:disable: no-unnecessary-local-variable */
 /* tslint:disable: max-func-body-length */
+/* tslint:disable: max-line-length */
 /**
  * Detects action types with names ending with REQUEST, REJECTED, FULFILLED, ABORTED
  * Will dispatch PENDING if REQUEST
@@ -7,27 +8,27 @@
  * REJECT when REJECTED or ABORTED
  * END after FULFILLED/REJECTED/ABORTED
  */
-import { Middleware, Dispatch } from 'redux';
-import { Action } from 'redux-actions';
 import * as Bluebird from 'bluebird';
-import { newDate } from './date';
-import { defaultOpts } from './default-options';
-import {
-  RequestStore,
-  IRequestMap,
-  REQUEST_KEY_PROMISE,
-  REQUEST_KEY_RESOLVEFN,
-  REQUEST_KEY_REJECTFN
-} from '../request-store';
+import { Dispatch, Middleware } from 'redux';
+import { Action } from 'redux-actions';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import {
   getAsyncTypeConstants,
   replaceSuffix,
-  TDefaultTypesOptional
+  TDefaultTypesOptional,
 } from '../async-types';
 import { createPromise } from '../promise-factory';
+import {
+  IRequestMap,
+  REQUEST_KEY_PROMISE,
+  REQUEST_KEY_REJECTFN,
+  REQUEST_KEY_RESOLVEFN,
+  RequestStore,
+} from '../request-store';
+import { newDate } from './date';
+import { defaultOpts } from './default-options';
 import { createObservers } from './middleware-observers';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
 import merge = require('lodash.merge');
 import lSet = require('lodash.set');
 import lGet = require('lodash.get');
@@ -97,7 +98,7 @@ export interface ICreateAsyncFlowMiddlewareBaseOpts {
 export type TCreateAsyncFlowMiddlewareOpts<TAction> = ICreateAsyncFlowMiddlewareBaseOpts & TDefaultOptsOptional<TAction>;
 export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<any>>(opts: TCreateAsyncFlowMiddlewareOpts<TAction> = {
   metaKey: defaultOpts.metaKey,
-  timeout: defaultOpts.timeout
+  timeout: defaultOpts.timeout,
 }) => {
   const {
     REQUEST,
@@ -105,24 +106,24 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
     FULFILLED,
     REJECTED,
     ABORTED,
-    END
+    END,
   } = getAsyncTypeConstants({ types: opts.asyncTypes });
 
   const mwObservers = createObservers({
     asyncTypes: {
       REQUEST,
-      END
-    }
+      END,
+    },
   });
 
   const {
     metaKey,
     timeout,
     metaKeyRequestID,
-    generateId: generateIdMerged
+    generateId: generateIdMerged,
   }: IDefaultOpts<TAction> = {
       ...defaultOpts,
-      ...opts
+      ...opts,
     };
   const generateId = generateIdMerged || getGenerateId();
 
@@ -172,13 +173,13 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
               requestStore.reject(requestID, payloadArg || action.payload);
             }
             const actionEnd = merge({}, action, {
-              type: replaceSuffix(actionType, suffixType, END),
               meta: {
                 [metaKey]: {
                   endActionType: actionType,
-                  timeEnd: newDate()
-                }
-              }
+                  timeEnd: newDate(),
+                },
+              },
+              type: replaceSuffix(actionType, suffixType, END),
             });
 
             dispatchAsyncFlow(actionEnd as any);
@@ -217,7 +218,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
           const {
             promise,
             reject,
-            resolve
+            resolve,
           } = createPromise<any>();
           promise
             .timeout(timeoutRequest, 'timeout')
@@ -233,7 +234,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
           const tmpRequestStoreAddPayload: IRequestMap<any> = {
             [REQUEST_KEY_PROMISE]: promise,
             [REQUEST_KEY_RESOLVEFN]: resolve,
-            [REQUEST_KEY_REJECTFN]: reject
+            [REQUEST_KEY_REJECTFN]: reject,
           } as any;
           // Register promise to requestStore
           requestStore.add(requestID, tmpRequestStoreAddPayload);
@@ -243,22 +244,22 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
           const addedActionMetaData = {
             meta: {
               [metaKey]: {
+                endActionType: null,
+                promise,
+                timeEnd: null,
+                timeStart: newDate(),
                 timeout,
                 timeoutRequest,
-                promise,
-                endActionType: null,
-                timeStart: newDate(),
-                timeEnd: null
-              } as IAsyncFlowActionMeta<any>
-            }
+              } as IAsyncFlowActionMeta<any>,
+            },
           };
           const pendingAction: IAsyncFlowAction<any> = merge(
             {},
             actionClone,
             {
-              type: replaceSuffix(actionType, REQUEST, PENDING)
+              type: replaceSuffix(actionType, REQUEST, PENDING),
             },
-            addedActionMetaData
+            addedActionMetaData,
           ) as any;
           dispatchAsyncFlow(pendingAction);
 
@@ -288,16 +289,16 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
     middleware,
     // Do not expose rootSubject
     observers: {
-      before: {
-        obsOnAll: mwObservers.before.obsOnAll,
-        obsOnRequest: mwObservers.before.obsOnRequest,
-        obsOnEnd: mwObservers.before.obsOnEnd
-      },
       after: {
         obsOnAll: mwObservers.after.obsOnAll,
+        obsOnEnd: mwObservers.after.obsOnEnd,
         obsOnRequest: mwObservers.after.obsOnRequest,
-        obsOnEnd: mwObservers.after.obsOnEnd
-      }
-    }
+      },
+      before: {
+        obsOnAll: mwObservers.before.obsOnAll,
+        obsOnEnd: mwObservers.before.obsOnEnd,
+        obsOnRequest: mwObservers.before.obsOnRequest,
+      },
+    },
   };
 };

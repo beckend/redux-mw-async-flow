@@ -4,14 +4,14 @@
  * Intercept action types of all the defaultTypes and set state
  */
 import lGet = require('lodash.get');
+import { ActionMeta, ReducerMeta } from 'redux-actions';
+import {
+  getAsyncTypeConstants,
+  replaceSuffix,
+  TDefaultTypesOptional,
+} from '../async-types';
 import { TRequestId } from '../middleware/create-middleware';
 import { defaultOpts as middlewareDefaultOpts } from '../middleware/default-options';
-import {
-  TDefaultTypesOptional,
-  getAsyncTypeConstants,
-  replaceSuffix
-} from '../async-types';
-import { ReducerMeta, ActionMeta } from 'redux-actions';
 
 export interface IActionsByActionType {
   [actionType: string]: IActionsByActionId;
@@ -26,7 +26,8 @@ export interface IRequestCounters {
 export interface IState {
   counters: IRequestCounters;
   /**
-   * One latest single action by action type as key, useful to see if the type of action is currently pending or something
+   * One latest single action by action type as key
+   * useful to see if the type of action is currently pending or something
    * Keys sorted by REQUEST suffix
    */
   latestActions: IActionsByActionId;
@@ -46,7 +47,7 @@ export interface ICreateAsyncFlowReducerOpts {
 export type TCreateAsyncFlowReducerOpts = ICreateAsyncFlowReducerOpts & IDefaultOpts;
 export const createAsyncFlowReducer = (opts: TCreateAsyncFlowReducerOpts = {
   metaKey: middlewareDefaultOpts.metaKey,
-  metaKeyRequestID: middlewareDefaultOpts.metaKeyRequestID
+  metaKeyRequestID: middlewareDefaultOpts.metaKeyRequestID,
 }) => {
   const {
     REQUEST,
@@ -54,15 +55,15 @@ export const createAsyncFlowReducer = (opts: TCreateAsyncFlowReducerOpts = {
     FULFILLED,
     REJECTED,
     ABORTED,
-    END
+    END,
   } = getAsyncTypeConstants({ types: opts.asyncTypes });
 
   const {
     metaKey,
-    metaKeyRequestID
+    metaKeyRequestID,
   }: IDefaultOpts = {
       ...middlewareDefaultOpts,
-      ...opts
+      ...opts,
     };
 
   const initialState: IState = {
@@ -78,9 +79,9 @@ export const createAsyncFlowReducer = (opts: TCreateAsyncFlowReducerOpts = {
       // Total aborted
       [ABORTED]: 0,
       // Total ended
-      [END]: 0
+      [END]: 0,
     },
-    latestActions: {}
+    latestActions: {},
   };
 
   // used to get deep in action object
@@ -94,12 +95,12 @@ export const createAsyncFlowReducer = (opts: TCreateAsyncFlowReducerOpts = {
       return {
         counters: {
           ...state.counters,
-          [actionSuffix]: state.counters[actionSuffix] + 1
+          [actionSuffix]: state.counters[actionSuffix] + 1,
         },
         latestActions: {
           ...state.latestActions,
-          [actionTypeKey]: action
-        }
+          [actionTypeKey]: action,
+        },
       } as IState;
     }
     return state;
@@ -112,12 +113,12 @@ export const createAsyncFlowReducer = (opts: TCreateAsyncFlowReducerOpts = {
       return {
         counters: {
           ...state.counters,
-          [PENDING]: state.counters[PENDING] + 1
+          [PENDING]: state.counters[PENDING] + 1,
         },
         latestActions: {
           ...state.latestActions,
-          [actionTypeKey]: action
-        }
+          [actionTypeKey]: action,
+        },
       } as IState;
     } else if (action.type.endsWith(REQUEST)) {
       return handleCommonAsyncActions(state, action, REQUEST);

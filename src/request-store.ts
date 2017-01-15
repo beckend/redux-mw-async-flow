@@ -3,7 +3,7 @@
  * Store promise, resolve, reject outside of action
  */
 import * as Bluebird from 'bluebird';
-import { TResolveFn, TRejectFn } from './promise-factory';
+import { TRejectFn, TResolveFn } from './promise-factory';
 import lGet = require('lodash.get');
 
 export const REQUEST_KEY_PROMISE = 'promise';

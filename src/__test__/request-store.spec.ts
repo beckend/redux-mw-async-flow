@@ -1,6 +1,6 @@
 /* tslint:disable: no-backbone-get-set-outside-model */
-import { RequestStore } from '../request-store';
 import { createPromise } from '../promise-factory';
+import { RequestStore } from '../request-store';
 
 describe('RequestStore', () => {
   let requestStore: RequestStore;

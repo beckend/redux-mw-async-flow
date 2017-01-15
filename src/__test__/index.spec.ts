@@ -1,7 +1,7 @@
 /* tslint:disable: chai-vague-errors */
 import {
   createAsyncFlowMiddleware,
-  createAsyncFlowReducer
+  createAsyncFlowReducer,
 } from '../index';
 
 describe('index exports', () => {
