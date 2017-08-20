@@ -130,12 +130,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends ActionMet
     return (next: Dispatch<TStoreState>) => {
       return (action: any) => {
         const dispatchNormal = () => next(action);
-        const dispatchAsyncFlow = (actionArg: IAsyncFlowAction<any>) => {
-          // Lets observers have a go before and after dispatches
-          mwObservers.before.rootSubject.next(actionArg);
-          const dispatchResult = next(actionArg);
-          mwObservers.after.rootSubject.next(dispatchResult);
-        };
+
         const actionType = action.type;
         /**
          * If meta.asyncFlow.enable is explicit set to false, completely skip this middleware.
@@ -144,11 +139,20 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends ActionMet
           return dispatchNormal();
         }
 
+        const dispatchAsyncFlow = (actionArg: IAsyncFlowAction<any>) => {
+          // Lets observers have a go before and after dispatches
+          mwObservers.before.rootSubject.next(actionArg);
+          const dispatchResult = next(actionArg);
+          mwObservers.after.rootSubject.next(dispatchResult);
+
+          return dispatchResult;
+        };
+
         // used to get deep in action object
         const metaRequestIdPath = ['meta', metaKey, metaKeyRequestID];
         const metaPromisePath = ['meta', metaKey, 'promise'];
         // Resolve, reject and then set dispatch END payload
-        const handleEndAction = (suffixType: string, resolve: boolean, payloadArg?: any) => {
+        const handleEndAction = (suffixType: string, resolve: boolean) => {
           /**
            * First dispatch the original action
            */
@@ -157,15 +161,17 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends ActionMet
           // Normal dispatch and opt out if not a asyncflow action
           if (!requestID || !theAsyncFlowPromise) {
             return dispatchNormal();
-          } else {
-            // Can dispatch as async flow action
-            dispatchAsyncFlow(action as any);
           }
+
+          // Can dispatch as async flow action
+          const dispatchResult = dispatchAsyncFlow(action as any);
+
+          // Dispatch end if a valid async flow action
           if (requestID) {
             if (resolve) {
-              requestStore.resolve(requestID, payloadArg || action.payload);
+              requestStore.resolve(requestID, action.payload);
             } else {
-              requestStore.reject(requestID, payloadArg || action.payload);
+              requestStore.reject(requestID, action.payload);
             }
             const actionEnd = merge({}, action, {
               meta: {
@@ -182,6 +188,8 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends ActionMet
             // tslint:disable-next-line: no-console
             console.warn(`${action.type} - meta data not found, did you forget to send it?`);
           }
+
+          return dispatchResult;
         };
         /**
          * handle REQUEST, dispatches PENDING then dispatches REQUEST with meta data
@@ -260,17 +268,16 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends ActionMet
           dispatchAsyncFlow(pendingAction);
 
           /**
-           * Dispatch orginal action with meta data
+           * Dispatch and return orginal action with meta data
            */
           const newAction: IAsyncFlowAction<any> = merge({}, actionClone, addedActionMetaData) as any;
-          dispatchAsyncFlow(newAction);
-          return;
+          return dispatchAsyncFlow(newAction);
         } else if (actionType.endsWith(FULFILLED)) {
-          handleEndAction(FULFILLED, true);
+          return handleEndAction(FULFILLED, true);
         } else if (actionType.endsWith(REJECTED)) {
-          handleEndAction(REJECTED, false);
+          return handleEndAction(REJECTED, false);
         } else if (actionType.endsWith(ABORTED)) {
-          handleEndAction(ABORTED, false);
+          return handleEndAction(ABORTED, false);
         } else {
           /**
            * Normal dispatch when unmatched by suffixes

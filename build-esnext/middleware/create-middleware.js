@@ -40,12 +40,6 @@ exports.createAsyncFlowMiddleware = (opts = {
         return (next) => {
             return (action) => {
                 const dispatchNormal = () => next(action);
-                const dispatchAsyncFlow = (actionArg) => {
-                    // Lets observers have a go before and after dispatches
-                    mwObservers.before.rootSubject.next(actionArg);
-                    const dispatchResult = next(actionArg);
-                    mwObservers.after.rootSubject.next(dispatchResult);
-                };
                 const actionType = action.type;
                 /**
                  * If meta.asyncFlow.enable is explicit set to false, completely skip this middleware.
@@ -53,11 +47,18 @@ exports.createAsyncFlowMiddleware = (opts = {
                 if (!actionType || lGet(action, ['meta', metaKey, 'enable']) === false) {
                     return dispatchNormal();
                 }
+                const dispatchAsyncFlow = (actionArg) => {
+                    // Lets observers have a go before and after dispatches
+                    mwObservers.before.rootSubject.next(actionArg);
+                    const dispatchResult = next(actionArg);
+                    mwObservers.after.rootSubject.next(dispatchResult);
+                    return dispatchResult;
+                };
                 // used to get deep in action object
                 const metaRequestIdPath = ['meta', metaKey, metaKeyRequestID];
                 const metaPromisePath = ['meta', metaKey, 'promise'];
                 // Resolve, reject and then set dispatch END payload
-                const handleEndAction = (suffixType, resolve, payloadArg) => {
+                const handleEndAction = (suffixType, resolve) => {
                     /**
                      * First dispatch the original action
                      */
@@ -67,16 +68,15 @@ exports.createAsyncFlowMiddleware = (opts = {
                     if (!requestID || !theAsyncFlowPromise) {
                         return dispatchNormal();
                     }
-                    else {
-                        // Can dispatch as async flow action
-                        dispatchAsyncFlow(action);
-                    }
+                    // Can dispatch as async flow action
+                    const dispatchResult = dispatchAsyncFlow(action);
+                    // Dispatch end if a valid async flow action
                     if (requestID) {
                         if (resolve) {
-                            requestStore.resolve(requestID, payloadArg || action.payload);
+                            requestStore.resolve(requestID, action.payload);
                         }
                         else {
-                            requestStore.reject(requestID, payloadArg || action.payload);
+                            requestStore.reject(requestID, action.payload);
                         }
                         const actionEnd = merge({}, action, {
                             meta: {
@@ -93,6 +93,7 @@ exports.createAsyncFlowMiddleware = (opts = {
                         // tslint:disable-next-line: no-console
                         console.warn(`${action.type} - meta data not found, did you forget to send it?`);
                     }
+                    return dispatchResult;
                 };
                 /**
                  * handle REQUEST, dispatches PENDING then dispatches REQUEST with meta data
@@ -158,20 +159,19 @@ exports.createAsyncFlowMiddleware = (opts = {
                     }, addedActionMetaData);
                     dispatchAsyncFlow(pendingAction);
                     /**
-                     * Dispatch orginal action with meta data
+                     * Dispatch and return orginal action with meta data
                      */
                     const newAction = merge({}, actionClone, addedActionMetaData);
-                    dispatchAsyncFlow(newAction);
-                    return;
+                    return dispatchAsyncFlow(newAction);
                 }
                 else if (actionType.endsWith(FULFILLED)) {
-                    handleEndAction(FULFILLED, true);
+                    return handleEndAction(FULFILLED, true);
                 }
                 else if (actionType.endsWith(REJECTED)) {
-                    handleEndAction(REJECTED, false);
+                    return handleEndAction(REJECTED, false);
                 }
                 else if (actionType.endsWith(ABORTED)) {
-                    handleEndAction(ABORTED, false);
+                    return handleEndAction(ABORTED, false);
                 }
                 else {
                     /**
