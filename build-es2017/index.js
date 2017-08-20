@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 require("tslib");
 var create_middleware_1 = require("./middleware/create-middleware");
 exports.createAsyncFlowMiddleware = create_middleware_1.createAsyncFlowMiddleware;

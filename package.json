@@ -30,7 +30,6 @@
     "transform": {
       "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
-    "testResultsProcessor": "<rootDir>/node_modules/ts-jest/coverageprocessor.js",
     "testRegex": "(/__tests__/.*|\\.(spec))\\.(ts|tsx)$",
     "collectCoverage": false,
     "coverageDirectory": "./coverage",
@@ -54,10 +53,12 @@
       "js",
       "json"
     ],
-    "testEnvironment": "node",
     "globals": {
-      "__TS_CONFIG__": "./src/tsconfig-test.json"
-    }
+      "ts-jest": {
+        "tsConfigFile": "./src/tsconfig-test.json"
+      }
+    },
+    "mapCoverage": true
   },
   "keywords": [
     "typescript",
@@ -74,56 +75,58 @@
   "author": "Linken Dinh",
   "license": "ISC",
   "devDependencies": {
-    "@types/bluebird": "^3.0.37",
-    "@types/debug": "0.0.29",
-    "@types/fs-extra": "^0.0.37",
-    "@types/gulp": "^3.8.32",
-    "@types/gulp-debug": "^2.0.29",
-    "@types/jest": "^16.0.3",
-    "@types/lodash": "^4.14.48",
-    "@types/lodash.clonedeep": "^4.5.0",
-    "@types/lodash.get": "^4.4.0",
-    "@types/lodash.merge": "^4.6.0",
-    "@types/lodash.set": "^4.3.0",
-    "@types/react": "^15.0.0",
-    "@types/react-dom": "^0.14.19",
-    "@types/redux-actions": "^1.2.2",
-    "@types/redux-mock-store": "^0.0.7",
+    "@types/bluebird": "^3.5.8",
+    "@types/debug": "^0.0.30",
+    "@types/fs-extra": "^4.0.0",
+    "@types/globby": "^0.6.0",
+    "@types/gulp": "^4.0.4",
+    "@types/gulp-debug": "^2.0.30",
+    "@types/jest": "^20.0.7",
+    "@types/lodash": "^4.14.73",
+    "@types/lodash.clonedeep": "^4.5.3",
+    "@types/lodash.get": "^4.4.3",
+    "@types/lodash.merge": "^4.6.3",
+    "@types/lodash.set": "^4.3.3",
+    "@types/react": "^16.0.2",
+    "@types/react-dom": "^15.5.3",
+    "@types/redux-actions": "^1.2.8",
+    "@types/redux-mock-store": "^0.0.10",
     "cmd-spawn": "^1.4.0",
-    "coveralls": "^2.11.15",
-    "debug": "2.6.0",
-    "fs-extra": "^1.0.0",
+    "coveralls": "^2.13.1",
+    "debug": "^3.0.0",
+    "fs-extra": "^4.0.1",
     "globby": "^6.1.0",
-    "google-closure-compiler-js": "^20161201.0.0",
+    "google-closure-compiler-js": "^20170806.0.0",
     "gulp": "gulpjs/gulp.git#4.0",
-    "gulp-debug": "^3.0.0",
+    "gulp-debug": "^3.1.0",
     "gulp-run": "^1.7.1",
     "gulp-sourcemap": "^1.0.1",
-    "gulp-tslint": "^7.0.1",
-    "jest": "18.1.0",
-    "redux": "^3.6.0",
-    "redux-actions": "^1.2.0",
-    "redux-mock-store": "^1.2.1",
-    "ts-jest": "18.0.1",
-    "ts-node": "2.0.0",
-    "tslint": "^4.3.1",
-    "tslint-react": "^2.3.0",
-    "tslint-stylish": "^2.1.0-beta",
-    "typescript": "^2.1.5"
+    "gulp-tslint": "^8.1.2",
+    "jest": "^20.0.4",
+    "redux": "^3.7.2",
+    "redux-actions": "^2.2.1",
+    "redux-mock-store": "^1.2.3",
+    "ts-jest": "^20.0.10",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.6.0",
+    "tslint-react": "^3.2.0",
+    "tslint-stylish": "^2.1.0",
+    "typescript": "^2.4.2"
   },
   "peerDependencies": {
     "redux": "3.*"
   },
   "dependencies": {
-    "bluebird": "3.4.7",
+    "bluebird": "^3.5.0",
+    "lodash.clonedeep": "^4.5.0",
     "lodash.get": "^4.4.2",
     "lodash.merge": "^4.6.0",
     "lodash.set": "^4.3.2",
-    "rxjs": "^5.0.3",
-    "tslib": "^1.5.0",
+    "rxjs": "^5.4.3",
+    "tslib": "^1.7.1",
     "uniqueid": "^1.0.0"
   },
   "engines": {
-    "node": ">=7.0.0"
+    "node": ">=8.0.0"
   }
 }

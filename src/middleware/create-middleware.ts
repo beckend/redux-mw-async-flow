@@ -1,6 +1,3 @@
-/* tslint:disable: no-unnecessary-local-variable */
-/* tslint:disable: max-func-body-length */
-/* tslint:disable: max-line-length */
 /**
  * Detects action types with names ending with REQUEST, REJECTED, FULFILLED, ABORTED
  * Will dispatch PENDING if REQUEST
@@ -9,8 +6,12 @@
  * END after FULFILLED/REJECTED/ABORTED
  */
 import * as Bluebird from 'bluebird';
+import cloneDeep = require('lodash.clonedeep');
+import lGet = require('lodash.get');
+import merge = require('lodash.merge');
+import lSet = require('lodash.set');
 import { Dispatch, Middleware } from 'redux';
-import { Action } from 'redux-actions';
+import { ActionMeta } from 'redux-actions';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import {
@@ -29,10 +30,6 @@ import {
 import { newDate } from './date';
 import { defaultOpts } from './default-options';
 import { createObservers } from './middleware-observers';
-import merge = require('lodash.merge');
-import lSet = require('lodash.set');
-import lGet = require('lodash.get');
-import cloneDeep = require('lodash.clonedeep');
 export { Observable, Subject };
 
 const uniqueid = require('uniqueid');
@@ -59,20 +56,18 @@ export type TAsyncFlowActionMetaOptional<TActionPayload> = {
   readonly[P in keyof IAsyncFlowActionMeta<TActionPayload>]?: IAsyncFlowActionMeta<TActionPayload>[P];
 };
 // Can only apply to default metaKey
-export interface IAsyncFlowActionOptional<TActionPayload> extends Action<TActionPayload> {
+export interface IAsyncFlowActionOptional<TActionPayload> extends ActionMeta<TActionPayload, any> {
   meta: {
     asyncFlow: TAsyncFlowActionMetaOptional<TActionPayload>;
   };
 }
 // Action dispatched with meta added by middleware
-export interface IAsyncFlowAction<TActionPayload> extends Action<TActionPayload> {
+export interface IAsyncFlowAction<TActionPayload> extends ActionMeta<TActionPayload, any> {
   meta: {
     asyncFlow: IAsyncFlowActionMeta<TActionPayload>;
   };
 }
-export interface IGenerateIdFn<TAction> {
-  (opts: { action: TAction }): string;
-}
+export type IGenerateIdFn<TAction> = (opts: { action: TAction }) => string;
 export interface IDefaultOpts<TAction> {
   // main key under meta
   readonly metaKey: string;
@@ -85,7 +80,7 @@ export interface IDefaultOpts<TAction> {
 }
 const getGenerateId = () => {
   const asyncUniqueId = uniqueid(null, '-@@ASYNC_FLOW');
-  return ({ action }: { action: Action<any> }) => `${asyncUniqueId()}--${action.type}`;
+  return ({ action }: { action: ActionMeta<any, any> }) => `${asyncUniqueId()}--${action.type}`;
 };
 export type TRequestId = string;
 export type TDefaultOptsOptional<TAction> = {
@@ -95,8 +90,10 @@ export interface ICreateAsyncFlowMiddlewareBaseOpts {
   // async constants
   asyncTypes?: TDefaultTypesOptional;
 }
-export type TCreateAsyncFlowMiddlewareOpts<TAction> = ICreateAsyncFlowMiddlewareBaseOpts & TDefaultOptsOptional<TAction>;
-export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<any>>(opts: TCreateAsyncFlowMiddlewareOpts<TAction> = {
+export type TCreateAsyncFlowMiddlewareOpts<TAction> =
+  ICreateAsyncFlowMiddlewareBaseOpts & TDefaultOptsOptional<TAction>;
+export const createAsyncFlowMiddleware = <TStoreState, TAction extends ActionMeta<any, any>>
+(opts: TCreateAsyncFlowMiddlewareOpts<TAction> = {
   metaKey: defaultOpts.metaKey,
   timeout: defaultOpts.timeout,
 }) => {
@@ -111,27 +108,27 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
 
   const mwObservers = createObservers({
     asyncTypes: {
-      REQUEST,
       END,
+      REQUEST,
     },
   });
 
   const {
-    metaKey,
-    timeout,
-    metaKeyRequestID,
     generateId: generateIdMerged,
+    metaKey,
+    metaKeyRequestID,
+    timeout,
   }: IDefaultOpts<TAction> = {
-      ...defaultOpts,
-      ...opts,
-    };
+    ...defaultOpts,
+    ...opts,
+  } as any;
   const generateId = generateIdMerged || getGenerateId();
 
   const requestStore = new RequestStore();
 
   const middleware: Middleware = () => {
     return (next: Dispatch<TStoreState>) => {
-      return (action: TAction) => {
+      return (action: any) => {
         const dispatchNormal = () => next(action);
         const dispatchAsyncFlow = (actionArg: IAsyncFlowAction<any>) => {
           // Lets observers have a go before and after dispatches
@@ -144,8 +141,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
          * If meta.asyncFlow.enable is explicit set to false, completely skip this middleware.
          */
         if (!actionType || lGet<boolean>(action, ['meta', metaKey, 'enable']) === false) {
-          dispatchNormal();
-          return;
+          return dispatchNormal();
         }
 
         // used to get deep in action object
@@ -160,8 +156,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
           const theAsyncFlowPromise = lGet<Bluebird<any>>(action, metaPromisePath);
           // Normal dispatch and opt out if not a asyncflow action
           if (!requestID || !theAsyncFlowPromise) {
-            dispatchNormal();
-            return;
+            return dispatchNormal();
           } else {
             // Can dispatch as async flow action
             dispatchAsyncFlow(action as any);
@@ -184,6 +179,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
 
             dispatchAsyncFlow(actionEnd as any);
           } else {
+            // tslint:disable-next-line: no-console
             console.warn(`${action.type} - meta data not found, did you forget to send it?`);
           }
         };
@@ -259,7 +255,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
             {
               type: replaceSuffix(actionType, REQUEST, PENDING),
             },
-            addedActionMetaData,
+            addedActionMetaData
           ) as any;
           dispatchAsyncFlow(pendingAction);
 
@@ -279,7 +275,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends Action<an
           /**
            * Normal dispatch when unmatched by suffixes
            */
-          dispatchNormal();
+          return dispatchNormal();
         }
       };
     };

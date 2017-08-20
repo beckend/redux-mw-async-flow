@@ -27,19 +27,19 @@ export const createObservers = ({ asyncTypes }: ICreateObserversArgs) => {
     // filter by requests
     const obsOnRequest = obsOnAll
       .__invoke<Observable<IAsyncFlowAction<any>>>(
-        filter, (action: IAsyncFlowAction<any>) => action.type.endsWith(asyncTypes.REQUEST),
+        filter, (action: IAsyncFlowAction<any>) => action.type.endsWith(asyncTypes.REQUEST)
       );
 
     const obsOnEnd = obsOnAll
       .__invoke<Observable<IAsyncFlowAction<any>>>(
-        filter, (action: IAsyncFlowAction<any>) => action.type.endsWith(asyncTypes.END),
+        filter, (action: IAsyncFlowAction<any>) => action.type.endsWith(asyncTypes.END)
       );
 
     return {
-      rootSubject,
       obsOnAll,
-      obsOnRequest,
       obsOnEnd,
+      obsOnRequest,
+      rootSubject,
     };
   };
 

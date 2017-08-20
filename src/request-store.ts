@@ -1,10 +1,9 @@
-/* tslint:disable: no-reserved-keywords */
 /**
  * Store promise, resolve, reject outside of action
  */
 import * as Bluebird from 'bluebird';
-import { TRejectFn, TResolveFn } from './promise-factory';
 import lGet = require('lodash.get');
+import { TRejectFn, TResolveFn } from './promise-factory';
 
 export const REQUEST_KEY_PROMISE = 'promise';
 export const REQUEST_KEY_RESOLVEFN = 'resolve';
@@ -38,6 +37,7 @@ export class RequestStore {
     if (promiseFn) {
       promiseFn(payload);
     } else {
+      // tslint:disable-next-line: no-console
       console.warn(`${keyName} - was not found in request store and was not resolved.`);
     }
   }
@@ -47,6 +47,7 @@ export class RequestStore {
     if (promiseFn) {
       promiseFn(payload);
     } else {
+      // tslint:disable-next-line: no-console
       console.warn(`${keyName} - was not found in request store and was not rejected.`);
     }
   }

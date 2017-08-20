@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /* tslint:disable: no-invalid-this */
 /* tslint:disable: function-name */
 /**

@@ -1,10 +1,6 @@
-/* tslint:disable: chai-vague-errors */
-/* tslint:disable: max-line-length */
-/* tslint:disable: no-increment-decrement */
-/* tslint:disable: max-func-body-length */
 import * as Bluebird from 'bluebird';
 import { Action, ActionMeta } from 'redux-actions';
-import configureStore, { IStore } from 'redux-mock-store';
+import configureStore, { MockStore } from 'redux-mock-store';
 import { getAsyncTypeConstants } from '../../async-types';
 import { createPromise } from '../../promise-factory';
 import {
@@ -17,6 +13,7 @@ import { defaultOpts } from '../default-options';
 
 jest.mock('../date');
 
+// tslint:disable-next-line: max-line-length
 const { createAsyncFlowMiddleware }: { createAsyncFlowMiddleware: typeof createAsyncFlowMiddlewareFn } = require('../create-middleware');
 
 const {
@@ -32,6 +29,8 @@ interface ICreateMockStoreOpts<TAction> {
   initialState?: any;
   asyncFlowOpts?: TCreateAsyncFlowMiddlewareOpts<TAction>;
 }
+
+// tslint:disable-next-line: max-line-length
 const createMockStore = <TStoreState, TAction extends Action<any>>({ initialState, asyncFlowOpts }: ICreateMockStoreOpts<TAction> = {
   initialState: {},
 }) => {
@@ -47,7 +46,7 @@ const createMockStore = <TStoreState, TAction extends Action<any>>({ initialStat
 };
 
 describe('Middleware', () => {
-  let mockStore: IStore<any>;
+  let mockStore: MockStore<any>;
   beforeEach(() => {
     mockStore = createMockStore().mockStore;
   });

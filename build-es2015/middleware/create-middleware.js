@@ -1,5 +1,9 @@
 "use strict";
-const tslib_1 = require("tslib");
+Object.defineProperty(exports, "__esModule", { value: true });
+const cloneDeep = require("lodash.clonedeep");
+const lGet = require("lodash.get");
+const merge = require("lodash.merge");
+const lSet = require("lodash.set");
 const Observable_1 = require("rxjs/Observable");
 exports.Observable = Observable_1.Observable;
 const Subject_1 = require("rxjs/Subject");
@@ -10,10 +14,6 @@ const request_store_1 = require("../request-store");
 const date_1 = require("./date");
 const default_options_1 = require("./default-options");
 const middleware_observers_1 = require("./middleware-observers");
-const merge = require("lodash.merge");
-const lSet = require("lodash.set");
-const lGet = require("lodash.get");
-const cloneDeep = require("lodash.clonedeep");
 const uniqueid = require('uniqueid');
 const getGenerateId = () => {
     const asyncUniqueId = uniqueid(null, '-@@ASYNC_FLOW');
@@ -26,11 +26,11 @@ exports.createAsyncFlowMiddleware = (opts = {
     const { REQUEST, PENDING, FULFILLED, REJECTED, ABORTED, END, } = async_types_1.getAsyncTypeConstants({ types: opts.asyncTypes });
     const mwObservers = middleware_observers_1.createObservers({
         asyncTypes: {
-            REQUEST,
             END,
+            REQUEST,
         },
     });
-    const { metaKey, timeout, metaKeyRequestID, generateId: generateIdMerged, } = tslib_1.__assign({}, default_options_1.defaultOpts, opts);
+    const { generateId: generateIdMerged, metaKey, metaKeyRequestID, timeout, } = Object.assign({}, default_options_1.defaultOpts, opts);
     const generateId = generateIdMerged || getGenerateId();
     const requestStore = new request_store_1.RequestStore();
     const middleware = () => {
@@ -48,8 +48,7 @@ exports.createAsyncFlowMiddleware = (opts = {
                  * If meta.asyncFlow.enable is explicit set to false, completely skip this middleware.
                  */
                 if (!actionType || lGet(action, ['meta', metaKey, 'enable']) === false) {
-                    dispatchNormal();
-                    return;
+                    return dispatchNormal();
                 }
                 // used to get deep in action object
                 const metaRequestIdPath = ['meta', metaKey, metaKeyRequestID];
@@ -63,8 +62,7 @@ exports.createAsyncFlowMiddleware = (opts = {
                     const theAsyncFlowPromise = lGet(action, metaPromisePath);
                     // Normal dispatch and opt out if not a asyncflow action
                     if (!requestID || !theAsyncFlowPromise) {
-                        dispatchNormal();
-                        return;
+                        return dispatchNormal();
                     }
                     else {
                         // Can dispatch as async flow action
@@ -89,6 +87,7 @@ exports.createAsyncFlowMiddleware = (opts = {
                         dispatchAsyncFlow(actionEnd);
                     }
                     else {
+                        // tslint:disable-next-line: no-console
                         console.warn(`${action.type} - meta data not found, did you forget to send it?`);
                     }
                 };
@@ -175,7 +174,7 @@ exports.createAsyncFlowMiddleware = (opts = {
                     /**
                      * Normal dispatch when unmatched by suffixes
                      */
-                    dispatchNormal();
+                    return dispatchNormal();
                 }
             };
         };

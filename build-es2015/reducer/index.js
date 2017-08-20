@@ -1,7 +1,5 @@
 "use strict";
-const tslib_1 = require("tslib");
-/* tslint:disable: no-unnecessary-local-variable */
-/* tslint:disable: max-func-body-length */
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Intercept action types of all the defaultTypes and set state
  */
@@ -13,7 +11,7 @@ exports.createAsyncFlowReducer = (opts = {
         metaKeyRequestID: default_options_1.defaultOpts.metaKeyRequestID,
     }) => {
     const { REQUEST, PENDING, FULFILLED, REJECTED, ABORTED, END, } = async_types_1.getAsyncTypeConstants({ types: opts.asyncTypes });
-    const { metaKey, metaKeyRequestID, } = tslib_1.__assign({}, default_options_1.defaultOpts, opts);
+    const { metaKey, metaKeyRequestID, } = Object.assign({}, default_options_1.defaultOpts, opts);
     const initialState = {
         counters: {
             // Total request passed through the reducer
@@ -39,8 +37,8 @@ exports.createAsyncFlowReducer = (opts = {
         const latestActionRequestId = lGet(state.latestActions[actionTypeKey], metaRequestIdPath);
         if (requestId === latestActionRequestId) {
             return {
-                counters: tslib_1.__assign({}, state.counters, { [actionSuffix]: state.counters[actionSuffix] + 1 }),
-                latestActions: tslib_1.__assign({}, state.latestActions, { [actionTypeKey]: action }),
+                counters: Object.assign({}, state.counters, { [actionSuffix]: state.counters[actionSuffix] + 1 }),
+                latestActions: Object.assign({}, state.latestActions, { [actionTypeKey]: action }),
             };
         }
         return state;
@@ -50,8 +48,8 @@ exports.createAsyncFlowReducer = (opts = {
         if (action.type.endsWith(PENDING)) {
             const actionTypeKey = async_types_1.replaceSuffix(action.type, PENDING, REQUEST);
             return {
-                counters: tslib_1.__assign({}, state.counters, { [PENDING]: state.counters[PENDING] + 1 }),
-                latestActions: tslib_1.__assign({}, state.latestActions, { [actionTypeKey]: action }),
+                counters: Object.assign({}, state.counters, { [PENDING]: state.counters[PENDING] + 1 }),
+                latestActions: Object.assign({}, state.latestActions, { [actionTypeKey]: action }),
             };
         }
         else if (action.type.endsWith(REQUEST)) {

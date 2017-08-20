@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const lGet = require("lodash.get");
 exports.REQUEST_KEY_PROMISE = 'promise';
 exports.REQUEST_KEY_RESOLVEFN = 'resolve';
@@ -22,6 +23,7 @@ class RequestStore {
             promiseFn(payload);
         }
         else {
+            // tslint:disable-next-line: no-console
             console.warn(`${keyName} - was not found in request store and was not resolved.`);
         }
     }
@@ -31,6 +33,7 @@ class RequestStore {
             promiseFn(payload);
         }
         else {
+            // tslint:disable-next-line: no-console
             console.warn(`${keyName} - was not found in request store and was not rejected.`);
         }
     }

@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Rxjs observers only triggered when the async action is matched/enabled
  */
@@ -20,10 +21,10 @@ exports.createObservers = function (_a) {
         var obsOnEnd = obsOnAll
             .__invoke(filter_1.filter, function (action) { return action.type.endsWith(asyncTypes.END); });
         return {
-            rootSubject: rootSubject,
             obsOnAll: obsOnAll,
-            obsOnRequest: obsOnRequest,
             obsOnEnd: obsOnEnd,
+            obsOnRequest: obsOnRequest,
+            rootSubject: rootSubject,
         };
     };
     return {

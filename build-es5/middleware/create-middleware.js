@@ -1,5 +1,10 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
+var cloneDeep = require("lodash.clonedeep");
+var lGet = require("lodash.get");
+var merge = require("lodash.merge");
+var lSet = require("lodash.set");
 var Observable_1 = require("rxjs/Observable");
 exports.Observable = Observable_1.Observable;
 var Subject_1 = require("rxjs/Subject");
@@ -10,10 +15,6 @@ var request_store_1 = require("../request-store");
 var date_1 = require("./date");
 var default_options_1 = require("./default-options");
 var middleware_observers_1 = require("./middleware-observers");
-var merge = require("lodash.merge");
-var lSet = require("lodash.set");
-var lGet = require("lodash.get");
-var cloneDeep = require("lodash.clonedeep");
 var uniqueid = require('uniqueid');
 var getGenerateId = function () {
     var asyncUniqueId = uniqueid(null, '-@@ASYNC_FLOW');
@@ -30,11 +31,11 @@ exports.createAsyncFlowMiddleware = function (opts) {
     var _a = async_types_1.getAsyncTypeConstants({ types: opts.asyncTypes }), REQUEST = _a.REQUEST, PENDING = _a.PENDING, FULFILLED = _a.FULFILLED, REJECTED = _a.REJECTED, ABORTED = _a.ABORTED, END = _a.END;
     var mwObservers = middleware_observers_1.createObservers({
         asyncTypes: {
-            REQUEST: REQUEST,
             END: END,
+            REQUEST: REQUEST,
         },
     });
-    var _b = tslib_1.__assign({}, default_options_1.defaultOpts, opts), metaKey = _b.metaKey, timeout = _b.timeout, metaKeyRequestID = _b.metaKeyRequestID, generateIdMerged = _b.generateId;
+    var _b = tslib_1.__assign({}, default_options_1.defaultOpts, opts), generateIdMerged = _b.generateId, metaKey = _b.metaKey, metaKeyRequestID = _b.metaKeyRequestID, timeout = _b.timeout;
     var generateId = generateIdMerged || getGenerateId();
     var requestStore = new request_store_1.RequestStore();
     var middleware = function () {
@@ -52,8 +53,7 @@ exports.createAsyncFlowMiddleware = function (opts) {
                  * If meta.asyncFlow.enable is explicit set to false, completely skip this middleware.
                  */
                 if (!actionType || lGet(action, ['meta', metaKey, 'enable']) === false) {
-                    dispatchNormal();
-                    return;
+                    return dispatchNormal();
                 }
                 // used to get deep in action object
                 var metaRequestIdPath = ['meta', metaKey, metaKeyRequestID];
@@ -67,8 +67,7 @@ exports.createAsyncFlowMiddleware = function (opts) {
                     var theAsyncFlowPromise = lGet(action, metaPromisePath);
                     // Normal dispatch and opt out if not a asyncflow action
                     if (!requestID || !theAsyncFlowPromise) {
-                        dispatchNormal();
-                        return;
+                        return dispatchNormal();
                     }
                     else {
                         // Can dispatch as async flow action
@@ -93,6 +92,7 @@ exports.createAsyncFlowMiddleware = function (opts) {
                         dispatchAsyncFlow(actionEnd);
                     }
                     else {
+                        // tslint:disable-next-line: no-console
                         console.warn(action.type + " - meta data not found, did you forget to send it?");
                     }
                     var _a;
@@ -180,7 +180,7 @@ exports.createAsyncFlowMiddleware = function (opts) {
                     /**
                      * Normal dispatch when unmatched by suffixes
                      */
-                    dispatchNormal();
+                    return dispatchNormal();
                 }
                 var _b, _c;
             };

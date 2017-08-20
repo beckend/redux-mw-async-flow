@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`async-types generateAsyncAction with defaults 1`] = `
 Object {
   "namespace/MYACTION_ABORTED": "namespace/MYACTION_ABORTED",

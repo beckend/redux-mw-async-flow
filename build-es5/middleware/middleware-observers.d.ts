@@ -15,15 +15,15 @@ export interface ICreateObserversArgs {
 }
 export declare const createObservers: ({asyncTypes}: ICreateObserversArgs) => {
     after: {
-        rootSubject: Subject<IAsyncFlowAction<any>>;
         obsOnAll: Observable<IAsyncFlowAction<any>>;
-        obsOnRequest: Observable<IAsyncFlowAction<any>>;
         obsOnEnd: Observable<IAsyncFlowAction<any>>;
+        obsOnRequest: Observable<IAsyncFlowAction<any>>;
+        rootSubject: Subject<IAsyncFlowAction<any>>;
     };
     before: {
-        rootSubject: Subject<IAsyncFlowAction<any>>;
         obsOnAll: Observable<IAsyncFlowAction<any>>;
-        obsOnRequest: Observable<IAsyncFlowAction<any>>;
         obsOnEnd: Observable<IAsyncFlowAction<any>>;
+        obsOnRequest: Observable<IAsyncFlowAction<any>>;
+        rootSubject: Subject<IAsyncFlowAction<any>>;
     };
 };

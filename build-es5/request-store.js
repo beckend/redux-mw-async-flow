@@ -1,9 +1,10 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var lGet = require("lodash.get");
 exports.REQUEST_KEY_PROMISE = 'promise';
 exports.REQUEST_KEY_RESOLVEFN = 'resolve';
 exports.REQUEST_KEY_REJECTFN = 'reject';
-var RequestStore = (function () {
+var RequestStore = /** @class */ (function () {
     function RequestStore() {
         this.store = {};
     }
@@ -22,6 +23,7 @@ var RequestStore = (function () {
             promiseFn(payload);
         }
         else {
+            // tslint:disable-next-line: no-console
             console.warn(keyName + " - was not found in request store and was not resolved.");
         }
     };
@@ -31,6 +33,7 @@ var RequestStore = (function () {
             promiseFn(payload);
         }
         else {
+            // tslint:disable-next-line: no-console
             console.warn(keyName + " - was not found in request store and was not rejected.");
         }
     };

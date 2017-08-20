@@ -1,5 +1,3 @@
-/* tslint:disable: no-unnecessary-local-variable */
-/* tslint:disable: max-func-body-length */
 /**
  * Intercept action types of all the defaultTypes and set state
  */
@@ -62,9 +60,9 @@ export const createAsyncFlowReducer = (opts: TCreateAsyncFlowReducerOpts = {
     metaKey,
     metaKeyRequestID,
   }: IDefaultOpts = {
-      ...middlewareDefaultOpts,
-      ...opts,
-    };
+    ...middlewareDefaultOpts,
+    ...opts,
+  } as any;
 
   const initialState: IState = {
     counters: {

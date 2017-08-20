@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`reducer creation can create with options and works 1`] = `
 Object {
   "counters": Object {

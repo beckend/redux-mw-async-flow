@@ -8,7 +8,7 @@
  */
 import * as Bluebird from 'bluebird';
 import { Middleware } from 'redux';
-import { Action } from 'redux-actions';
+import { ActionMeta } from 'redux-actions';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { TDefaultTypesOptional } from '../async-types';
@@ -25,21 +25,19 @@ export interface IAsyncFlowActionMeta<TPayload> {
 export declare type TAsyncFlowActionMetaOptional<TActionPayload> = {
     readonly [P in keyof IAsyncFlowActionMeta<TActionPayload>]?: IAsyncFlowActionMeta<TActionPayload>[P];
 };
-export interface IAsyncFlowActionOptional<TActionPayload> extends Action<TActionPayload> {
+export interface IAsyncFlowActionOptional<TActionPayload> extends ActionMeta<TActionPayload, any> {
     meta: {
         asyncFlow: TAsyncFlowActionMetaOptional<TActionPayload>;
     };
 }
-export interface IAsyncFlowAction<TActionPayload> extends Action<TActionPayload> {
+export interface IAsyncFlowAction<TActionPayload> extends ActionMeta<TActionPayload, any> {
     meta: {
         asyncFlow: IAsyncFlowActionMeta<TActionPayload>;
     };
 }
-export interface IGenerateIdFn<TAction> {
-    (opts: {
-        action: TAction;
-    }): string;
-}
+export declare type IGenerateIdFn<TAction> = (opts: {
+    action: TAction;
+}) => string;
 export interface IDefaultOpts<TAction> {
     readonly metaKey: string;
     readonly metaKeyRequestID: string;
@@ -54,7 +52,7 @@ export interface ICreateAsyncFlowMiddlewareBaseOpts {
     asyncTypes?: TDefaultTypesOptional;
 }
 export declare type TCreateAsyncFlowMiddlewareOpts<TAction> = ICreateAsyncFlowMiddlewareBaseOpts & TDefaultOptsOptional<TAction>;
-export declare const createAsyncFlowMiddleware: <TStoreState, TAction extends Action<any>>(opts?: TCreateAsyncFlowMiddlewareOpts<TAction>) => {
+export declare const createAsyncFlowMiddleware: <TStoreState, TAction extends ActionMeta<any, any>>(opts?: TCreateAsyncFlowMiddlewareOpts<TAction>) => {
     middleware: Middleware;
     observers: {
         after: {

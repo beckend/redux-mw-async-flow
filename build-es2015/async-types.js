@@ -1,5 +1,5 @@
 "use strict";
-const tslib_1 = require("tslib");
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.defaultTypes = {
     ABORTED: '_ABORTED',
     END: '_END',
@@ -8,7 +8,7 @@ exports.defaultTypes = {
     REJECTED: '_REJECTED',
     REQUEST: '_REQUEST',
 };
-exports.getAsyncTypeConstants = ({ types } = {}) => (tslib_1.__assign({}, exports.defaultTypes, types));
+exports.getAsyncTypeConstants = ({ types } = {}) => (Object.assign({}, exports.defaultTypes, types));
 exports.generateAsyncAction = ({ actionName, types = {} }) => {
     const { ABORTED, END, FULFILLED, PENDING, REJECTED, REQUEST, } = exports.getAsyncTypeConstants({ types });
     const ABORTED_NAME = `${actionName}${ABORTED}`;

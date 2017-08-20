@@ -14,12 +14,12 @@ export interface IGetAsyncTypeConstantsOpts {
     readonly types?: TDefaultTypesOptional;
 }
 export declare const getAsyncTypeConstants: ({types}?: IGetAsyncTypeConstantsOpts) => {
-    readonly ABORTED: string;
-    readonly END: string;
-    readonly FULFILLED: string;
-    readonly PENDING: string;
-    readonly REJECTED: string;
-    readonly REQUEST: string;
+    ABORTED: string;
+    END: string;
+    FULFILLED: string;
+    PENDING: string;
+    REJECTED: string;
+    REQUEST: string;
 };
 export interface IGenerateAsyncActionOpts extends IGetAsyncTypeConstantsOpts {
     readonly actionName: string;

@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const Bluebird = require("bluebird");
 exports.createPromise = () => {
     let resolve;

@@ -1,7 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
-/* tslint:disable: no-unnecessary-local-variable */
-/* tslint:disable: max-func-body-length */
 /**
  * Intercept action types of all the defaultTypes and set state
  */
