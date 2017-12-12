@@ -19,7 +19,7 @@
   "jsnext:main": "./build-es2015/index.js",
   "types": "./build-es5/index.d.ts",
   "scripts": {
-    "prepare": "gulp",
+    "prepare-before": "gulp",
     "test": "jest",
     "test:watch": "jest --watchAll",
     "test:coverage": "jest --coverage --no-cache",
