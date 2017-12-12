@@ -57,13 +57,13 @@ export declare const createAsyncFlowMiddleware: <TStoreState, TAction extends Ac
     observers: {
         after: {
             obsOnAll: Observable<IAsyncFlowAction<any>>;
-            obsOnEnd: Observable<IAsyncFlowAction<any>>;
-            obsOnRequest: Observable<IAsyncFlowAction<any>>;
+            obsOnEnd: any;
+            obsOnRequest: any;
         };
         before: {
             obsOnAll: Observable<IAsyncFlowAction<any>>;
-            obsOnEnd: Observable<IAsyncFlowAction<any>>;
-            obsOnRequest: Observable<IAsyncFlowAction<any>>;
+            obsOnEnd: any;
+            obsOnRequest: any;
         };
     };
 };

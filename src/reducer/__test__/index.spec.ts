@@ -1,4 +1,3 @@
-/* tslint:disable: chai-vague-errors */
 import { ReducerMeta } from 'redux-actions';
 import {
   createAsyncFlowReducer,

@@ -1,4 +1,3 @@
-/* tslint:disable: no-backbone-get-set-outside-model */
 import { createPromise } from '../promise-factory';
 import { RequestStore } from '../request-store';
 

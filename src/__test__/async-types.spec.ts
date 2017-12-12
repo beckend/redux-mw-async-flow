@@ -1,4 +1,3 @@
-/* tslint:disable: chai-vague-errors */
 import {
   generateAsyncAction,
   getAsyncTypeConstants,

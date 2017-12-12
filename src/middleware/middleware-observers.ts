@@ -9,12 +9,12 @@ import { IAsyncFlowAction } from './create-middleware';
 export { Observable };
 
 export interface IAsyncTypes {
-  REQUEST: string;
-  END: string;
+  readonly REQUEST: string;
+  readonly END: string;
 }
 export interface ICreateObserversArgs {
   // async constants
-  asyncTypes: IAsyncTypes;
+  readonly asyncTypes: IAsyncTypes;
 }
 export const createObservers = ({ asyncTypes }: ICreateObserversArgs) => {
   const createAllObservers = () => {
@@ -26,12 +26,12 @@ export const createObservers = ({ asyncTypes }: ICreateObserversArgs) => {
 
     // filter by requests
     const obsOnRequest = obsOnAll
-      .__invoke<Observable<IAsyncFlowAction<any>>>(
+      .__invoke<typeof filter>(
         filter, (action: IAsyncFlowAction<any>) => action.type.endsWith(asyncTypes.REQUEST)
       );
 
     const obsOnEnd = obsOnAll
-      .__invoke<Observable<IAsyncFlowAction<any>>>(
+      .__invoke<typeof filter>(
         filter, (action: IAsyncFlowAction<any>) => action.type.endsWith(asyncTypes.END)
       );
 

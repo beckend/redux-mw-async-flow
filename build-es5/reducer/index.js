@@ -7,28 +7,27 @@ var tslib_1 = require("tslib");
 var lGet = require("lodash.get");
 var async_types_1 = require("../async-types");
 var default_options_1 = require("../middleware/default-options");
-exports.createAsyncFlowReducer = function (opts) {
-    if (opts === void 0) { opts = {
+exports.createAsyncFlowReducer = function (_a) {
+    var _b = _a === void 0 ? {
         metaKey: default_options_1.defaultOpts.metaKey,
         metaKeyRequestID: default_options_1.defaultOpts.metaKeyRequestID,
-    }; }
-    var _a = async_types_1.getAsyncTypeConstants({ types: opts.asyncTypes }), REQUEST = _a.REQUEST, PENDING = _a.PENDING, FULFILLED = _a.FULFILLED, REJECTED = _a.REJECTED, ABORTED = _a.ABORTED, END = _a.END;
-    var _b = tslib_1.__assign({}, default_options_1.defaultOpts, opts), metaKey = _b.metaKey, metaKeyRequestID = _b.metaKeyRequestID;
+    } : _a, asyncTypes = _b.asyncTypes, metaKey = _b.metaKey, metaKeyRequestID = _b.metaKeyRequestID;
+    var _c = async_types_1.getAsyncTypeConstants({ types: asyncTypes }), REQUEST = _c.REQUEST, PENDING = _c.PENDING, FULFILLED = _c.FULFILLED, REJECTED = _c.REJECTED, ABORTED = _c.ABORTED, END = _c.END;
     var initialState = {
-        counters: (_c = {},
+        counters: (_d = {},
             // Total request passed through the reducer
-            _c[REQUEST] = 0,
+            _d[REQUEST] = 0,
             // Only current pending ones
-            _c[PENDING] = 0,
+            _d[PENDING] = 0,
             // Total fullfilled
-            _c[FULFILLED] = 0,
+            _d[FULFILLED] = 0,
             // Total rejected
-            _c[REJECTED] = 0,
+            _d[REJECTED] = 0,
             // Total aborted
-            _c[ABORTED] = 0,
+            _d[ABORTED] = 0,
             // Total ended
-            _c[END] = 0,
-            _c),
+            _d[END] = 0,
+            _d),
         latestActions: {},
     };
     // used to get deep in action object
@@ -75,9 +74,6 @@ exports.createAsyncFlowReducer = function (opts) {
         var _a, _b;
     };
     return reducer;
-    var _c;
+    var _d;
 };
-/**
- * need delete options in case the payload is big ass, maybe limit lru or something
- */
 //# sourceMappingURL=index.js.map

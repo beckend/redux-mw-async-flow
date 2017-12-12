@@ -12,8 +12,8 @@
       "esnext",
       "dom"
     ],
-    "noImplicitAny": true,
     "sourceMap": true,
+    "strict": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "jsx": "react",

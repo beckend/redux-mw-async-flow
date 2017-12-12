@@ -135,7 +135,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends ActionMet
         /**
          * If meta.asyncFlow.enable is explicit set to false, completely skip this middleware.
          */
-        if (!actionType || lGet<boolean>(action, ['meta', metaKey, 'enable']) === false) {
+        if (!actionType || lGet(action, ['meta', metaKey, 'enable']) === false) {
           return dispatchNormal();
         }
 
@@ -156,8 +156,8 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends ActionMet
           /**
            * First dispatch the original action
            */
-          const requestID = lGet<TRequestId>(action, metaRequestIdPath);
-          const theAsyncFlowPromise = lGet<Bluebird<any>>(action, metaPromisePath);
+          const requestID: TRequestId | undefined = lGet(action, metaRequestIdPath);
+          const theAsyncFlowPromise: Bluebird<any> = lGet(action, metaPromisePath);
           // Normal dispatch and opt out if not a asyncflow action
           if (!requestID || !theAsyncFlowPromise) {
             return dispatchNormal();
@@ -200,7 +200,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends ActionMet
           /**
            * Generate uniqueid, make sure it does not exist
            */
-          let requestID = lGet<TRequestId>(actionClone, metaRequestIdPath);
+          let requestID: TRequestId | undefined = lGet(actionClone, metaRequestIdPath);
           /* istanbul ignore next */
           if (!requestID || {}.hasOwnProperty.call(requestStore, requestID)) {
             do {
@@ -212,7 +212,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends ActionMet
           }
 
           // User override of the timeout for each request
-          const metaTimeoutKey = lGet<number>(actionClone, ['meta', metaKey, 'timeoutRequest']);
+          const metaTimeoutKey: number | undefined = lGet(actionClone, ['meta', metaKey, 'timeoutRequest']);
           const timeoutRequest = metaTimeoutKey || timeout;
           /**
            * Dispatch pending first, with a twist, send a promise resolve reject with it
@@ -232,7 +232,7 @@ export const createAsyncFlowMiddleware = <TStoreState, TAction extends ActionMet
             })
             .finally(() => {
               // Cleanup from requestStore
-              requestStore.delete(requestID);
+              requestStore.delete(requestID as string);
             });
 
           const tmpRequestStoreAddPayload: IRequestMap<any> = {

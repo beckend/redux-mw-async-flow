@@ -1,4 +1,3 @@
-/* tslint:disable: chai-vague-errors */
 import * as Bluebird from 'bluebird';
 import { createPromise } from '../promise-factory';
 

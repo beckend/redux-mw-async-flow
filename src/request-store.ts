@@ -33,7 +33,7 @@ export class RequestStore {
   }
 
   public resolve<TPayload>(keyName: string, payload: TPayload) {
-    const promiseFn = lGet<TResolveFn<TPayload>>(this.store, [keyName, REQUEST_KEY_RESOLVEFN]);
+    const promiseFn: TResolveFn<TPayload> | undefined = lGet(this.store, [keyName, REQUEST_KEY_RESOLVEFN]) as any;
     if (promiseFn) {
       promiseFn(payload);
     } else {
@@ -43,7 +43,7 @@ export class RequestStore {
   }
 
   public reject<TPayload>(keyName: string, payload: TPayload) {
-    const promiseFn = lGet<TResolveFn<TPayload>>(this.store, [keyName, REQUEST_KEY_REJECTFN]);
+    const promiseFn: TResolveFn<TPayload> | undefined = lGet(this.store, [keyName, REQUEST_KEY_REJECTFN]) as any;
     if (promiseFn) {
       promiseFn(payload);
     } else {

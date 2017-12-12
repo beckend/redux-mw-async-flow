@@ -6,12 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const lGet = require("lodash.get");
 const async_types_1 = require("../async-types");
 const default_options_1 = require("../middleware/default-options");
-exports.createAsyncFlowReducer = (opts = {
+exports.createAsyncFlowReducer = ({ asyncTypes, metaKey, metaKeyRequestID, } = {
         metaKey: default_options_1.defaultOpts.metaKey,
         metaKeyRequestID: default_options_1.defaultOpts.metaKeyRequestID,
     }) => {
-    const { REQUEST, PENDING, FULFILLED, REJECTED, ABORTED, END, } = async_types_1.getAsyncTypeConstants({ types: opts.asyncTypes });
-    const { metaKey, metaKeyRequestID, } = Object.assign({}, default_options_1.defaultOpts, opts);
+    const { REQUEST, PENDING, FULFILLED, REJECTED, ABORTED, END, } = async_types_1.getAsyncTypeConstants({ types: asyncTypes });
     const initialState = {
         counters: {
             // Total request passed through the reducer
@@ -71,7 +70,4 @@ exports.createAsyncFlowReducer = (opts = {
     };
     return reducer;
 };
-/**
- * need delete options in case the payload is big ass, maybe limit lru or something
- */
 //# sourceMappingURL=index.js.map
