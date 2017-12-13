@@ -16,14 +16,14 @@ export interface ICreateObserversArgs {
 export declare const createObservers: ({asyncTypes}: ICreateObserversArgs) => {
     after: {
         obsOnAll: Observable<IAsyncFlowAction<any>>;
-        obsOnEnd: any;
-        obsOnRequest: any;
+        obsOnEnd: Observable<IAsyncFlowAction<any>>;
+        obsOnRequest: Observable<IAsyncFlowAction<any>>;
         rootSubject: Subject<IAsyncFlowAction<any>>;
     };
     before: {
         obsOnAll: Observable<IAsyncFlowAction<any>>;
-        obsOnEnd: any;
-        obsOnRequest: any;
+        obsOnEnd: Observable<IAsyncFlowAction<any>>;
+        obsOnRequest: Observable<IAsyncFlowAction<any>>;
         rootSubject: Subject<IAsyncFlowAction<any>>;
     };
 };

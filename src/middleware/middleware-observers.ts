@@ -25,13 +25,13 @@ export const createObservers = ({ asyncTypes }: ICreateObserversArgs) => {
     const obsOnAll = rootSubject.asObservable();
 
     // filter by requests
-    const obsOnRequest = obsOnAll
-      .__invoke<typeof filter>(
+    const obsOnRequest: Observable<IAsyncFlowAction<any>> = obsOnAll
+      .__invoke(
         filter, (action: IAsyncFlowAction<any>) => action.type.endsWith(asyncTypes.REQUEST)
       );
 
-    const obsOnEnd = obsOnAll
-      .__invoke<typeof filter>(
+    const obsOnEnd: Observable<IAsyncFlowAction<any>> = obsOnAll
+      .__invoke(
         filter, (action: IAsyncFlowAction<any>) => action.type.endsWith(asyncTypes.END)
       );
 
