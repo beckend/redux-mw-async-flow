@@ -2,9 +2,8 @@
  * Rxjs observers only triggered when the async action is matched/enabled
  */
 import { Observable } from 'rxjs/Observable';
-import { filter } from 'rxjs/operator/filter';
+import { filter } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
-import '../rxjs/add/__invoke';
 import { IAsyncFlowAction } from './create-middleware';
 export { Observable };
 
@@ -25,14 +24,14 @@ export const createObservers = ({ asyncTypes }: ICreateObserversArgs) => {
     const obsOnAll = rootSubject.asObservable();
 
     // filter by requests
-    const obsOnRequest: Observable<IAsyncFlowAction<any>> = obsOnAll
-      .__invoke(
-        filter, (action: IAsyncFlowAction<any>) => action.type.endsWith(asyncTypes.REQUEST)
+    const obsOnRequest = obsOnAll
+      .pipe(
+        filter((action: IAsyncFlowAction<any>) => action.type.endsWith(asyncTypes.REQUEST))
       );
 
-    const obsOnEnd: Observable<IAsyncFlowAction<any>> = obsOnAll
-      .__invoke(
-        filter, (action: IAsyncFlowAction<any>) => action.type.endsWith(asyncTypes.END)
+    const obsOnEnd = obsOnAll
+      .pipe(
+        filter((action: IAsyncFlowAction<any>) => action.type.endsWith(asyncTypes.END))
       );
 
     return {

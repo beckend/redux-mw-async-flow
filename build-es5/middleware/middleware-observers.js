@@ -5,9 +5,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var Observable_1 = require("rxjs/Observable");
 exports.Observable = Observable_1.Observable;
-var filter_1 = require("rxjs/operator/filter");
+var operators_1 = require("rxjs/operators");
 var Subject_1 = require("rxjs/Subject");
-require("../rxjs/add/__invoke");
 exports.createObservers = function (_a) {
     var asyncTypes = _a.asyncTypes;
     var createAllObservers = function () {
@@ -17,9 +16,9 @@ exports.createObservers = function (_a) {
         var obsOnAll = rootSubject.asObservable();
         // filter by requests
         var obsOnRequest = obsOnAll
-            .__invoke(filter_1.filter, function (action) { return action.type.endsWith(asyncTypes.REQUEST); });
+            .pipe(operators_1.filter(function (action) { return action.type.endsWith(asyncTypes.REQUEST); }));
         var obsOnEnd = obsOnAll
-            .__invoke(filter_1.filter, function (action) { return action.type.endsWith(asyncTypes.END); });
+            .pipe(operators_1.filter(function (action) { return action.type.endsWith(asyncTypes.END); }));
         return {
             obsOnAll: obsOnAll,
             obsOnEnd: obsOnEnd,

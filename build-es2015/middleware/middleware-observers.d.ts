@@ -3,7 +3,6 @@
  */
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import '../rxjs/add/__invoke';
 import { IAsyncFlowAction } from './create-middleware';
 export { Observable };
 export interface IAsyncTypes {
