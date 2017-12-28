@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 const Observable_1 = require("rxjs/Observable");
 exports.Observable = Observable_1.Observable;
-const operators_1 = require("rxjs/operators");
+const filter_1 = require("rxjs/operators/filter");
 const Subject_1 = require("rxjs/Subject");
 exports.createObservers = ({ asyncTypes }) => {
     const createAllObservers = () => {
@@ -15,9 +15,9 @@ exports.createObservers = ({ asyncTypes }) => {
         const obsOnAll = rootSubject.asObservable();
         // filter by requests
         const obsOnRequest = obsOnAll
-            .pipe(operators_1.filter((action) => action.type.endsWith(asyncTypes.REQUEST)));
+            .pipe(filter_1.filter((action) => action.type.endsWith(asyncTypes.REQUEST)));
         const obsOnEnd = obsOnAll
-            .pipe(operators_1.filter((action) => action.type.endsWith(asyncTypes.END)));
+            .pipe(filter_1.filter((action) => action.type.endsWith(asyncTypes.END)));
         return {
             obsOnAll,
             obsOnEnd,
